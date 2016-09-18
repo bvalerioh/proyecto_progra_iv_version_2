@@ -1,0 +1,224 @@
+/*
+<!--
+    ============================================================================
+    Universidad Nacional de Costa Rica.
+    Curso           : Programacion IV.
+    Profesor        : Christian Garita.
+    Estudiantes     : Dennis Bonilla Ramirez | Bryan Valerio Herrera.           
+    Proyecto # 1     
+    ============================================================================
+-->
+*/
+/* Reset de estilos por defecto en el browser  usando import */
+/* VARIABLES. */
+:root{
+    --ancho-contenido: 95%;
+    --alto-contenido: 100%;
+}
+
+
+/* IMPORTS UTILES. */
+@import "normalize/normalize.css";
+
+/* Reset de paddings, margins y borders de elementos de nivel de bloque. */
+*{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+body {
+    height: 100%;
+}
+
+#componente-carrusel{
+    width: 100%;
+    height: 620px;
+}
+
+.img-carrusel1{
+    height: 620px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url(../images/place-holder-1024x768.png);
+}
+.img-carrusel2{
+    height: 620px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background: url(../images/place-holder-1024x768.png);
+}
+.img-carrusel3{
+    height: 620px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background: url(../images/place-holder-1024x768.png);
+}
+/*==============================================================================
+                       ESTILOS PERSONALIZADOS PARA EL SITIO.
+ ==============================================================================*/
+/* Estilizado contenedor principal */
+/* Mobile first */
+.container{
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+}
+#contenido-principal{
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+}
+footer{
+    
+    background:#ffab62;
+    width:100%;
+    height:100px;
+    position:relative;
+    bottom:0;
+    left:0;
+    
+}
+/*========================================
+    MEDIA QUERIES SEGUN EL VIEWPORT.
+ ========================================*/
+
+/* DISPOSITIVOS MOVILES - TELEFONOS. */
+/* POSICION PORTRAIT */
+@media only screen and (max-width : 320px){   
+    .container{
+        width: 100%;
+    }
+    #contenido-inicio, 
+    #contenido-instruccional, 
+    #contenido-nuestra-historia, 
+    #contenido-contactenos,
+    #contenido-formulario-login{
+        width: var(--ancho-contenido);
+        hieght: var(--alto-contenido);
+        margin-left: auto;
+        margin-right: auto;
+    }
+     #contenido-formulario-login{
+        position: relative;
+        left: 0%;
+        top: 0rem;
+    }
+
+}
+/* POSICION LANDSCAPE */
+@media only screen and (min-width : 320px){   
+    .container{
+        width: 100%;
+    }
+    #contenido-inicio, 
+    #contenido-instruccional, 
+    #contenido-nuestra-historia, 
+    #contenido-contactenos,
+    #contenido-formulario-login{
+        width: var(--ancho-contenido);
+        hieght: var(--alto-contenido);
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #contenido-formulario-login{
+        position: relative;
+        left: 0%;
+        top: 0rem;
+    }
+
+}
+
+
+/* DISPOSITIVOS MOVILES - TABLETS. */
+@media only screen and (min-width : 640px){
+    .container{
+        width: 100%;
+    }
+    #contenido-inicio, 
+    #contenido-instruccional, 
+    #contenido-nuestra-historia, 
+    #contenido-contactenos,
+    #contenido-formulario-login{
+        width: var(--ancho-contenido);
+        hieght: var(--alto-contenido);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #contenido-formulario-login{
+        position: relative;
+        left: 0%;
+        top: 0rem;
+    }
+}
+
+
+
+/* COMPUTADORAS Y DESKTOPS - LAPTOPS. */
+@media only screen and (min-width : 1024px){
+    .container{
+        width: 100%;
+    }
+    #contenido-inicio, 
+    #contenido-instruccional, 
+    #contenido-nuestra-historia, 
+    #contenido-contactenos,
+    #contenido-formulario-login,
+    #contenido-formulario-login{
+        width: var(--ancho-contenido);
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+
+    #contenido-formulario-login{
+        position: relative;
+        left: 0%;
+        top: 7rem;
+    }
+
+
+}
+ 
+/* Ajustes contactenos */
+#contenido-contactenos{
+    width: 65%;
+    margin-left: 15%;
+}
+
+/* Ajustes contenido mis-datos-personales */
+#contenido-mis-datos-personales{
+    width: 65%;
+    margin-left: 15%;
+}
+
+/* Ajustes contenido registrarse */
+#contenido-registrarse, #contenido-expertos-por-tema{
+    width: 65%;
+    margin-left: 15%;
+}
+/* Ajustes botones de form, registro usuario, modificar, contactenos */
+.boton-left{
+    float: right;
+    margin-right: 5%;
+    width: 25%;
+    font-weight: bold;
+    font-size: medium;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.boton-left:hover{
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #8c8c8c;
+} 
+/* Ajustes menu acceder a mi cuenta */
+.menu-left{
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 5%;    
+    max-height: 45px;
+}
