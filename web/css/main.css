@@ -194,9 +194,17 @@ footer{
 }
 
 /* Ajustes contenido registrarse */
-#contenido-registrarse, #contenido-expertos-por-tema{
+#contenido-registrarse, #contenido-expertos-por-tema, #contenido-gestionar-tema{
     width: 65%;
     margin-left: 15%;
+}
+/*Ajuste gestionar-tema-id-categoria*/
+#gestionar-tema-id-categoria{
+    width: 65%;
+    margin-right: 3%;
+}
+#gestionar-tema-nuevo-id{
+    margin-top: -4.5%;
 }
 /* Ajustes botones de form, registro usuario, modificar, contactenos */
 .boton-left{
