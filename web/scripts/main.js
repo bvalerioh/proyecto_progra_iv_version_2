@@ -111,11 +111,11 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 //******************************************************************************
 function carrucelDinamico() {
     var text = '{ "items" : [' +
-            '{ "stars":"5" , "username":"Juan Perez" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Maria Lopez" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Ana Maria" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Pedro Aguilar" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Bryan Valerio" , "comentario":"Gracias por excelente respuesta." , "imagen":"./" , "alt":"_"}]}';
+            '{ "stars":"5" , "username":"Juan Perez" , "comentario":"Gracias por la respuesta." , "imagen":"./images/001.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Maria Lopez" , "comentario":"Gracias por la respuesta." , "imagen":"./images/002.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Ana Maria" , "comentario":"Gracias por la respuesta." , "imagen":"./images/003.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Pedro Aguilar" , "comentario":"Gracias por la respuesta." , "imagen":"./images/004.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Bryan Valerio" , "comentario":"Gracias por excelente respuesta." , "imagen":"./images/005.png" , "alt":"_"}]}';
 
     json = JSON.parse(text);
     var content = "";
@@ -125,19 +125,23 @@ function carrucelDinamico() {
         var user = json["items"][i].username;
         var come = json["items"][i].comentario;
         var imag = json["items"][i].imagen;
-        var alt_ = json["items"][i].alt;
-        /*LA PARTE DE LAS ESTRELLAS*/
+        var alt_ = json["items"][i].alt;        
         if (i == 0) {
             content += "<div class='item active'>";
         }
         if(i > 0){
             content += "<div class='item'>";
         }
-        content += "<input id='input-" + i + "' name='input-" + i + "' value=" + star + " class='rating-loading'>";
-        /*LA PARTE DE FEEDBACK*/
-        content += "<h3 class='slider-text" + i + "'>" + come + "</h3>";
-        content += "<h5 class='slider-text" + i + "'>" + user + "</h5>";
         content += "<img src=\"" + imag + "\" alt=\"" + alt_ + "\">";
+        /*LA PARTE DE FEEDBACK*/
+        content += "<div class='carousel-caption'>";
+        /*LA PARTE DE LAS ESTRELLAS*/
+        content += "<input id='input-" + i + "' name='input-" + i + "' value=" + star + " class='rating-loading'>";
+        
+        content += "<h3>" + user + "</h3>";
+        content += "<P>" + come + "</P>";
+        
+        content += "</div>";
         content += "</div>";
     }
     content += "</div>";
@@ -151,61 +155,15 @@ function carrucelDinamico() {
     
     $("#carrucelAutomatico").html(content);
 }
-
-/* backup
-function carrucelDinamico() {
-    var text = '{ "items" : [' +
-            '{ "stars":"5" , "username":"Juan Perez" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Maria Lopez" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Ana Maria" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Pedro Aguilar" , "comentario":"Gracias por la respuesta." , "imagen":"./" , "alt":"_"},' +
-            '{ "stars":"5" , "username":"Bryan Valerio" , "comentario":"Gracias por excelente respuesta." , "imagen":"./" , "alt":"_"}]}';
-
-    json = JSON.parse(text);
-    var content = "";
-    content += "<div class='carousel-inner slider-text' role='listbox'>";
-    for (var i in json["items"]) {
-        var star = json["items"][i].stars;
-        var user = json["items"][i].username;
-        var come = json["items"][i].comentario;
-        var imag = json["items"][i].imagen;
-        var alt_ = json["items"][i].alt;
-        /*LA PARTE DE LAS ESTRELLAS
-        if (i === 0) {
-            content += "<div class='item active'>";
-        } else {
-            content += "<div class='item'>";
-        }
-        content += "<input id='input-" + i + "' name='input-" + i + "' value=" + star + " class='rating-loading'>";
-        /*LA PARTE DE FEEDBACK
-        content += "<h1 class='slider-text1'>" + come + "</h1>";
-        content += "<h3 class='slider-text2'>" + user + "</h3>";
-        content += "<img src=\"" + imag + "\" alt=\"" + alt_ + "\">";
-        content += "</div>";
-    }
-    content += "</div>";
-    content += "<ol class='carousel-indicators'>";
-    content += "<li data-target='#componente-carrucel' data-slide-to='0' class='active'></li>";
-    content += "<li data-target='#componente-carrucel' data-slide-to='1'></li>";
-    content += "<li data-target='#componente-carrucel' data-slide-to='2'></li>";
-    content += "<li data-target='#componente-carrucel' data-slide-to='3'></li>";
-    content += "<li data-target='#componente-carrucel' data-slide-to='4'></li>";
-    content += "</ol>";
-    content += "<a class='left carousel-control' href='#componente-carrucel' role='button' data-slide='prev'>" +
-            "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>" +
-            "<span class='sr-only'>Previous</span></a>";
-
-    content += "<a class='right carousel-control' href='#componente-carrucel' role='button' data-slide='next'>" +
-            "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>" +
-            "<span class='sr-only'>Next</span></a>";
-    /*
-     <a class="right carousel-control" href="#componente-carrucel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-     
-    $("#componente-carrucel").html(content);
-} 
+$("#input-1").rating();
+$("#input-2").rating();
+/* <div class="item active">
+      <img src="img_chania.jpg" alt="Chania">
+      <div class="carousel-caption">
+        <h3>Chania</h3>
+        <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+      </div>
+    </div>
 */
 
 //******************************************************************************
