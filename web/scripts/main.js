@@ -9,63 +9,77 @@
  ============================================================================
  -->
  */
+$(document).ready(function () {
+    // put all your jQuery goodness in here.
+    $("#datos-personales-fecha-nacimiento").datepicker();
+    $("#registro-fecha-nacimiento").datepicker();
+    // Esta linea se debe mantener sino no cargan las imagenes de slider.
+    //$("#contenido-principal").load("./public/contenido-inicio.html");
+    carrucelDinamico();
+});
+$("#contenido-inicio").ready(function() {
+        carrucelDinamico();
+});
+//******************************************************************************
 // Funcion para cargar contenido segun la pagina.
 function cargarContenido(idContenido) {
     /* CONTENIDO PUBLICO */
-    if (idContenido === '1') {
-        $("#contenido-principal").load("./public/contenido-inicio.html");
+    if (idContenido === '1') {      
+        $("#contenido-principal").load("./public/contenido-inicio.html");        
         carrucelDinamico();
-    }
-    if (idContenido === '2') {
-        $("#contenido-principal").load("./public/contenido-instruccional.html");
-    }
-    if (idContenido === '3') {
-        $("#contenido-principal").load("./public/contenido-nuestra-historia.html");
-    }
-    if (idContenido === '4') {
-        $("#contenido-principal").load("./public/contenido-contactenos.html");
-    }
-    /* USUARIO REGISTRADO */
-    if (idContenido === '5') {
-        $("#contenido-principal").load("./usuario/contenido-chat.html");
-    }
-    if (idContenido === '6') {
-        $("#contenido-principal").load("./usuario/contenido-mis-datos-personales.html");
-    }
-    if (idContenido === '7') {
-        $("#contenido-principal").load("./usuario/contenido-historial-consultas.html");
-    }
-    if (idContenido === '8') {
-        $("#contenido-principal").load("./usuario/contenido-consulta-facturas.html");
-    }
-    if (idContenido === '9') {
-        $("#contenido-principal").load("./usuario/contenido-loguearse.html");
-    }
-    if (idContenido === '10') {
-        $("#contenido-principal").load("./usuario/contenido-registrarse.html");
-    }
-    /* USUARIO EXPERTO */
-    if (idContenido === '11') {
-        $("#contenido-principal").load("./usuario/contenido-usuarios-en-espera.html");
-    }
-    if (idContenido === '12') {
-        $("#contenido-principal").load("./usuario/contenido-categorias.html");
-    }
-    /* ADMINISTRADOR */
-    if (idContenido === '13') {
-        $("#contenido-principal").load("./administrador/contenido-facturacion.html");
-    }
-    if (idContenido === '14') {
-        $("#contenido-principal").load("./administrador/contenido-reportes.html");
-    }
-    if (idContenido === '15') {
-        $("#contenido-principal").load("./administrador/contenido-gestionar-usuario.html");
-    }
-    if (idContenido === '16') {
-        $("#contenido-principal").load("./administrador/contenido-gestionar-tema.html");
-    }
-    if (idContenido === '17') {
-        $("#contenido-principal").load("./administrador/contenido-gestionar-expertos-por-tema.html");
+    } else {
+        if (idContenido === '2') {
+            $("#contenido-principal").load("./public/contenido-instruccional.html");
+        } else {
+            if (idContenido === '3') {
+                $("#contenido-principal").load("./public/contenido-nuestra-historia.html");
+            }
+            if (idContenido === '4') {
+                $("#contenido-principal").load("./public/contenido-contactenos.html");
+            }
+            /* USUARIO REGISTRADO */
+            if (idContenido === '5') {
+                $("#contenido-principal").load("./usuario/contenido-chat.html");
+            }
+            if (idContenido === '6') {
+                $("#contenido-principal").load("./usuario/contenido-mis-datos-personales.html");
+            }
+            if (idContenido === '7') {
+                $("#contenido-principal").load("./usuario/contenido-historial-consultas.html");
+            }
+            if (idContenido === '8') {
+                $("#contenido-principal").load("./usuario/contenido-consulta-facturas.html");
+            }
+            if (idContenido === '9') {
+                $("#contenido-principal").load("./usuario/contenido-loguearse.html");
+            }
+            if (idContenido === '10') {
+                $("#contenido-principal").load("./usuario/contenido-registrarse.html");
+            }
+            /* USUARIO EXPERTO */
+            if (idContenido === '11') {
+                $("#contenido-principal").load("./usuario/contenido-usuarios-en-espera.html");
+            }
+            if (idContenido === '12') {
+                $("#contenido-principal").load("./usuario/contenido-categorias.html");
+            }
+            /* ADMINISTRADOR */
+            if (idContenido === '13') {
+                $("#contenido-principal").load("./administrador/contenido-facturacion.html");
+            }
+            if (idContenido === '14') {
+                $("#contenido-principal").load("./administrador/contenido-reportes.html");
+            }
+            if (idContenido === '15') {
+                $("#contenido-principal").load("./administrador/contenido-gestionar-usuario.html");
+            }
+            if (idContenido === '16') {
+                $("#contenido-principal").load("./administrador/contenido-gestionar-tema.html");
+            }
+            if (idContenido === '17') {
+                $("#contenido-principal").load("./administrador/contenido-gestionar-expertos-por-tema.html");
+            }
+        }
     }
 }
 //******************************************************************************
@@ -80,25 +94,7 @@ function registro_usuario() {
 }
 ;
 //******************************************************************************
-$(document).ready(function () {
-    // put all your jQuery goodness in here.
-    $("#datos-personales-fecha-nacimiento").datepicker();
-    $("#registro-fecha-nacimiento").datepicker();
-    // Esta linea se debe mantener sino no cargan las imagenes de slider.
-    //$("#contenido-principal").load("./public/contenido-inicio.html");
-    carrucelDinamico();
-    try {
-        $('#input-1').rating({displayOnly: true, step: 0.5});
-        $('#input-2').rating({displayOnly: true, step: 0.5});
-        $('#input-3').rating({displayOnly: true, step: 0.5});
-        $('#input-4').rating({displayOnly: true, step: 0.5});
-        $('#input-5').rating({displayOnly: true, step: 0.5});
-    } catch (error) {
 
-    }
-});
-
-//******************************************************************************
 function toggleChevron(e) {
     $(e.target)
             .prev('.panel-heading')
@@ -126,22 +122,23 @@ function carrucelDinamico() {
         var user = json["items"][i].username;
         var come = json["items"][i].comentario;
         var imag = json["items"][i].imagen;
-        var alt_ = json["items"][i].alt;        
+        var alt_ = json["items"][i].alt;
         if (i == 0) {
             content += "<div class='item active'>";
         }
-        if(i > 0){
+        if (i > 0) {
             content += "<div class='item'>";
         }
         content += "<img src=\"" + imag + "\" alt=\"" + alt_ + "\">";
         /*LA PARTE DE FEEDBACK*/
         content += "<div class='carousel-caption'>";
         /*LA PARTE DE LAS ESTRELLAS*/
+        //    <input id="input-3" name="input-3" value="4" class="rating-loading">
         content += "<input id='input-" + i + "' name='input-" + i + "' value=" + star + " class='rating-loading'>";
-        
+
         content += "<h3>" + user + "</h3>";
         content += "<P>" + come + "</P>";
-        
+
         content += "</div>";
         content += "</div>";
     }
@@ -153,22 +150,22 @@ function carrucelDinamico() {
     content += "<li data-target='#componente-carrucel' data-slide-to='3'></li>";
     content += "<li data-target='#componente-carrucel' data-slide-to='4'></li>";
     content += "</ol>";
-    
+
     $("#carrucelAutomatico").html(content);
-    $("#input-1").rating();
-    $("#input-2").rating();
-    $("#input-3").rating();
-    $("#input-4").rating();
-    $("#input-5").rating();
+    $("#input-0").rating({displayOnly: true, step: 0.5});
+    $("#input-1").rating({displayOnly: true, step: 0.5});
+    $('#input-2').rating({displayOnly: true, step: 0.5});
+    $("#input-3").rating({displayOnly: true, step: 0.5});
+    $("#input-4").rating({displayOnly: true, step: 0.5});
 }
 /* <div class="item active">
-      <img src="img_chania.jpg" alt="Chania">
-      <div class="carousel-caption">
-        <h3>Chania</h3>
-        <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
-      </div>
-    </div>
-*/
+ <img src="img_chania.jpg" alt="Chania">
+ <div class="carousel-caption">
+ <h3>Chania</h3>
+ <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+ </div>
+ </div>
+ */
 
 //******************************************************************************
 //*********************** CARGAR JSON A UNA TABLA ******************************
