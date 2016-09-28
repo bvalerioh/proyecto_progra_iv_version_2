@@ -8,26 +8,12 @@
     Proyecto # 1     
     ============================================================================
 -->
-<div id="contenido-inicio">
-    <div id="componente-carrusel" class="carousel slide" data-ride="carousel"  data-interval="" data-pause="true">    
+<div id="contenido-inicio" onload="carrucelDinamico();">
+    <div id="componente-carrusel" class="carousel slide" data-ride="carousel"  data-interval="5000" data-pause="true">    
+
         <!-- CONTENEDOR DE LOS SLIDES. -->
-        <div class="carousel-inner slider-text" role="listbox">
-            <div class="img-carrusel1 item active">
-                <h1 class="slider-text1">Diseños de vanguardia.</h1>  
-            </div>
-            <div class="img-carrusel2 item">
-                <h1 class="slider-text2">Personal Calificado</h1>
-            </div>  
-            <div class="img-carrusel3 item">
-                <h1 class="slider-text3">Analisis experto</h1>
-            </div>
+        <div id="carrucelAutomatico">
         </div>
-        <!-- INDICADORES O BULLETS DE CADA SLIDE.  -->
-        <ol class="carousel-indicators">
-            <li data-target="#componente-carrucel" data-slide-to="0" class="active"></li>
-            <li data-target="#componente-carrucel" data-slide-to="1"></li>
-            <li data-target="#componente-carrucel" data-slide-to="2"></li>
-        </ol>
         <!-- CONTROLES PARA MANIPULAR EL CARRUSEL.  -->
         <a class="left carousel-control" href="#componente-carrucel" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -39,7 +25,7 @@
         </a>
     </div>
     <div>
-        <h1>Bienvenido</h1>
+        <h1>Bienvenidos...</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
@@ -49,30 +35,6 @@
             officia deserunt mollit anim id est laborum.
         </p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-        </p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-        </p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-        </p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
             nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in

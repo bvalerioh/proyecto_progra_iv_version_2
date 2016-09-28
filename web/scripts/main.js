@@ -14,6 +14,7 @@ function cargarContenido(idContenido) {
     /* CONTENIDO PUBLICO */
     if (idContenido === '1') {
         $("#contenido-principal").load("./public/contenido-inicio.html");
+        carrucelDinamico();
     }
     if (idContenido === '2') {
         $("#contenido-principal").load("./public/contenido-instruccional.html");
@@ -154,9 +155,12 @@ function carrucelDinamico() {
     content += "</ol>";
     
     $("#carrucelAutomatico").html(content);
+    $("#input-1").rating();
+    $("#input-2").rating();
+    $("#input-3").rating();
+    $("#input-4").rating();
+    $("#input-5").rating();
 }
-$("#input-1").rating();
-$("#input-2").rating();
 /* <div class="item active">
       <img src="img_chania.jpg" alt="Chania">
       <div class="carousel-caption">
