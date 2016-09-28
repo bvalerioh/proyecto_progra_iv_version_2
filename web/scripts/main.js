@@ -17,16 +17,17 @@ $(document).ready(function () {
     //$("#contenido-principal").load("./public/contenido-inicio.html");
     carrucelDinamico();
 });
-$("#contenido-inicio").ready(function() {
+/*
+$("#contenido-inicio-2").onload ready(function() {
         carrucelDinamico();
-});
+});*/
 //******************************************************************************
 // Funcion para cargar contenido segun la pagina.
 function cargarContenido(idContenido) {
     /* CONTENIDO PUBLICO */
     if (idContenido === '1') {      
-        $("#contenido-principal").load("./public/contenido-inicio.html");        
-        carrucelDinamico();
+        $("#contenido-principal").load("./public/contenido-inicio-2.html");        
+        carrucelDinamico2();
     } else {
         if (idContenido === '2') {
             $("#contenido-principal").load("./public/contenido-instruccional.html");
@@ -158,14 +159,59 @@ function carrucelDinamico() {
     $("#input-3").rating({displayOnly: true, step: 0.5});
     $("#input-4").rating({displayOnly: true, step: 0.5});
 }
-/* <div class="item active">
- <img src="img_chania.jpg" alt="Chania">
- <div class="carousel-caption">
- <h3>Chania</h3>
- <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
- </div>
- </div>
- */
+
+function carrucelDinamico2() {
+    var text = '{ "items" : [' +
+            '{ "stars":"5" , "username":"Juan Perez" , "comentario":"Gracias por la respuesta." , "imagen":"./images/001.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Maria Lopez" , "comentario":"Gracias por la respuesta." , "imagen":"./images/002.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Ana Maria" , "comentario":"Gracias por la respuesta." , "imagen":"./images/003.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Pedro Aguilar" , "comentario":"Gracias por la respuesta." , "imagen":"./images/004.png" , "alt":"_"},' +
+            '{ "stars":"5" , "username":"Bryan Valerio" , "comentario":"Gracias por excelente respuesta." , "imagen":"./images/005.png" , "alt":"_"}]}';
+
+    json = JSON.parse(text);
+    var content = "";
+    content += "<div class='carousel-inner slider-text' role='listbox'>";
+    for (var i in json["items"]) {
+        var star = json["items"][i].stars;
+        var user = json["items"][i].username;
+        var come = json["items"][i].comentario;
+        var imag = json["items"][i].imagen;
+        var alt_ = json["items"][i].alt;
+        if (i == 0) {
+            content += "<div class='item active'>";
+        }
+        if (i > 0) {
+            content += "<div class='item'>";
+        }
+        content += "<img src=\"" + imag + "\" alt=\"" + alt_ + "\">";
+        /*LA PARTE DE FEEDBACK*/
+        content += "<div class='carousel-caption'>";
+        /*LA PARTE DE LAS ESTRELLAS*/
+        //    <input id="input-3" name="input-3" value="4" class="rating-loading">
+        content += "<input id='input-" + i + "' name='input-" + i + "' value=" + star + " class='rating-loading'>";
+
+        content += "<h3>" + user + "</h3>";
+        content += "<P>" + come + "</P>";
+
+        content += "</div>";
+        content += "</div>";
+    }
+    content += "</div>";
+    content += "<ol class='carousel-indicators'>";
+    content += "<li data-target='#componente-carrucel' data-slide-to='0' class='active'></li>";
+    content += "<li data-target='#componente-carrucel' data-slide-to='1'></li>";
+    content += "<li data-target='#componente-carrucel' data-slide-to='2'></li>";
+    content += "<li data-target='#componente-carrucel' data-slide-to='3'></li>";
+    content += "<li data-target='#componente-carrucel' data-slide-to='4'></li>";
+    content += "</ol>";
+
+    $("#carrucelAutomatico2").html(content);
+    $("#input-0").rating({displayOnly: true, step: 0.5});
+    $("#input-1").rating({displayOnly: true, step: 0.5});
+    $('#input-2').rating({displayOnly: true, step: 0.5});
+    $("#input-3").rating({displayOnly: true, step: 0.5});
+    $("#input-4").rating({displayOnly: true, step: 0.5});
+}
 
 //******************************************************************************
 //*********************** CARGAR JSON A UNA TABLA ******************************
