@@ -5,10 +5,16 @@
  */
 package cr.ac.una.prograiv.proyecto.dao;
 
+import java.util.List;
+
 /**
  *
  * @author Bryan_2
  */
-public class test2 {
-    
+public interface IBaseDAO <T,K> {
+    public abstract void save (T o);
+    public abstract T merge (T o);
+    public abstract void delete (T o);
+    public abstract T findById (K o);
+    public abstract  List<T> findAll();
 }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cr.ac.una.prograiv.proyecto.domain;
+package cr.ac.una.prograiv.proyecto.dao;
 
 /**
  *
  * @author Bryan_2
  */
-public class test1 {
+interface IBaseDAO<T0, T1> {
     
 }
