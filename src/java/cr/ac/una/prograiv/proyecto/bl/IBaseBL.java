@@ -5,10 +5,16 @@
  */
 package cr.ac.una.prograiv.proyecto.bl;
 
+import java.util.List;
+
 /**
  *
  * @author Bryan_2
  */
-public class test4 {
-    int variable;
+public interface IBaseBL <T,K> {
+    public abstract void save (T o);
+    public abstract T merge (T o);
+    public abstract void delete (T o);
+    public abstract T findById (K o);
+    public abstract  List<T> findAll(String className);
 }
