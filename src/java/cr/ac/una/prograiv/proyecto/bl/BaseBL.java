@@ -19,13 +19,13 @@ public class BaseBL {
 
     public BaseBL() {
         daos = new LinkedHashMap();
-        daos.put("cr.ac.una.prograiv.origraiv.domain.Usuario", new usuarioDAO());
-        daos.put("cr.ac.una.prograiv.origraiv.domain.Chat", new chatDAO());
-        daos.put("cr.ac.una.prograiv.origraiv.domain.Feedback", new feedbackDAO());
-        daos.put("cr.ac.una.prograiv.origraiv.domain.Gestiontemas", new gestionTemaDAO());
-        daos.put("cr.ac.una.prograiv.origraiv.domain.Historialconsultas", new historialConsultasDAO());
-        daos.put("cr.ac.una.prograiv.origraiv.domain.Historialfacturasxservicio", new historialFacturasXservicioDAO());
         
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Chat", new chatDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Feedback", new feedbackDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Gestiontemas", new gestionTemaDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Historialconsultas", new historialConsultasDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Historialfacturasxservicio", new historialFacturasXservicioDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Usuario", new usuarioDAO());
     }
     
     public IBaseDAO getDao(String className){
