@@ -9,16 +9,16 @@
     ============================================================================
 -->
 */
-/* Reset de estilos por defecto en el browser  usando import */
-/* VARIABLES. */
-:root{
-    --ancho-contenido: 95%;
-    --alto-contenido: 100%;
-}
-
 
 /* IMPORTS UTILES. */
 @import "normalize/normalize.css";
+
+/* Reset de los estilos por defecto del browser */
+*{
+    margin: 0px;
+    padding: 0px;
+    
+}
 
 /* Reset de paddings, margins y borders de elementos de nivel de bloque. */
 *{
@@ -100,8 +100,8 @@ footer{
     #contenido-nuestra-historia, 
     #contenido-contactenos,
     #contenido-formulario-login{
-        width: var(--ancho-contenido);
-        hieght: var(--alto-contenido);
+        width: 95%;
+        height: 100%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -122,8 +122,8 @@ footer{
     #contenido-nuestra-historia, 
     #contenido-contactenos,
     #contenido-formulario-login{
-        width: var(--ancho-contenido);
-        hieght: var(--alto-contenido);
+        width: 95%;
+        height: 100%;
 
         margin-left: auto;
         margin-right: auto;
@@ -147,8 +147,8 @@ footer{
     #contenido-nuestra-historia, 
     #contenido-contactenos,
     #contenido-formulario-login{
-        width: var(--ancho-contenido);
-        hieght: var(--alto-contenido);
+        width: 95%;
+        height: 100%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -173,7 +173,7 @@ footer{
     #contenido-contactenos,
     #contenido-formulario-login,
     #contenido-formulario-login{
-        width: var(--ancho-contenido);
+        width: 95%;
         height: 100%;
         margin-left: auto;
         margin-right: auto;     
