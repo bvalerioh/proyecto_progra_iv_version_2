@@ -5,7 +5,6 @@
  */
 package cr.ac.una.prograiv.proyecto.bl;
 
-
 import cr.ac.una.prograiv.proyecto.dao.IBaseDAO;
 import cr.ac.una.prograiv.proyecto.dao.*;
 import java.util.LinkedHashMap;
@@ -18,14 +17,13 @@ public class BaseBL {
     private final LinkedHashMap<String, IBaseDAO> daos;
 
     public BaseBL() {
-        daos = new LinkedHashMap();
-        
+        daos = new LinkedHashMap(6);        
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Usuario", new usuarioDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Chat", new chatDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Feedback", new feedbackDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Gestiontemas", new gestionTemaDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Historialconsultas", new historialConsultasDAO());
-        daos.put("cr.ac.una.prograiv.proyecto.domain.Historialfacturasxservicio", new historialFacturasXservicioDAO());
-        daos.put("cr.ac.una.prograiv.proyecto.domain.Usuario", new usuarioDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Historialfacturasxservicio", new historialFacturasXservicioDAO());        
     }
     
     public IBaseDAO getDao(String className){

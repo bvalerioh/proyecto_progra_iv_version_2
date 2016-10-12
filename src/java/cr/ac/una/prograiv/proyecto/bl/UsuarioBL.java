@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package cr.ac.una.prograiv.proyecto.bl;
-
+import javax.persistence.Entity;
 import cr.ac.una.prograiv.proyecto.domain.Usuario;
 import java.util.List;
 

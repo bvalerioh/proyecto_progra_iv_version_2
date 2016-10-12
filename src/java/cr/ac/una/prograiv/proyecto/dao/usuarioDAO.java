@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package cr.ac.una.prograiv.proyecto.dao;
-
+import javax.persistence.Entity;
 import cr.ac.una.prograiv.proyecto.domain.Usuario;
 import cr.ac.una.prograiv.proyecto.utils.HibernateUtil;
 import java.util.List;
@@ -75,7 +75,7 @@ public class usuarioDAO extends HibernateUtil implements IBaseDAO<Usuario, Integ
         List<Usuario> listusu;
         try{
             iniciaOperacion();
-            listusu = getSesion().createQuery("from Usuario").list();
+            listusu = getSesion().createQuery("from usuario").list();
         }catch(HibernateException he){
             throw he;
         }finally{
