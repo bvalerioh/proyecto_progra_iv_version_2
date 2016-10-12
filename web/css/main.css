@@ -9,57 +9,27 @@
     ============================================================================
 -->
 */
-
 /* IMPORTS UTILES. */
 @import "normalize/normalize.css";
-
-/* Reset de los estilos por defecto del browser */
-*{
-    margin: 0px;
-    padding: 0px;
-    
-}
-
 /* Reset de paddings, margins y borders de elementos de nivel de bloque. */
 *{
     padding: 0px;
     margin: 0px;
     border: 0px;
 }
-body {
+html, body {
     height: 100%;
+    background: #C8D3FF;
+    background: -webkit-linear-gradient(#C8D3FF  , #C8D3FF  );
+    background:    -moz-linear-gradient(#C8D3FF  , #C8D3FF  );
+    background:         linear-gradient(#C8D3FF  , #C8D3FF  );
 }
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-    width: 80%;
+    width: 100%;
     margin: auto;
 }
-/*
-#componente-carrusel{
-    width: 100%;
-    height: 620px;
-}
-
-.img-carrusel1{
-    height: 620px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-image: url(../images/place-holder-1024x768.png);
-}
-.img-carrusel2{
-    height: 620px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background: url(../images/place-holder-1024x768.png);
-}
-.img-carrusel3{
-    height: 620px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background: url(../images/place-holder-1024x768.png);
-}*/
-
 /*==============================================================================
                        ESTILOS PERSONALIZADOS PARA EL SITIO.
  ==============================================================================*/
@@ -76,14 +46,12 @@ body {
     position: relative;
 }
 footer{
-    
-    background:#ffab62;
+    background: #CDCDCD;
     width:100%;
     height:100px;
-    position:relative;
+    position: static;
     bottom:0;
     left:0;
-    
 }
 /*========================================
     MEDIA QUERIES SEGUN EL VIEWPORT.
@@ -180,14 +148,16 @@ footer{
     }
 
     #contenido-formulario-login{
-        position: relative;
-        left: 0%;
-        top: 7rem;
+        position: static;
+        width: 800px;
+        height: 600px;
     }
 
 
 }
  
+
+
 /* Ajustes contactenos */
 #contenido-contactenos{
     width: 65%;
