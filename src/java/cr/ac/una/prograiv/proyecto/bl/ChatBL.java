@@ -5,7 +5,7 @@
  */
 package cr.ac.una.prograiv.proyecto.bl;
 
-import cr.ac.una.prograiv.proyecto.domain.Chat;
+import cr.ac.una.prograiv.proyecto.domain.Chat ;
 import java.util.List;
 
 /**

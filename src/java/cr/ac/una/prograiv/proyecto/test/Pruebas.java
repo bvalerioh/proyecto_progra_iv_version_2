@@ -5,12 +5,8 @@
  */
 package cr.ac.una.prograiv.proyecto.test;
 
-import cr.ac.una.prograiv.proyecto.bl.FeedbackBL;
-import cr.ac.una.prograiv.proyecto.bl.GestiontemasBL;
-import cr.ac.una.prograiv.proyecto.bl.UsuarioBL;
-import cr.ac.una.prograiv.proyecto.domain.Feedback;
-import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
-import cr.ac.una.prograiv.proyecto.domain.Usuario;
+import cr.ac.una.prograiv.proyecto.bl.*;
+import cr.ac.una.prograiv.proyecto.domain.*;
 import java.util.Date;
 
 /**
