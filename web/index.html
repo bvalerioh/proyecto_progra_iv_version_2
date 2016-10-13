@@ -34,6 +34,7 @@
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <!-- Utils -->
         <script src="scripts/utils.js" type="text/javascript"></script>
+        <script src="scripts/datetimepicker.js" type="text/javascript"></script>
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -92,8 +93,15 @@
                                         <li onclick="cargarContenido('6');"><a href="#">DATOS PERSONALES</a></li>
                                         <li onclick="cargarContenido('7');"><a href="#">HISTORIAL CONSULTAS</a></li>
                                         <li onclick="cargarContenido('8');"><a href="#">CONSULTA FACTURAS</a></li>                                        
-                                        <li role="separator" class="divider"></li>
-                                        <li class="dropdown-header">EXPERTO</li>
+                                    </ul>
+                                </li>
+                                <li class="hidden" id="parteUsuarioExperto">
+                                    <a href="#" class="dropdown-toggle" 
+                                       data-toggle="dropdown" role="button" 
+                                       aria-haspopup="true" aria-expanded="false">
+                                        EXPERTO<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">                                    
                                         <li onclick="cargarContenido('11');"><a href="#">USUARIOS EN ESPERA</a></li>
                                         <li onclick="cargarContenido('12');"><a href="#">CATEGORÍAS</a></li>                                        
                                     </ul>

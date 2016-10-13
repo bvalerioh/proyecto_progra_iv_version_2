@@ -17,6 +17,8 @@ $(document).ready(function () {
     //$("#contenido-principal").load("./public/contenido-inicio.html");
     carrucelDinamico();
     verificaUsuarioLogueado();
+    $("#btModificarDatosPersonales").button();
+    $("#btModificarDatosPersonales").on(onclick(modificarDatosPersonales()));
 });
 /*
 $("#contenido-inicio-2").onload ready(function() {
@@ -45,6 +47,7 @@ function cargarContenido(idContenido) {
             }
             if (idContenido === '6') {
                 $("#contenido-principal").load("./usuario/contenido-mis-datos-personales.html");
+                mis_datos_personales();
             }
             if (idContenido === '7') {
                 $("#contenido-principal").load("./usuario/contenido-historial-consultas.html");
@@ -108,6 +111,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 
 //******************************************************************************
 function carrucelDinamico() {
+    // VA FUNCION CARGAR FEEDBACKS
     var text = '{ "items" : [' +
             '{ "stars":"5" , "username":"Juan Perez" , "comentario":"Gracias por la respuesta." , "imagen":"./images/001.png" , "alt":"_"},' +
             '{ "stars":"5" , "username":"Maria Lopez" , "comentario":"Gracias por la respuesta." , "imagen":"./images/002.png" , "alt":"_"},' +
@@ -161,78 +165,9 @@ function carrucelDinamico() {
 }
 
 //******************************************************************************
-//*********************** CARGAR JSON A UNA TABLA ******************************
-//******************************************************************************
-/*
- function llenarTabla(){    
- var text = '{ "principalesAcciones" : [' +
- '{ "minuto":"10" , "accion":"Remate a marco" },' +
- '{ "minuto":"23" , "accion":"gol de Juan Perez " },' +
- '{ "minuto":"78" , "accion":"gol de Adrian Arroyo" } ]}';
- json   = JSON.parse(text);
- var html = "<table id='t-principales-acciones'>";
- html+= "<tr>";
- html+= "<th>Minuto</td>";
- html+= "<th>Acción</td>";
- html+= "<tr>";
- for(var i=0;i<json.principalesAcciones.length;i++){
- html+= "<tr>";
- html+= "<td>"+json.principalesAcciones[i].minuto+"</td>";
- html+= "<td>"+json.principalesAcciones[i].accion+"</td>";
- html+= "</tr>";
- }
- html += "</table>";
- $("#tabla_dinamica").html(html);
- }
- */
-
-//******************************************************************************
-//***********************EJEMPLO DEL CAROUCEL DESDE JSON************************
-//******************************************************************************
-/*$(document).ready(function() {
- <div class="carousel-inner" role="listbox">
- 
- <div class="item active">
- <img src="img_chania.jpg" alt="Chania" width="460" height="345">
- <div class="carousel-caption">
- <h3>Chania</h3>
- <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
- </div>
- </div>
- 
- <div class="item">
- <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
- <div class="carousel-caption">
- <h3>Chania</h3>
- <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
- </div>
- </div>
- 
- <div class="item">
- <img src="img_flower.jpg" alt="Flower" width="460" height="345">
- <div class="carousel-caption">
- <h3>Flowers</h3>
- <p>Beatiful flowers in Kolymbari, Crete.</p>
- </div>
- </div>
- 
- <div class="item">
- <img src="img_flower2.jpg" alt="Flower" width="460" height="345">
- <div class="carousel-caption">
- <h3>Flowers</h3>
- <p>Beatiful flowers in Kolymbari, Crete.</p>
- </div>
- </div>
- 
- </div>
- 
- });*/
-
-
-//******************************************************************************
 //****************************** PARTE DEL LOGIN *******************************
 //******************************************************************************
-
+// COMPRUEBA QUE EL USUARIO ESTA IDENTIFICADO
 function verificaUsuarioLogueado(){
     // datos tomados desde la funcion identificarse
     var usuario = $("#IdUsuario").val();
@@ -252,18 +187,22 @@ function verificaUsuarioLogueado(){
                 $("#parteAdministrador").addClass("dropdown");
             }else{
                 // Usuario Experto. falta de separar.
+                $("#parteUsuarioExperto").removeClass();
+                $("#parteUsuarioExperto").addClass("dropdown");
             }
         }
     }else{ // usuario no esta identificado o se acaba de desloguear
         $("#parteUsuarioIdentificado").removeClass();
         $("#parteAdministrador").removeClass();
+        $("#parteUsuarioExperto").removeClass();                
         $("#parteUsuarioIdentificado").addClass("oculta");        
         $("#parteAdministrador").addClass("oculta");
+        $("#parteUsuarioExperto").addClass("oculta");
     }     
 }
 
 /******************************************************************************/
-// Buscar usuario por ID
+// BUSCAR USUARIO POR ID
 function getUsuarioById(id){
     //Se envia la información por ajax
     $.ajax({
@@ -324,7 +263,7 @@ $(document).ready(function(){
 });
 */
 //******************************************************************************
-// identificarse
+// IDENTIFICARSE/LOGIN
 function identificarse(){
     mostrarModal("myModal", "Espere por favor..", "Se esta comprobando los datos...");
     //Se envia la información por ajax
@@ -339,26 +278,102 @@ function identificarse(){
             cambiarMensajeModal("myModal", "Resultado acción", "Se presento un error, contactar al administador");
         },
         success: function (data) { //si todo esta correcto en la respuesta del ajax, la respuesta queda en el data
-            //var json = eval('(' + data + ')');
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
             ocultarModal("myModal");
-            // en caso de que el explorador no soporte sessionStorage
-            $("#IdUsuario").val = data.idUsuario;
-            $("#tipoUsua").val = data.tipoUsuario;
-            // si soporota el SessionStorage
-            sessionStorage.setItem("idUsuario", data.idUsuario);
-            sessionStorage.setItem("usuario", data.usuario);
-            sessionStorage.setItem("nombre", data.nombre);
-            sessionStorage.setItem("apellidos", data.apellidos);
-            sessionStorage.setItem("email", data.email);
-            sessionStorage.setItem("Nacimiento", data.feNacimiento);
-            sessionStorage.setItem("direccion", data.direccion);
-            sessionStorage.setItem("telTrabajo", data.telTrabajo);
-            sessionStorage.setItem("telCelular", data.telCelular);
-            sessionStorage.setItem("observaciones", data.observaciones);
-            sessionStorage.setItem("tipoUsuario", data.tipoUsuario);            
-            sessionStorage.setItem("estado", data.estado);            
+            if (tipoRespuesta === "C~") {
+                limpiarFormLogin();
+                // en caso de que el explorador no soporte sessionStorage
+                $("#IdUsuario").val = data.idUsuario;
+                $("#tipoUsua").val = data.tipoUsuario;
+                // si soporota el SessionStorage
+                sessionStorage.setItem("idUsuario", data.idUsuario);
+                sessionStorage.setItem("usuario", data.usuario);
+                sessionStorage.setItem("nombre", data.nombre);
+                sessionStorage.setItem("apellidos", data.apellidos);
+                sessionStorage.setItem("email", data.email);
+                sessionStorage.setItem("Nacimiento", data.feNacimiento);
+                sessionStorage.setItem("direccion", data.direccion);
+                sessionStorage.setItem("telTrabajo", data.telTrabajo);
+                sessionStorage.setItem("telCelular", data.telCelular);
+                sessionStorage.setItem("observaciones", data.observaciones);
+                sessionStorage.setItem("tipoUsuario", data.tipoUsuario);            
+                sessionStorage.setItem("estado", data.estado);               
+            } else {
+                if (tipoRespuesta === "E~") {                     
+                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                } else {
+                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                }
+            }                      
         },
         type: 'POST',
         dataType: "json"
     });
+}
+
+//******************************************************************************
+//*********************** PARTE DATOS PERSONALES *******************************
+//******************************************************************************
+
+function cargarMisDatos(){
+    mostrarModal("myModal", "Espere por favor..", "Cargando datos...");
+    try{
+    $("#datos-personales-usuario").val = sessionStorage.getItem("usuario");
+    $("#datos-personales-nombre").val = sessionStorage.getItem("nombre");
+    $("#datos-personales-apellidos").val = sessionStorage.getItem("apellidos");
+    $("#datos-personales-correo-electronico").val = sessionStorage.getItem("email");
+    $("#datos-personales-fecha-nacimiento").val = sessionStorage.getItem("Nacimiento");
+    $("#datos-personales-telefono-trabajo").val = sessionStorage.getItem("telTrabajo");
+    $("#datos-personales-celular").val = sessionStorage.getItem("telCelular");
+    $("#datos-personales-direccion").val = sessionStorage.getItem("direccion");
+    //$("#").val(), = 
+   // $("#datos-personales-contrasena") = ;
+    //$("#datos-personales-confirmar-contrasena") = ;
+    }catch(error){
+        //parte donde los cargamos si el explorador no soporta el sessionStorage
+    }
+}
+//******************************************************************************
+// MODIFICAR USUARIO
+function modificarDatosPersonales(){
+    mostrarModal("myModal", "Espere por favor..", "Comprobando datos...");
+    $.ajax({
+        url: 'usuarioServlet',
+        data: {
+            accion: "modificarDatosPersonales",
+            idUsuario: $("#IdUsuario").val(),
+            usuario:$("#datos-personales-usuario").val(),
+            nombre:$("#datos-personales-nombre").val(),
+            apellidos:$("#datos-personales-apellidos").val(),
+            email:$("#datos-personales-correo-electronico").val(),
+            Nacimiento: $("#datos-personales-fecha-nacimiento").val(),
+            direccion:$("#datos-personales-direccion").val(),
+            telTrabajo: $("#datos-personales-telefono-trabajo").val(),
+            telCelular: $("#datos-personales-celular").val()
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            ocultarModal("myModal");
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            ocultarModal("myModal");
+            if (tipoRespuesta === "C~") {
+                limpiarFormDireccion();
+                mostrarMensaje("alert alert-success", "Los datos fueron modificados, exitosamente!!!","¡Exito! "+respuestaTxt);              
+            } else {
+                if (tipoRespuesta === "E~") {                     
+                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                } else {
+                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                }
+            }
+        },
+        type: 'POST',
+        dataType: "json"        
+    });  
 }
