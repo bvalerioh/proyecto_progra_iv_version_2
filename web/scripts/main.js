@@ -16,6 +16,7 @@ $(document).ready(function () {
     // Esta linea se debe mantener sino no cargan las imagenes de slider.
     //$("#contenido-principal").load("./public/contenido-inicio.html");
     carrucelDinamico();
+    verificaUsuarioLogueado();
 });
 /*
 $("#contenido-inicio-2").onload ready(function() {
@@ -88,12 +89,11 @@ function cargarContenido(idContenido) {
 function mis_datos_personales() {
     $("#datos-personales-fecha-nacimiento").datepicker();
 }
-;
+
 // Datepicker contenido-registro  
 function registro_usuario() {
     $("#registro-fecha-nacimiento").datepicker();
 }
-;
 //******************************************************************************
 
 function toggleChevron(e) {
@@ -227,3 +227,138 @@ function carrucelDinamico() {
  </div>
  
  });*/
+
+
+//******************************************************************************
+//****************************** PARTE DEL LOGIN *******************************
+//******************************************************************************
+
+function verificaUsuarioLogueado(){
+    // datos tomados desde la funcion identificarse
+    var usuario = $("#IdUsuario").val();
+    var tipo =  $("#tipoUsua").val();
+    //** se pueden tomar desde el sessionStorage
+    //    var nombre = sessionStorage.getItem("Nombre");
+    //    var apellido = sessionStorage.getItem("Apellido");
+    if(usuario != null){        
+        if(tipo == 0){
+            // usuario corriente
+            $("#parteUsuarioIdentificado").removeClass();
+            $("#parteUsuarioIdentificado").addClass("dropdown");
+        }else{
+            if(tipo == 2){
+                // Usuario Administrador
+                $("#parteAdministrador").removeClass();
+                $("#parteAdministrador").addClass("dropdown");
+            }else{
+                // Usuario Experto. falta de separar.
+            }
+        }
+    }else{ // usuario no esta identificado o se acaba de desloguear
+        $("#parteUsuarioIdentificado").removeClass();
+        $("#parteAdministrador").removeClass();
+        $("#parteUsuarioIdentificado").addClass("oculta");        
+        $("#parteAdministrador").addClass("oculta");
+    }     
+}
+
+/******************************************************************************/
+// Buscar usuario por ID
+function getUsuarioById(id){
+    //Se envia la información por ajax
+    $.ajax({
+        url: 'usuarioServlet',
+        data: {
+            accion: "buscarUsuarioID",
+            idUsuario: id
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            sessionStorage.setItem("idUsuario", data.idUsuario);
+            sessionStorage.setItem("usuario", data.usuario);
+            sessionStorage.setItem("nombre", data.nombre);
+            sessionStorage.setItem("apellidos", data.apellidos);
+            sessionStorage.setItem("email", data.email);
+            sessionStorage.setItem("Nacimiento", data.feNacimiento);
+            sessionStorage.setItem("direccion", data.direccion);
+            sessionStorage.setItem("telTrabajo", data.telTrabajo);
+            sessionStorage.setItem("telCelular", data.telCelular);
+            sessionStorage.setItem("observaciones", data.observaciones);
+            sessionStorage.setItem("tipoUsuario", data.tipoUsuario);            
+            sessionStorage.setItem("estado", data.estado);
+        },
+        type: 'POST',
+        dataType: "json"        
+    });    
+}
+// EJEMPLO DEL SESSION STORAGE
+//******************************************************************************
+/*$(document).ready(function(){  
+   $('#boton-guardar').click(function(){      
+        //Captura de datos escrito en los inputs
+        var nom = document.getElementById("nombretxt").value;
+        var apel = document.getElementById("apellidotxt").value;
+        //Guardando los datos en el LocalStorage
+        sessionStorage.setItem("Nombre", nom);
+        sessionStorage.setItem("Apellido", apel);
+        //Limpiando los campos o inputs
+        document.getElementById("nombretxt").value = "";
+        document.getElementById("apellidotxt").value = "";
+   });  
+});
+
+//Funcion Cargar y Mostrar datos
+$(document).ready(function(){  
+   $('#boton-cargar').click(function(){                      
+        //Obtener datos almacenados
+        var nombre = sessionStorage.getItem("Nombre");
+        var apellido = sessionStorage.getItem("Apellido");
+        //Mostrar datos almacenados    
+        document.getElementById("nombre").innerHTML = nombre;
+        document.getElementById("apellido").innerHTML = apellido;
+   });  
+});
+*/
+//******************************************************************************
+// identificarse
+function identificarse(){
+    mostrarModal("myModal", "Espere por favor..", "Se esta comprobando los datos...");
+    //Se envia la información por ajax
+    $.ajax({
+        url: 'LoginServlet',
+        data: {
+            accion: "loguearse",
+            usuario: $("#usuarioLogin").val(),
+            contra: $("#contrasenaLogin").val()
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            cambiarMensajeModal("myModal", "Resultado acción", "Se presento un error, contactar al administador");
+        },
+        success: function (data) { //si todo esta correcto en la respuesta del ajax, la respuesta queda en el data
+            //var json = eval('(' + data + ')');
+            ocultarModal("myModal");
+            // en caso de que el explorador no soporte sessionStorage
+            $("#IdUsuario").val = data.idUsuario;
+            $("#tipoUsua").val = data.tipoUsuario;
+            // si soporota el SessionStorage
+            sessionStorage.setItem("idUsuario", data.idUsuario);
+            sessionStorage.setItem("usuario", data.usuario);
+            sessionStorage.setItem("nombre", data.nombre);
+            sessionStorage.setItem("apellidos", data.apellidos);
+            sessionStorage.setItem("email", data.email);
+            sessionStorage.setItem("Nacimiento", data.feNacimiento);
+            sessionStorage.setItem("direccion", data.direccion);
+            sessionStorage.setItem("telTrabajo", data.telTrabajo);
+            sessionStorage.setItem("telCelular", data.telCelular);
+            sessionStorage.setItem("observaciones", data.observaciones);
+            sessionStorage.setItem("tipoUsuario", data.tipoUsuario);            
+            sessionStorage.setItem("estado", data.estado);            
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}

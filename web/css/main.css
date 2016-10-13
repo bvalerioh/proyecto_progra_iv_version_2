@@ -207,3 +207,12 @@ footer{
     margin-right: 5%;    
     max-height: 45px;
 }
+/******************************************************************************/
+/* ocultar el id del usuario, para que el javascript lo pueda agarrar. */
+.oculta{
+    display:none;
+}
+li.hidden {
+    display: none;
+}
+/******************************************************************************/

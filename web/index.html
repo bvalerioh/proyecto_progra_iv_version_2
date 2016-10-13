@@ -32,11 +32,16 @@
         <script src="scripts/main.js" type="text/javascript"></script>
         <!-- Custrom CSS -->
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
+        <!-- Utils -->
+        <script src="scripts/utils.js" type="text/javascript"></script>
     </head>
     <body>
         <!--[if lt IE 10]>
               <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-            <![endif]-->
+            <![endif]-->       
+        
+        <p id="IdUsuario" class="oculta"></p>
+        <p id="tipoUsua" class="oculta"></p>
             <section id="barra-navegacion">
                 <nav class="navbar ">
                     <div id="navbar-login" class="menu-left">
@@ -76,7 +81,7 @@
                                 <li onclick="cargarContenido('2'); colapsar_Accordion('');"><a href="#">REFERENTE INSTRUCCIONAL</a></li>
                                 <li onclick="cargarContenido('3');"><a href="#">NUESTRA HISTORIA</a></li>
                                 <li onclick="cargarContenido('4');"><a href="#">CONTÁCTENOS</a></li>
-                                <li class="dropdown">
+                                <li class="hidden" id="parteUsuarioIdentificado">
                                     <a href="#" class="dropdown-toggle" 
                                        data-toggle="dropdown" role="button" 
                                        aria-haspopup="true" aria-expanded="false">
@@ -93,7 +98,7 @@
                                         <li onclick="cargarContenido('12');"><a href="#">CATEGORÍAS</a></li>                                        
                                     </ul>
                                 </li>
-                                <li class="dropdown">
+                                <li class="hidden" id="parteAdministrador">
                                     <a href="#" class="dropdown-toggle" 
                                        data-toggle="dropdown" role="button" 
                                        aria-haspopup="true" aria-expanded="false">
