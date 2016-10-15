@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
             String accion = request.getParameter("accion");
             switch (accion) {          
                 case "loguearse":
+                    int flag = 0;
                     liusu = usuBL.findAll(Usuario.class.getName());
                     // El usuario de la persona.
                     usu.setUsuario(request.getParameter("usuario"));                    
@@ -81,7 +82,7 @@ public class LoginServlet extends HttpServlet {
                                 userName.setMaxAge(30*60);
                                 //userName.setSecure(true);
                                 response.addCookie(userName);
-                                                                
+                                flag = 1;                                
                                 // devolvemos el usuario
                                 json = new Gson().toJson(usu);
                                 out.print(json);
@@ -89,7 +90,14 @@ public class LoginServlet extends HttpServlet {
                         }
                     }
                     // el usuario no existe
-                    out.print("E~El usuario no existe.");                    
+                    if(flag == 0){
+                        usu.setIdUsuario(101);
+                        usu.setUsuario("No encontrado");
+                        json = new Gson().toJson(usu);
+                                out.print(json);     
+                    }
+                    break;
+                    
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
