@@ -20,35 +20,50 @@
 }
 html, body {
     height: 100%;
-    width: 99%;
-    background: #C8D3FF;
-    background: -webkit-linear-gradient(#C8D3FF  , #C8D3FF  );
-    background:    -moz-linear-gradient(#C8D3FF  , #C8D3FF  );
-    background:         linear-gradient(#C8D3FF  , #C8D3FF  );
+    width: 100%;
+    background: #ffffff /*#C8D3FF*/;
 }
 
 body {
     padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
+/*==============================================================================
+                          ESTILOS DE TIPOGRAFIA.
+================================================================================*/
+/* FUENTES. */
+/* Roboto condensed light. */
+@font-face{
+    font-family: roboto_condensed_light;
+    src: url(../fonts/roboto/Roboto-Light.ttf);
+}
 
-/*
+.heading-one{
+    font-size: 40px;
+    font-family: roboto_condensed_light;
+    text-align: center;
+    font-weight: 100;
+}
+
 /*==============================================================================
                        ESTILOS PERSONALIZADOS PARA EL SITIO.
  ==============================================================================*/
 /*==============================================================================
                                ESTILOS PAGINA INICIO
 ================================================================================*/
-.img-portfolio {
-    margin-bottom: 30px;
+nav{
+    color: #122b40;
 }
-
+.img-portfolio {
+    margin-bottom: 29px;
+    border-radius: 161px 0px 161px 0px;
+    -moz-border-radius: 161px 0px 161px 0px;
+    -webkit-border-radius: 161px 0px 161px 0px;
+}
 .img-hover:hover {
     opacity: 0.8;
 }
-
 /* Home Page Carousel */
-
-header.carousel {
+header.carousel{
     height: 50%;
 }
 
@@ -91,13 +106,18 @@ header.carousel .fill {
 }
 
 /* Footer Styles */
-
 footer {
-    margin: 50px 0;
+    margin: 50px 0px;
+    font-size: 16px;
+    vertical-align: middle;
+    color: white;
+    margin-bottom: 0px;
+    background-color: rgb(90,90,90);
+    height: 90px;
+    text-align: center;
 }
 
 /* Responsive Styles */
-
 @media(max-width:991px) {
     .customer-img,
     .img-related {
@@ -114,7 +134,42 @@ footer {
         height: 70%;
     }
 }
-
+@media (max-width: 1200px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
 
 /*==============================================================================
                        ESTILOS PAGINA REFERENTE INSTRUCCIONAL
