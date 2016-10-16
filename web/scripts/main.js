@@ -40,9 +40,16 @@ $(document).ready(function () {
     $("#btLogin").button();
 });
 
-$( window ).unload(function() {
+$(window).on('beforeunload', function() {
     desconectar();
+    mostrarModal("myModal", "Espere por favor..", "Se esta cerrando los procesos...");
+    sleep(500);    
 });
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+
 /*
 $("#contenido-inicio-2").onload ready(function() {
         carrucelDinamico();
