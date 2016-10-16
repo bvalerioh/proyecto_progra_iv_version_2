@@ -30,7 +30,7 @@ $(document).ready(function () {
         forceParse: 0
     });
     // Esta linea se debe mantener sino no cargan las imagenes de slider.
-    //$("#contenido-principal").load("./public/contenido-inicio.html");
+    //$("#contenido-wrapper").load("./public/contenido-inicio.html");
     carrucelDinamico();
     verificaUsuarioLogueado();
     $("#btModificarDatosPersonales").button();
@@ -54,7 +54,7 @@ $("#contenido-inicio-2").onload ready(function() {
 function cargarContenido(idContenido) {
     /* CONTENIDO PUBLICO */
     if (idContenido === '1') {      
-        $("#contenido-principal").load("./public/contenido-inicio.html",
+        $("#contenido-wrapper").load("./public/contenido-inicio.html",
                         function(responseText, statusText, xhr){
                             if(statusText == "success")
                                carrucelDinamico();
@@ -63,20 +63,20 @@ function cargarContenido(idContenido) {
                     });  
     } else {
         if (idContenido === '2') {
-            $("#contenido-principal").load("./public/contenido-instruccional.html");
+            $("#contenido-wrapper").load("./public/contenido-instruccional.html");
         } else {
             if (idContenido === '3') {
-                $("#contenido-principal").load("./public/contenido-nuestra-historia.html");
+                $("#contenido-wrapper").load("./public/contenido-nuestra-historia.html");
             }
             if (idContenido === '4') {
-                $("#contenido-principal").load("./public/contenido-contactenos.html");
+                $("#contenido-wrapper").load("./public/contenido-contactenos.html");
             }
             /* USUARIO REGISTRADO */
             if (idContenido === '5') {
-                $("#contenido-principal").load("./usuario/contenido-chat.html");
+                $("#contenido-wrapper").load("./usuario/contenido-chat.html");
             }
             if (idContenido === '6') {
-                $("#contenido-principal").load("./usuario/contenido-mis-datos-personales.html"
+                $("#contenido-wrapper").load("./usuario/contenido-mis-datos-personales.html"
                                         , function(responseText, statusText, xhr){
                     if(statusText == "success")
                         cargarMisDatos();
@@ -85,39 +85,39 @@ function cargarContenido(idContenido) {
                 }); 
             }
             if (idContenido === '7') {
-                $("#contenido-principal").load("./usuario/contenido-historial-consultas.html");
+                $("#contenido-wrapper").load("./usuario/contenido-historial-consultas.html");
             }
             if (idContenido === '8') {
-                $("#contenido-principal").load("./usuario/contenido-consulta-facturas.html");
+                $("#contenido-wrapper").load("./usuario/contenido-consulta-facturas.html");
             }
             if (idContenido === '9') {
-                $("#contenido-principal").load("./public/contenido-formulario-login.html");
+                $("#contenido-wrapper").load("./public/contenido-formulario-login.html");
             }
             if (idContenido === '10') {
-                $("#contenido-principal").load("./public/contenido-registrarse.html");
+                $("#contenido-wrapper").load("./public/contenido-registrarse.html");
             }
             /* USUARIO EXPERTO */
             if (idContenido === '11') {
-                $("#contenido-principal").load("./usuario/contenido-usuarios-en-espera.html");
+                $("#contenido-wrapper").load("./usuario/contenido-usuarios-en-espera.html");
             }
             if (idContenido === '12') {
-                $("#contenido-principal").load("./usuario/contenido-categorias.html");
+                $("#contenido-wrapper").load("./usuario/contenido-categorias.html");
             }
             /* ADMINISTRADOR */
             if (idContenido === '13') {
-                $("#contenido-principal").load("./administrador/contenido-facturacion.html");
+                $("#contenido-wrapper").load("./administrador/contenido-facturacion.html");
             }
             if (idContenido === '14') {
-                $("#contenido-principal").load("./administrador/contenido-reportes.html");
+                $("#contenido-wrapper").load("./administrador/contenido-reportes.html");
             }
             if (idContenido === '15') {
-                $("#contenido-principal").load("./administrador/contenido-gestionar-usuario.html");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.html");
             }
             if (idContenido === '16') {
-                $("#contenido-principal").load("./administrador/contenido-gestionar-tema.html");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-tema.html");
             }
             if (idContenido === '17') {
-                $("#contenido-principal").load("./administrador/contenido-gestionar-expertos-por-tema.html");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-expertos-por-tema.html");
             }
         }
     }

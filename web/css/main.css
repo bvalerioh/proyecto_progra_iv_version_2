@@ -1,4 +1,4 @@
-/*
+/*==============================================================================
 <!--
     ============================================================================
     Universidad Nacional de Costa Rica.
@@ -8,7 +8,8 @@
     Proyecto # 1     
     ============================================================================
 -->
-*/
+================================================================================*/
+/*===================     ESTILIZADO A NIVEL GENERAL     =======================*/
 /* IMPORTS UTILES. */
 @import "normalize/normalize.css";
 /* Reset de paddings, margins y borders de elementos de nivel de bloque. */
@@ -19,200 +20,102 @@
 }
 html, body {
     height: 100%;
+    width: 99%;
     background: #C8D3FF;
     background: -webkit-linear-gradient(#C8D3FF  , #C8D3FF  );
     background:    -moz-linear-gradient(#C8D3FF  , #C8D3FF  );
     background:         linear-gradient(#C8D3FF  , #C8D3FF  );
 }
 
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-    width: 100%;
-    margin: auto;
+body {
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
+
+/*
 /*==============================================================================
                        ESTILOS PERSONALIZADOS PARA EL SITIO.
  ==============================================================================*/
 /*==============================================================================
                                ESTILOS PAGINA INICIO
 ================================================================================*/
-/* Mobile first */
-.container{
+.img-portfolio {
+    margin-bottom: 30px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+/* Home Page Carousel */
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
     width: 100%;
-    min-height: 100%;
-    position: relative;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
 }
-#contenido-principal{
-    width: 100%;
-    min-height: 100%;
-    position: relative;
+
+/* 404 Page Styles */
+
+.error-404 {
+    font-size: 100px;
 }
-footer{
-    background: #CDCDCD;
-    width:100%;
-    height:100px;
-    position: static;
-    bottom:0;
-    left:0;
+
+/* Pricing Page Styles */
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
 }
+
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+/* Footer Styles */
+
+footer {
+    margin: 50px 0;
+}
+
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+
+
 /*==============================================================================
-    MEDIA QUERIES SEGUN EL VIEWPORT.
- ========================================*/
-/* DISPOSITIVOS MOVILES - TELEFONOS. */
-/* POSICION PORTRAIT */
-@media only screen and (max-width : 320px){   
-    .container{
-        width: 100%;
-    }
-    #contenido-inicio, 
-    #contenido-instruccional, 
-    #contenido-nuestra-historia, 
-    #contenido-contactenos,
-    #contenido-formulario-login{
-        width: 95%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-     #contenido-formulario-login{
-        position: relative;
-        left: 0%;
-        top: 0rem;
-    }
-
-}
-/* POSICION LANDSCAPE */
-@media only screen and (min-width : 320px){   
-    .container{
-        width: 100%;
-    }
-    #contenido-inicio, 
-    #contenido-instruccional, 
-    #contenido-nuestra-historia, 
-    #contenido-contactenos,
-    #contenido-formulario-login{
-        width: 95%;
-        height: 100%;
-
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #contenido-formulario-login{
-        position: relative;
-        left: 0%;
-        top: 0rem;
-    }
-
-}
-/* DISPOSITIVOS MOVILES - TABLETS. */
-@media only screen and (min-width : 640px){
-    .container{
-        width: 100%;
-    }
-    #contenido-inicio, 
-    #contenido-instruccional, 
-    #contenido-nuestra-historia, 
-    #contenido-contactenos,
-    #contenido-formulario-login{
-        width: 95%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    #contenido-formulario-login{
-        position: relative;
-        left: 0%;
-        top: 0rem;
-    }
-}
-/* COMPUTADORAS Y DESKTOPS - LAPTOPS. */
-@media only screen and (min-width : 1024px){
-    .container{
-        width: 100%;
-    }
-    #contenido-inicio, 
-    #contenido-instruccional, 
-    #contenido-nuestra-historia, 
-    #contenido-contactenos,
-    #contenido-formulario-login,
-    #contenido-formulario-login{
-        width: 95%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;     
-    }
-
-    #contenido-formulario-login{
-        position: static;
-        width: 800px;
-        height: 600px;
-    }
-
-
-}
- 
-
-
-/* Ajustes contactenos */
-#contenido-contactenos{
-    width: 65%;
-    margin-left: 15%;
-}
-
-/* Ajustes contenido mis-datos-personales */
-#contenido-mis-datos-personales{
-    width: 65%;
-    margin-left: 15%;
-}
-
-/* Ajustes contenido registrarse */
-#contenido-registrarse, #contenido-expertos-por-tema, #contenido-gestionar-tema{
-    width: 65%;
-    margin-left: 15%;
-}
-/*Ajuste gestionar-tema-id-categoria*/
-#gestionar-tema-id-categoria{
-    width: 65%;
-    margin-right: 3%;
-}
-#gestionar-tema-nuevo-id{
-    margin-top: -4.5%;
-}
-/* Ajustes botones de form, registro usuario, modificar, contactenos */
-.boton-left{
-    float: right;
-    margin-right: 5%;
-    width: 25%;
-    font-weight: bold;
-    font-size: medium;
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-.boton-left:hover{
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #8c8c8c;
-} 
-/* Ajustes menu acceder a mi cuenta */
-.menu-left{
-    float: right;
-    margin: 0px;
-    padding: 0px;
-    margin-right: 5%;    
-    max-height: 45px;
-}
-/******************************************************************************/
-/* ocultar el id del usuario, para que el javascript lo pueda agarrar. */
-.oculta{
-    display:none;
-}
-li.hidden {
-    display: none;
-}
-/******************************************************************************/
-#lblBienvenida{
-    margin-left: 15px; 
-    margin-right: 10px;
-}
+                       ESTILOS PAGINA REFERENTE INSTRUCCIONAL
+================================================================================*/
