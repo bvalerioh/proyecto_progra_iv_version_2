@@ -33,7 +33,9 @@ html, body {
 /*==============================================================================
                        ESTILOS PERSONALIZADOS PARA EL SITIO.
  ==============================================================================*/
-/* Estilizado contenedor principal */
+/*==============================================================================
+                               ESTILOS PAGINA INICIO
+================================================================================*/
 /* Mobile first */
 .container{
     width: 100%;
@@ -53,10 +55,9 @@ footer{
     bottom:0;
     left:0;
 }
-/*========================================
+/*==============================================================================
     MEDIA QUERIES SEGUN EL VIEWPORT.
  ========================================*/
-
 /* DISPOSITIVOS MOVILES - TELEFONOS. */
 /* POSICION PORTRAIT */
 @media only screen and (max-width : 320px){   
@@ -103,8 +104,6 @@ footer{
     }
 
 }
-
-
 /* DISPOSITIVOS MOVILES - TABLETS. */
 @media only screen and (min-width : 640px){
     .container{
@@ -127,9 +126,6 @@ footer{
         top: 0rem;
     }
 }
-
-
-
 /* COMPUTADORAS Y DESKTOPS - LAPTOPS. */
 @media only screen and (min-width : 1024px){
     .container{

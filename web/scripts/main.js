@@ -54,7 +54,7 @@ $("#contenido-inicio-2").onload ready(function() {
 function cargarContenido(idContenido) {
     /* CONTENIDO PUBLICO */
     if (idContenido === '1') {      
-        $("#contenido-principal").load("./public/contenido-inicio-2.html",
+        $("#contenido-principal").load("./public/contenido-inicio.html",
                         function(responseText, statusText, xhr){
                             if(statusText == "success")
                                carrucelDinamico();
