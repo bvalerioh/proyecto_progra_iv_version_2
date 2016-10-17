@@ -1,3 +1,9 @@
+<%-- 
+    Document   : contenido-chat
+    Created on : Oct 17, 2016, 1:37:29 AM
+    Author     : ghost
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-chat">
         <h1>CHAT</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
