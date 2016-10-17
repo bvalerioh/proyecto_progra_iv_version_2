@@ -94,7 +94,7 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <a href="#"><img src="http://placehold.it/1900x1080&text=Slide One"/></a>
+                                <a href="#"><img src="images/001.png" alt=""/></a>         
                                 <!--<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>-->
                                 <div class="carousel-caption">
                                     <h2>Caption 1</h2>
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="item">
-                                <a href="#"><img src="http://placehold.it/1900x1080&text=Slide Two"/></a>
+                                <a href="#"><img src="images/002.png"/></a>
                                 <!--<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>-->
                                 <div class="carousel-caption">
                                     <h2>Caption 2</h2>
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="item">
-                                <a href="#"><img src="http://placehold.it/1900x1080&text=Slide Three" /></a>
+                            <a href="#"><img src="images/003.png" /></a>
                                 <!--<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>-->
                                 <div class="carousel-caption">
                                     <h2>Caption 3</h2>
@@ -174,7 +174,7 @@
                     <!-- Portfolio Section -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <h2 class="page-header">Portfolio Heading</h2>
+                            <h1 class="page-header heading-one">Nuestra Experiencia</h1>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <a href="portfolio-item.html">
@@ -193,17 +193,17 @@
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <a href="portfolio-item.html">
-                                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                                <img class="img-responsive img-portfolio img-hover" src="images/pagina-inicio/viajes.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <a href="portfolio-item.html">
-                                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                                <img class="img-responsive img-portfolio img-hover" src="images/pagina-inicio/legal.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <a href="portfolio-item.html">
-                                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                                <img class="img-responsive img-portfolio img-hover" src="images/pagina-inicio/gastronomia.jpg" alt="">
                             </a>
                         </div>
                     </div>
