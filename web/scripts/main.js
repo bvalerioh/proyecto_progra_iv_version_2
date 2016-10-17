@@ -426,15 +426,17 @@ function cargarMisDatos(){
 function modificarDatosPersonales(){
     mostrarModal("myModal", "Espere por favor..", "Comprobando datos...");
     $.ajax({
-        url: 'usuarioServlet',
+        url: 'UsuarioServlet',
         data: {
             accion: "modificarDatosPersonales",
-            idUsuario: $("#IdUsuario").val(),
+            idUsuario: sessionStorage.getItem("idUsuario"),
+            tipoUsuario: sessionStorage.getItem("tipoUsuario"),
+            contrasena:$("#datos-personales-contrasena").val(),
             usuario:$("#datos-personales-usuario").val(),
             nombre:$("#datos-personales-nombre").val(),
             apellidos:$("#datos-personales-apellidos").val(),
             email:$("#datos-personales-correo-electronico").val(),
-            Nacimiento: $("#datos-personales-fecha-nacimiento").val(),
+            fechaNacimiento: $("#datos-personales-fecha-nacimiento").val(),
             direccion:$("#datos-personales-direccion").val(),
             telTrabajo: $("#datos-personales-telefono-trabajo").val(),
             telCelular: $("#datos-personales-celular").val()

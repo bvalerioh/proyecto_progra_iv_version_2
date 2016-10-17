@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cr.ac.una.prograiv.proyecto.bl;
+import cr.ac.una.prograiv.proyecto.dao.usuarioDAO;
 import javax.persistence.Entity;
 import cr.ac.una.prograiv.proyecto.domain.Usuario;
 import java.util.List;
@@ -37,7 +38,11 @@ public class UsuarioBL extends BaseBL implements IBaseBL<Usuario, Integer>{
     public Usuario findById(Integer o) {
         return (Usuario)this.getDao(o.getClass().getName()).findById(o);
     }
-
+    // Encontrar por usuario
+    public Usuario findByUser(String o) {
+        Usuario usu = findByUser(o);
+        return usu;
+    }
     @Override
     public List<Usuario> findAll(String className) {
         return this.getDao(className).findAll();

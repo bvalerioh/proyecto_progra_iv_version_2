@@ -69,7 +69,20 @@ public class usuarioDAO extends HibernateUtil implements IBaseDAO<Usuario, Integ
         }
         return usu;
     }
-
+    // obtener usuario por usuario
+    public Usuario findByUser(String o) {
+        Usuario usu = null;
+        try{
+            iniciaOperacion();
+            usu = (Usuario)getSesion().get(Usuario.class, o);
+        }catch(HibernateException he){
+            usu = null;
+        }finally{
+            getSesion().close();
+        }
+        return usu;
+    }
+    
     @Override
     public List<Usuario> findAll() {
         List<Usuario> listusu;
