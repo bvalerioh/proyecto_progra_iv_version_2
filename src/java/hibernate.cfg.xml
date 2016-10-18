@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mypiv?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">admin</property>
+    <property name="hibernate.connection.password"></property>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Historialconsultas.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Chat.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Historialfacturasxservicio.hbm.xml"/>

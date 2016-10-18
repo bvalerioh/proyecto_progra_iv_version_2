@@ -9,15 +9,21 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
-    String nombreUsuarioEnSesion = "Manuel";
-    //nombreUsuarioEnSesion = (String)request.getSession().getAttribute("usuario");       
-    boolean estaLogueado = true;// Define si el usuario esta logueado.
+    boolean estaLogueado = false;// Define si el usuario esta logueado.
+    // Obtiene el nombre de usuario.
+    String nombreUsuario = (String)session.getAttribute("username"); 
+    Integer rolusuario = (Integer)session.getAttribute("rolusuario");
+    //String nombreUsuario = "Carlos";
+    if( nombreUsuario != null && rolusuario != null ){
+        estaLogueado = true;
+    }
     // Define el rol de un suario segun su nivel de acceso.
-    int rolUsuario = 2; // 0 - normal, 1 - Experto, 2 - Administrador.
+    //int rolUsuario = 2; // 0 - normal, 1 - Experto, 2 - Administrador.
+    
 %>
 <!DOCTYPE html>
 <html>
-    <!-- Inicio del Head -->
+    <!-- Inicio del Head --> 
     <%@include file="public/contenido-head.jsp"%>
     <!-- Final del Head --> 
     <!-- Inicio del body -->
@@ -66,13 +72,13 @@
                 <% if (estaLogueado == false) { %>
                 <%@include file="public/content-public-nav-bar.jsp"%>
                 <%}%>
-                <% if (estaLogueado == true && rolUsuario == 0) { %>
+                <% if (estaLogueado == true && rolusuario == 0) { %>
                 <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
                 <%}%>
-                <% if (estaLogueado == true && rolUsuario == 1) { %>
+                <% if (estaLogueado == true && rolusuario == 1) { %>
                 <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
                 <%}%>
-                <% if (estaLogueado == true && rolUsuario == 2) { %>
+                <% if (estaLogueado == true && rolusuario == 2) { %>
                 <%@include file="administrador/contenido-admin-nav-bar.jsp"%>
                 <%}%>
             </div>

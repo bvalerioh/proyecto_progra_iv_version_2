@@ -1,3 +1,10 @@
+<%-- 
+    Document   : contenido-registrarse
+    Created on : Oct 17, 2016, 8:21:08 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-registrarse" onloadstart="registro_usuario()">
     <form class="form-horizontal">
         <h1>REGISTRO USUARIO</h1>

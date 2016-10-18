@@ -1,3 +1,10 @@
+<%-- 
+    Document   : contenido-mis-datos-personales
+    Created on : Oct 17, 2016, 8:39:58 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-mis-datos-personales" onload="mis_datos_personales();">    
     <h1>MIS DATOS PERSONALES</h1>
     <br/>

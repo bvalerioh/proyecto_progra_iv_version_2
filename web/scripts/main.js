@@ -61,7 +61,7 @@ $("#contenido-inicio-2").onload ready(function() {
 function cargarContenido(idContenido) {
     /* CONTENIDO PUBLICO */
     if (idContenido === '1') {      
-        $("#contenido-wrapper").load("./public/contenido-inicio.html",
+        $("#contenido-wrapper").load("./public/contenido-inicio.jsp",
                         function(responseText, statusText, xhr){
                             if(statusText == "success")
                                carrucelDinamico();
@@ -70,20 +70,20 @@ function cargarContenido(idContenido) {
                     });  
     } else {
         if (idContenido === '2') {
-            $("#contenido-wrapper").load("./public/contenido-instruccional.html");
+            $("#contenido-wrapper").load("./public/contenido-instruccional.jsp");
         } else {
             if (idContenido === '3') {
-                $("#contenido-wrapper").load("./public/contenido-nuestra-historia.html");
+                $("#contenido-wrapper").load("./public/contenido-nuestra-historia.jsp");
             }
             if (idContenido === '4') {
-                $("#contenido-wrapper").load("./public/contenido-contactenos.html");
+                $("#contenido-wrapper").load("./public/contenido-contactenos.jsp");
             }
             /* USUARIO REGISTRADO */
             if (idContenido === '5') {
-                $("#contenido-wrapper").load("./usuario/contenido-chat.html");
+                $("#contenido-wrapper").load("./usuario/contenido-chat.jsp");
             }
             if (idContenido === '6') {
-                $("#contenido-wrapper").load("./usuario/contenido-mis-datos-personales.html"
+                $("#contenido-wrapper").load("./usuario/contenido-mis-datos-personales.jsp"
                                         , function(responseText, statusText, xhr){
                     if(statusText == "success")
                         cargarMisDatos();
@@ -92,39 +92,39 @@ function cargarContenido(idContenido) {
                 }); 
             }
             if (idContenido === '7') {
-                $("#contenido-wrapper").load("./usuario/contenido-historial-consultas.html");
+                $("#contenido-wrapper").load("./usuario/contenido-historial-consultas.jsp");
             }
             if (idContenido === '8') {
-                $("#contenido-wrapper").load("./usuario/contenido-consulta-facturas.html");
+                $("#contenido-wrapper").load("./usuario/contenido-consulta-facturas.jsp");
             }
             if (idContenido === '9') {
-                $("#contenido-wrapper").load("./public/contenido-formulario-login.html");
+                $("#contenido-wrapper").load("./public/contenido-formulario-login.jsp");
             }
             if (idContenido === '10') {
-                $("#contenido-wrapper").load("./public/contenido-registrarse.html");
+                $("#contenido-wrapper").load("./public/contenido-registrarse.jsp");
             }
             /* USUARIO EXPERTO */
             if (idContenido === '11') {
-                $("#contenido-wrapper").load("./usuario/contenido-usuarios-en-espera.html");
+                $("#contenido-wrapper").load("./usuario/contenido-usuarios-en-espera.jsp");
             }
             if (idContenido === '12') {
-                $("#contenido-wrapper").load("./usuario/contenido-categorias.html");
+                $("#contenido-wrapper").load("./usuario/contenido-categorias.jsp");
             }
             /* ADMINISTRADOR */
             if (idContenido === '13') {
-                $("#contenido-wrapper").load("./administrador/contenido-facturacion.html");
+                $("#contenido-wrapper").load("./administrador/contenido-facturacion.jsp");
             }
             if (idContenido === '14') {
-                $("#contenido-wrapper").load("./administrador/contenido-reportes.html");
+                $("#contenido-wrapper").load("./administrador/contenido-reportes.jsp");
             }
             if (idContenido === '15') {
-                $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.html");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.jsp");
             }
             if (idContenido === '16') {
-                $("#contenido-wrapper").load("./administrador/contenido-gestionar-tema.html");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-tema.jsp");
             }
             if (idContenido === '17') {
-                $("#contenido-wrapper").load("./administrador/contenido-gestionar-expertos-por-tema.html");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-expertos-por-tema.jsp");
             }
         }
     }

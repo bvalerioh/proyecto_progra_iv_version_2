@@ -1,5 +1,12 @@
-<div id="contenido-gestionar-usuario">
-        <h1>GESTIONAR USUARIO</h1>
+<%-- 
+    Document   : contenido-facturacion
+    Created on : Oct 17, 2016, 8:59:53 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<div id="contenido-facturacion">
+        <h1>FACTURACIÓN</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 

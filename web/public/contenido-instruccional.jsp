@@ -1,3 +1,9 @@
+<%-- 
+    Document   : contenido-instruccional
+    Created on : Oct 17, 2016, 8:17:56 PM
+    Author     : ghost
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-instruccional" onclick="toogleChaveron('');">
     <h1>Bienvenido al referente instruccional</h1>
     <p>

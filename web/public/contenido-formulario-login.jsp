@@ -1,3 +1,10 @@
+<%-- 
+    Document   : contenido-formulario-login
+    Created on : Oct 17, 2016, 8:12:26 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-formulario-login">
     <div class="container">
         <div class="row">

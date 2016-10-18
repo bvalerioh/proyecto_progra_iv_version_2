@@ -1,3 +1,10 @@
+<%-- 
+    Document   : contenido-gestionar-tema
+    Created on : Oct 17, 2016, 9:27:10 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-gestionar-tema">
     <h1>GESTION DE TEMAS</h1>
     <form class="form-horizontal">

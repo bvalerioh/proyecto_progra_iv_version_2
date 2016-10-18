@@ -1,5 +1,12 @@
-<div id="contenido-nuestra-historia">
-        <h1>NUESTRA HISTORIA</h1>
+<%-- 
+    Document   : contenido-consulta-factura
+    Created on : Oct 17, 2016, 8:24:26 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<div id="contenido-consulta-facturas">
+        <h1>CONSULTA FACTURAS</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 

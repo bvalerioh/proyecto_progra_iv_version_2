@@ -1,5 +1,12 @@
-<div id="contenido-reportes">
-        <h1>REPORTES</h1>
+<%-- 
+    Document   : contenido-usuario-en-espera
+    Created on : Oct 17, 2016, 8:58:34 PM
+    Author     : ghost
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<div id="contenido-usuarios-en-espera">
+        <h1>USUARIOS EN ESPERA</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 

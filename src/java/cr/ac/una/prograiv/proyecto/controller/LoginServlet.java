@@ -75,6 +75,10 @@ public class LoginServlet extends HttpServlet {
                                 usu = liusu.get(i);
                                 // creamos una session                                
                                 session.setAttribute("id", usu.getIdUsuario());
+                                // Se guarda el nombre de usaurio en sesion.
+                                session.setAttribute("username",usu.getUsuario());
+                                // Se guarda el roll del usuario en sesion.
+                                session.setAttribute("rolusuario",usu.getTipoUsuario());
                                 //setting session to expiry in 30 mins
                                 session.setMaxInactiveInterval(30*60);
                                 // agregando cookie

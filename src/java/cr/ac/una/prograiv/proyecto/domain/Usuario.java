@@ -139,10 +139,6 @@ public class Usuario  implements java.io.Serializable {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
-
-
-
-
 }
 
 
