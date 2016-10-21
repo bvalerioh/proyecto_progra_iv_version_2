@@ -93,10 +93,6 @@ public class Historialconsultas  implements java.io.Serializable {
     public void setFkChat(Integer fkChat) {
         this.fkChat = fkChat;
     }
-
-
-
-
 }
 
 

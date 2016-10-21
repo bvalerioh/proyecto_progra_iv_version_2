@@ -17,4 +17,8 @@ public interface IBaseBL <T,K> {
     public abstract void delete (T o);
     public abstract T findById (K o);
     public abstract  List<T> findAll(String className);
+    // metodos personalizados.    
+    public abstract T findByName(String className, String name);
+    // obtiene por usuario
+    public abstract List<T> findAllById(String className, T o);
 }

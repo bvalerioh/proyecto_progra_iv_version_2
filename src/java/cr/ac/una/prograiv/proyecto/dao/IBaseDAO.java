@@ -5,6 +5,7 @@
  */
 package cr.ac.una.prograiv.proyecto.dao;
 
+import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
 import java.util.List;
 
 /**
@@ -16,5 +17,8 @@ public interface IBaseDAO <T,K> {
     public abstract T merge (T o);
     public abstract void delete (T o);
     public abstract T findById (K o);
-    public abstract  List<T> findAll();
+    public abstract List<T> findAll();
+    // metodos personalizados.
+    public abstract List<T> findAllById(T o);
+    public abstract T findByName(String nombreT);
 }

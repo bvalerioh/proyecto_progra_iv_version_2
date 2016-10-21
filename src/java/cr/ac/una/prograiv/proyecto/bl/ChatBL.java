@@ -42,6 +42,17 @@ public class ChatBL extends BaseBL implements IBaseBL<Chat, Integer>{
     public List<Chat> findAll(String className) {
         return this.getDao(className).findAll();
     }
+    // Metodos personalizados
+    @Override
+    public Chat findByName(String className, String name) {
+        // No se ocupa aquí
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Chat> findAllById(String className, Chat o) {
+        return this.getDao(className).findAllById(o);
+    }
     
     
 }

@@ -9,6 +9,7 @@ import cr.ac.una.prograiv.proyecto.utils.HibernateUtil;
 import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 /**
  *
  * @author Bryan_2
@@ -46,9 +47,14 @@ public class gestionTemaDAO extends HibernateUtil implements IBaseDAO<Gestiontem
     public void delete(Gestiontemas o) {
         try{
             iniciaOperacion();
-            getSesion().delete(o);
+            String hql = "update Gestiontemas set estado = :estadoT where idTemas = :idxTema";
+            Query q = getSesion().createQuery(hql);
+            q.setInteger("estadoT", o.getEstado());
+            q.setInteger("idxTema", o.getIdTemas());
+            int modifications=q.executeUpdate();
             getTransac().commit();
         }catch(HibernateException he){
+            System.out.print(he.getMessage());
             throw he;
         }finally{
             getSesion().close();
@@ -73,14 +79,38 @@ public class gestionTemaDAO extends HibernateUtil implements IBaseDAO<Gestiontem
     public List<Gestiontemas> findAll() {
         List<Gestiontemas> listgt;
         try{
-            iniciaOperacion();
-            listgt = getSesion().createQuery("from Gestiontemas").list();
+            iniciaOperacion();            
+            listgt = getSesion().createQuery("from Gestiontemas where estado = 1").list();
         }catch(HibernateException he){
+            System.out.print(he.getMessage());
             throw he;
         }finally{
             getSesion().close();
         }
         return listgt;
+    }
+
+    @Override
+    public Gestiontemas findByName(String nombreT) {
+        Gestiontemas gt = null;
+        try{
+            iniciaOperacion();            
+            String hql = "from Gestiontemas where nombreTema = :nombreT";
+            Query q = getSesion().createQuery(hql);
+            q.setString("nombreT", nombreT);
+            gt = (Gestiontemas)q.uniqueResult();
+        }catch(HibernateException he){
+            System.out.print(he.getMessage());
+            gt = null;
+        }finally{
+            getSesion().close();            
+        }
+        return gt;        
+    }
+
+    @Override
+    public List<Gestiontemas> findAllById(Gestiontemas o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

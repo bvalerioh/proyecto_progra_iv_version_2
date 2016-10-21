@@ -42,5 +42,16 @@ public class HistorialfacturasxservicioBL extends BaseBL implements IBaseBL<Hist
     public List<Historialfacturasxservicio> findAll(String className) {
         return this.getDao(className).findAll();
     }
+
+    @Override
+    public Historialfacturasxservicio findByName(String className, String name) {
+        // no se ocupa
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Historialfacturasxservicio> findAllById(String className, Historialfacturasxservicio o) {
+        return this.getDao(className).findAllById(o);
+    }
     
 }

@@ -9,6 +9,7 @@ import cr.ac.una.prograiv.proyecto.utils.HibernateUtil;
 import cr.ac.una.prograiv.proyecto.domain.Historialfacturasxservicio;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 /**
  *
  * @author Bryan_2
@@ -81,6 +82,17 @@ public class historialFacturasXservicioDAO extends HibernateUtil implements IBas
             getSesion().close();
         }
         return listhfs;
+    }
+
+    @Override
+    public Historialfacturasxservicio findByName(String nombreT) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Historialfacturasxservicio> findAllById(Historialfacturasxservicio o) {
+        // no se ocupa solo se regresa 1
+       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -83,5 +83,16 @@ public class chatDAO extends HibernateUtil implements IBaseDAO<Chat, Integer>{
         }
         return listc;
     }
+
+    @Override
+    public Chat findByName(String nombreT) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Chat> findAllById(Chat o) {
+        // Esta en duda.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

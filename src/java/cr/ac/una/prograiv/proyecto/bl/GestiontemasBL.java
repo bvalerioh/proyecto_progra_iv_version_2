@@ -42,5 +42,15 @@ public class GestiontemasBL extends BaseBL implements IBaseBL<Gestiontemas, Inte
     public List<Gestiontemas> findAll(String className) {
         return this.getDao(className).findAll();
     }
+    // metodos personalizados
+    @Override
+    public Gestiontemas findByName(String className, String nombreT) {
+        return (Gestiontemas) this.getDao(className).findByName(nombreT);
+    }
+
+    @Override
+    public List<Gestiontemas> findAllById(String className, Gestiontemas o) {
+        return this.getDao(className).findAllById(o);
+    }
     
 }

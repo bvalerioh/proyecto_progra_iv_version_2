@@ -83,6 +83,16 @@ public class feedbackDAO extends HibernateUtil implements IBaseDAO<Feedback, Int
         }
         return Listfb;
     }
+
+    @Override
+    public Feedback findByName(String nombreT) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Feedback> findAllById(Feedback o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

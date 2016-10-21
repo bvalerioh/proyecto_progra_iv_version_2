@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
             //**********************************************************************
             //se toman los datos de la session
             //**********************************************************************
-            HttpSession session = request.getSession();
+            HttpSession session;// = request.getSession(true);
             
             //**********************************************************************
             //se consulta cual accion se desea realizar
@@ -71,6 +71,7 @@ public class LoginServlet extends HttpServlet {
                     for(int i = 0; i < liusu.size(); i++){
                         if(liusu.get(i).getUsuario().equals(usu.getUsuario())){
                             if(liusu.get(i).getContrasena().equals(usu.getContrasena())){
+                                session = request.getSession(true);
                                 // El usuario Existe y es regresado.                                
                                 usu = liusu.get(i);
                                 // creamos una session                                

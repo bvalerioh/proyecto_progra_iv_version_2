@@ -42,5 +42,16 @@ public class HistorialconsultasBL extends BaseBL implements IBaseBL<Historialcon
     public List<Historialconsultas> findAll(String className) {
         return this.getDao(className).findAll();
     }
+
+    @Override
+    public Historialconsultas findByName(String className, String name) {
+        // no se ocupa aquí.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Historialconsultas> findAllById(String className, Historialconsultas o) {
+        return this.getDao(className).findAllById(o);
+    }
     
 }

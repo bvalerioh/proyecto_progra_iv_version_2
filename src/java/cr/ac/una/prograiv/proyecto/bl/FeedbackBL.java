@@ -42,5 +42,16 @@ public class FeedbackBL extends BaseBL implements IBaseBL<Feedback, Integer>{
     public List<Feedback> findAll(String className) {
         return this.getDao(className).findAll();
     }
+    // metodos personalizados
+    @Override
+    public Feedback findByName(String className, String name) {
+        // no se ocupa 
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Feedback> findAllById(String className, Feedback o) {
+        return this.getDao(className).findAllById(o);
+    }
     
 }
