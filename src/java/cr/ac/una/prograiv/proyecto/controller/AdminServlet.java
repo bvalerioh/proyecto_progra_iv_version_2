@@ -10,7 +10,6 @@ import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
 import cr.ac.una.prograiv.proyecto.bl.GestiontemasBL;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +44,8 @@ public class AdminServlet extends HttpServlet {
             Gestiontemas gt;// = new Gestiontemas(); 
             
             // Creación de BLS
-            GestiontemasBL gtBL = new GestiontemasBL();
-            
+            GestiontemasBL gtBL = null;
+            gtBL = new GestiontemasBL();
             // Creación de LISTAS
           //  List<Gestiontemas> gtlist;
             
@@ -98,7 +97,8 @@ public class AdminServlet extends HttpServlet {
                     break;
                 case "obtenerTemaXid":
                     gt = new Gestiontemas(); 
-                    gt = gtBL.findById(Integer.parseInt(request.getParameter("idxTema")));
+                    int idTema = Integer.parseInt(request.getParameter("idxTema"));
+                    gt = gtBL.findById(idTema);
                     //se pasa la informacion del objeto a formato JSON
                     json = new Gson().toJson(gt);
                     out.print(json);

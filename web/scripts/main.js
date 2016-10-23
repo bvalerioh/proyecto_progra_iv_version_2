@@ -507,6 +507,7 @@ function guardarTema(){
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "C~") {
+                ocultarModal("myModal");
                 mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
                 // Vuelve a conseguir la lista de los temas
                 obtenerTemas();
@@ -545,6 +546,7 @@ function modificaTemas(){
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "C~") {
+                ocultarModal("myModal");
                 mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
                 // Vuelve a conseguir la lista de los temas
                 obtenerTemas();
@@ -610,8 +612,9 @@ function cargarTablaTemas(datos){
             row.append($("<th><b>ACCIÓN</th>"));
             //carga la tabla con el json devuelto
             for (var i = 0; i < data.length; i++) {
-                dibujarFila(data[i]);
+                dibujarFilaTemas(data[i]);
             }
+            ocultarModal("myModal");
         }
     });
 }
@@ -650,6 +653,7 @@ function llenarFormTema(temaID){
             mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
+            ocultarModal("myModal");
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
             $("#gestionar-tema-id").val(data.idxTema);
             $("#gestionar-tema-nombre").val(data.nombreTema);

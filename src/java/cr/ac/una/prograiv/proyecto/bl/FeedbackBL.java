@@ -35,7 +35,7 @@ public class FeedbackBL extends BaseBL implements IBaseBL<Feedback, Integer>{
 
     @Override
     public Feedback findById(Integer o) {
-        return (Feedback)this.getDao(o.getClass().getName()).findById(o);
+        return (Feedback)this.getDao(Feedback.class.getName()).findById(o);
     }
 
     @Override

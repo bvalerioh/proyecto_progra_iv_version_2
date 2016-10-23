@@ -35,7 +35,8 @@ public class GestiontemasBL extends BaseBL implements IBaseBL<Gestiontemas, Inte
 
     @Override
     public Gestiontemas findById(Integer o) {
-        return (Gestiontemas)this.getDao(o.getClass().getName()).findById(o);
+        //return (Personas) this.getDao(Personas.class.getName()).findById(o);
+        return (Gestiontemas)this.getDao(Gestiontemas.class.getName()).findById(o);
     }
 
     @Override

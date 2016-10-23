@@ -35,7 +35,7 @@ public class ChatBL extends BaseBL implements IBaseBL<Chat, Integer>{
 
     @Override
     public Chat findById(Integer o) {
-        return (Chat)this.getDao(o.getClass().getName()).findById(o);
+        return (Chat)this.getDao(Chat.class.getName()).findById(o);
     }
 
     @Override

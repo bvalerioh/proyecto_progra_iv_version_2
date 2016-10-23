@@ -24,6 +24,7 @@
         <!-- Bootstrap -->
         <script src="css/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <!-- Custom JS -->
+        <script src="scripts/pagination.min.js" type="text/javascript"></script>
         <script src="scripts/main.js" type="text/javascript"></script>       
         <!-- ESTILOS  -->
         <!-- Bootstrap -->
@@ -35,5 +36,6 @@
         <!-- Normalize -->
         <link href="css/normalize/normalize.css" rel="stylesheet" type="text/css"/>
         <!-- Custrom CSS -->
+        <link href="css/pagination.css" rel="stylesheet" type="text/css"/>        
         <link href="css/main.css" rel="stylesheet" type="text/css"/>   
     </head>

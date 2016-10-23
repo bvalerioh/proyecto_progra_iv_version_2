@@ -43,9 +43,9 @@
                     <button type="button" class="btn boton-rigth" 
                             id="gestionar-tema-cancela">Cancelar</button>
                     <button type="button" class="btn boton-left" 
-                            id="gestionar-tema-guardar">Guardar</button>
+                            id="gestionar-tema-guardar" onclick="guardarTema()">Guardar</button>
                     <button type="button" class="hidden" 
-                            id="gestionar-tema-modificar">Modificar</button>
+                            id="gestionar-tema-modificar" onclick="modificaTemas()">Modificar</button>
                 </div>
             </form>
         </div>

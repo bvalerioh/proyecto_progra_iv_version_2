@@ -35,7 +35,7 @@ public class HistorialfacturasxservicioBL extends BaseBL implements IBaseBL<Hist
 
     @Override
     public Historialfacturasxservicio findById(Integer o) {
-        return (Historialfacturasxservicio)this.getDao(o.getClass().getName()).findById(o);
+        return (Historialfacturasxservicio)this.getDao(Historialfacturasxservicio.class.getName()).findById(o);
     }
 
     @Override

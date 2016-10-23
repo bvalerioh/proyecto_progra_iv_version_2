@@ -35,7 +35,7 @@ public class HistorialconsultasBL extends BaseBL implements IBaseBL<Historialcon
 
     @Override
     public Historialconsultas findById(Integer o) {
-        return (Historialconsultas)this.getDao(o.getClass().getName()).findById(o);
+        return (Historialconsultas)this.getDao(Historialconsultas.class.getName()).findById(o);
     }
 
     @Override
