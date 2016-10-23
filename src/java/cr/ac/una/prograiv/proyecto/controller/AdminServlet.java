@@ -46,40 +46,64 @@ public class AdminServlet extends HttpServlet {
             // Creación de BLS
             GestiontemasBL gtBL = null;
             gtBL = new GestiontemasBL();
-            // Creación de LISTAS
-          //  List<Gestiontemas> gtlist;
-            
             //Se hace una pausa para ver el modal
             Thread.sleep(1000);            
             //**********************************************************************
             //se consulta cual accion se desea realizar
             //**********************************************************************
             String accion = request.getParameter("accion");
-            String nombreT, costoxT, observT;
-            int idxTema, estadoT;
+            String nombreT, observT;
+            int idxTema, estadoT, costoxT;
             
             switch (accion) {
                 case "guardarTema": case "modificarTema":
                     nombreT = request.getParameter("nombreT");
-                    costoxT = request.getParameter("costoxT");
+                    costoxT = Integer.parseInt(request.getParameter("costoxT"));
                     observT = request.getParameter("observT");
                     idxTema = Integer.parseInt(request.getParameter("idxTema"));
                     estadoT = Integer.parseInt(request.getParameter("estadoT"));
+                    gt = new Gestiontemas(); 
                     if (accion.equals("guardarTema")) {
-                        // verifiquemos que el tema no exista ya.
-                        gt = new Gestiontemas(); 
+                        // verifiquemos que el tema no exista ya.                        
                         gt = gtBL.findByName(Gestiontemas.class.getName(), nombreT);
                         //si no es null
-                        if (gt != null) {
-                            
-                            out.print("C~Validación correcta... espere esta siendo redireccionado");
-                        }else{
-                            out.print("E~Usuario o contraseña invalidos");
+                        if(gt == null){
+                            gt = new Gestiontemas(); 
+                            gt.setIdTemas(idxTema);
+                            gt.setEstado(estadoT);
+                            gt.setCostoXminuto(costoxT);
+                            gt.setNombreTema(nombreT);
+                            gt.setObservaciones(observT);
+                            //Se guarda el objeto
+                            gtBL.save(gt);
+                            //Se imprime la respuesta con el response
+                            out.print("C~El tema fue ingresado correctamente");
                         }
-                    }else{
-                        out.print("E~Usuario o contraseña invalidos");
+                        else{
+                            if(gt.getEstado().equals(0)){
+                                gt.setEstado(estadoT);
+                                gt.setCostoXminuto(costoxT);
+                                gt.setNombreTema(nombreT);
+                                gt.setObservaciones(observT);
+                                gtBL.merge(gt);
+                                out.print("C~El tema fue reactivado y actualizado");
+                            }else{
+                                out.print("E~El tema ya existe");
+                            }
+                        }
+                    }else{//es modificar persona
+                        //Se guarda el objeto
+                        gt.setIdTemas(idxTema);
+                        gt.setEstado(estadoT);
+                        gt.setCostoXminuto(costoxT);
+                        gt.setNombreTema(nombreT);
+                        gt.setObservaciones(observT);
+                        gtBL.merge(gt);
+                        //Se imprime la respuesta con el response
+                        out.print("C~El tema fue modificado correctamente");
                     }
                     break;
+                    
                 case "eliminarTema":
                         try{
                             gt = new Gestiontemas(); 
@@ -90,11 +114,13 @@ public class AdminServlet extends HttpServlet {
                         }catch(Exception e){
                             out.print("E~Hubo un error elimiando el tema."+ e.getMessage());
                         }
-                    break;      
+                    break;    
+                    
                 case "obtenerTodosTemas":
                     json = new Gson().toJson(gtBL.findAll(Gestiontemas.class.getName()));
                     out.print(json);
                     break;
+                    
                 case "obtenerTemaXid":
                     gt = new Gestiontemas(); 
                     int idTema = Integer.parseInt(request.getParameter("idxTema"));
@@ -102,7 +128,9 @@ public class AdminServlet extends HttpServlet {
                     //se pasa la informacion del objeto a formato JSON
                     json = new Gson().toJson(gt);
                     out.print(json);
-                    break;    
+                    break;   
+    //**************************************************************************                
+    //**************************************************************************
                 case "asignarTemaExperto":
                     break;
                     

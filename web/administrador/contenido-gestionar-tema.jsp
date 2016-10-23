@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-6 text-center">
             <form class="form-horizontal">
-                <input type="hidden" id="gestionar-tema-id" value="" />
+                <input type="hidden" id="gestionar-tema-id"/>
                 <div class="form-group">
                     <label for="gestionar-tema-nombre">Nombre de la categoría:</label>
                     <input type="text" class="form-control" id="gestionar-tema-nombre" 

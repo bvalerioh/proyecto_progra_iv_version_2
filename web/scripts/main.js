@@ -479,6 +479,7 @@ function obtenerTemas(){
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            ocultarModal("myModal");
             cargarTablaTemas(data);
         },
         type: 'POST',
@@ -499,9 +500,25 @@ function guardarTema(){
             idxTema: '0',
             estadoT: $("#gestionar-tema-estado").val()
         },
-        error: function () { //si existe un error en la respuesta del ajax
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
             ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             var respuestaTxt = data.substring(2);
@@ -513,6 +530,7 @@ function guardarTema(){
                 obtenerTemas();
                 limpiaFormTema();
             } else {
+                ocultarModal("myModal");
                 if (tipoRespuesta === "E~") {
                     mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
                 } else {
@@ -520,13 +538,11 @@ function guardarTema(){
                 }
             }
         },
-        type: 'POST',
-        dataType: "json"        
+        type: 'POST'       
     });
 }
 
 function modificaTemas(){
-    limpiarTabla("gesion-temas-tabla");
     mostrarModal("myModal", "Espere por favor..", "Modificando la información en la base de datos");
     $.ajax({
         url: 'AdminServlet',
@@ -535,12 +551,28 @@ function modificaTemas(){
             nombreT: $("#gestionar-tema-nombre").val(),
             costoxT: $("#gestionar-tema-costo-minuto").val(),
             observT: $("#gestionar-tema-observaciones").val(),
-            idxTema: $("#gestionar-tema-id").val(),
+            idxTema: sessionStorage.getItem("idxTema"),
             estadoT: $("#gestionar-tema-estado").val()
         },
-        error: function () { //si existe un error en la respuesta del ajax
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
             ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             var respuestaTxt = data.substring(2);
@@ -549,6 +581,7 @@ function modificaTemas(){
                 ocultarModal("myModal");
                 mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
                 // Vuelve a conseguir la lista de los temas
+                limpiarTabla("gesion-temas-tabla");
                 obtenerTemas();
                 // limpiar formulario temas
                 gestionTemasBotones('0');
@@ -561,8 +594,7 @@ function modificaTemas(){
                 }
             }
         },
-        type: 'POST',
-        dataType: "json"        
+        type: 'POST'
     }); 
 }
 
@@ -585,11 +617,12 @@ function eliminaTema(idTema){
             if (tipoRespuesta === "E~") {
                 cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
             } else {
+                mostrarMensaje("alert alert-success", respuestaTxt, "!Accion correcta!");
                 setTimeout(obtenerTemas, 2000);// hace una pausa y consulta la información de la base de datos
             }
         },
         type: 'POST',
-        dataType: "json"        
+        dataType: "text"        
     }); 
 }
 
@@ -614,7 +647,6 @@ function cargarTablaTemas(datos){
             for (var i = 0; i < data.length; i++) {
                 dibujarFilaTemas(data[i]);
             }
-            ocultarModal("myModal");
         }
     });
 }
@@ -655,7 +687,8 @@ function llenarFormTema(temaID){
         success: function (data) {
             ocultarModal("myModal");
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
-            $("#gestionar-tema-id").val(data.idxTema);
+            sessionStorage.setItem("idxTema", data.idTemas);
+            //$("#gestionar-tema-id").val(data.idTemas);
             $("#gestionar-tema-nombre").val(data.nombreTema);
             $("#gestionar-tema-costo-minuto").val(data.costoXminuto);
             $("#gestionar-tema-observaciones").val(data.observaciones);
