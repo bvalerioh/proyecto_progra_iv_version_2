@@ -8,7 +8,7 @@
 <div id="contenido-formulario-login">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center ">
+            <div class="col-md-6">
                 <form class="form-signin" method="POST">       
                     <h2 class="form-signin-heading">Inicio de Sesion</h2>
                     <input type="text" class="form-control" name="username" 

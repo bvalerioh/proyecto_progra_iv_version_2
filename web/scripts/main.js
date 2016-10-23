@@ -43,17 +43,13 @@ $(document).ready(function () {
 $(window).on('beforeunload', function() {
     desconectar();
     mostrarModal("myModal", "Espere por favor..", "Se esta cerrando los procesos...");
-    sleep(500);    
+    sleep(300);    
 });
+
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-
-/*
-$("#contenido-inicio-2").onload ready(function() {
-        carrucelDinamico();
-});*/
 //******************************************************************************
 // Funcion para cargar contenido segun la pagina.
 //******************************************************************************
@@ -121,10 +117,19 @@ function cargarContenido(idContenido) {
                 $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.jsp");
             }
             if (idContenido === '16') {
-                $("#contenido-wrapper").load("./administrador/contenido-gestionar-tema.jsp");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-tema.jsp", function(responseText, statusText, xhr){
+                    if(statusText === "success")
+                        obtenerTemas();
+                    if(statusText === "error")
+                        alert("An error occurred: " + xhr.status + " - " + xhr.statusText);
+                }); 
             }
             if (idContenido === '17') {
                 $("#contenido-wrapper").load("./administrador/contenido-gestionar-expertos-por-tema.jsp");
+            }
+            if (idContenido === '18') {
+                //logout
+                desconectar();
             }
         }
     }
@@ -203,7 +208,7 @@ function verificaUsuarioLogueado(){
     // datos tomados desde la funcion identificarse
     var usuario = $("#IdUsuario").val();
     var tipo =  $("#tipoUsua").val();
-    if(usuario == ""){
+    if(usuario === ""){
     //** se pueden tomar desde el sessionStorage
         usuario = sessionStorage.getItem("idUsuario");
         tipo = sessionStorage.getItem("tipoUsuario");
@@ -268,34 +273,6 @@ function getUsuarioById(id){
         dataType: "json"        
     });    
 }
-// EJEMPLO DEL SESSION STORAGE
-//******************************************************************************
-/*$(document).ready(function(){  
-   $('#boton-guardar').click(function(){      
-        //Captura de datos escrito en los inputs
-        var nom = document.getElementById("nombretxt").value;
-        var apel = document.getElementById("apellidotxt").value;
-        //Guardando los datos en el LocalStorage
-        sessionStorage.setItem("Nombre", nom);
-        sessionStorage.setItem("Apellido", apel);
-        //Limpiando los campos o inputs
-        document.getElementById("nombretxt").value = "";
-        document.getElementById("apellidotxt").value = "";
-   });  
-});
-
-//Funcion Cargar y Mostrar datos
-$(document).ready(function(){  
-   $('#boton-cargar').click(function(){                      
-        //Obtener datos almacenados
-        var nombre = sessionStorage.getItem("Nombre");
-        var apellido = sessionStorage.getItem("Apellido");
-        //Mostrar datos almacenados    
-        document.getElementById("nombre").innerHTML = nombre;
-        document.getElementById("apellido").innerHTML = apellido;
-   });  
-});
-*/
 
 function mostrarMensaje(classCss, msg, neg) {
     $("#modalAlert").modal("show");
@@ -381,15 +358,32 @@ function limpiarFormLogin(){
 }
 
 function desconectar(){
-    $("#navbar-logout").removeClass();
-    $("#navbar-logout").addClass("hidden");
     sessionStorage.clear();
+    /* $("#navbar-logout").removeClass();
+    $("#navbar-logout").addClass("hidden");
+    
     document.getElementById("IdUsuario").value = "";
     document.getElementById("tipoUsua").value = "";
     $("#navbar-login").removeClass();
     $("#navbar-login").addClass("menu-left");
-    document.getElementById('lblBienvenida').innerHTML = "";
-    verificaUsuarioLogueado();
+    document.getElementById('lblBienvenida').innerHTML = "";*/
+    //verificaUsuarioLogueado();
+     mostrarModal("myModal", "Espere por favor..", "Desconectando...");
+    $.ajax({
+        url: 'LogoutServlet',
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function () {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            ocultarModal("myModal");
+            var url = 'proyecto-progra-iv-v2/index.jsp';
+            window.location.replace(url);
+        },
+        type: 'POST'      
+    });  
+    
 }
 //******************************************************************************
 //*********************** PARTE DATOS PERSONALES *******************************
@@ -465,4 +459,244 @@ function modificarDatosPersonales(){
         type: 'POST',
         dataType: "json"        
     });  
+}
+
+//******************************************************************************
+//*********************** PARTE ADMINISTRADOR **********************************
+//******************************************************************************
+// GESTION TEMAS
+function obtenerTemas(){
+    limpiarTabla("gesion-temas-tabla");
+    mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "obtenerTodosTemas"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            cargarTablaTemas(data);
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+}
+
+function guardarTema(){
+    limpiarTabla("gesion-temas-tabla");
+    mostrarModal("myModal", "Espere por favor..", "Guardando la información en la base de datos");
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "guardarTema",
+            nombreT: $("#gestionar-tema-nombre").val(),
+            costoxT: $("#gestionar-tema-costo-minuto").val(),
+            observT: $("#gestionar-tema-observaciones").val(),
+            idxTema: '0',
+            estadoT: $("#gestionar-tema-estado").val()
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "C~") {
+                mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
+                // Vuelve a conseguir la lista de los temas
+                obtenerTemas();
+                limpiaFormTema();
+            } else {
+                if (tipoRespuesta === "E~") {
+                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                } else {
+                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                }
+            }
+        },
+        type: 'POST',
+        dataType: "json"        
+    });
+}
+
+function modificaTemas(){
+    limpiarTabla("gesion-temas-tabla");
+    mostrarModal("myModal", "Espere por favor..", "Modificando la información en la base de datos");
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "modificarTema",
+            nombreT: $("#gestionar-tema-nombre").val(),
+            costoxT: $("#gestionar-tema-costo-minuto").val(),
+            observT: $("#gestionar-tema-observaciones").val(),
+            idxTema: $("#gestionar-tema-id").val(),
+            estadoT: $("#gestionar-tema-estado").val()
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "C~") {
+                mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
+                // Vuelve a conseguir la lista de los temas
+                obtenerTemas();
+                // limpiar formulario temas
+                gestionTemasBotones('0');
+                limpiaFormTema();
+            } else {
+                if (tipoRespuesta === "E~") {
+                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                } else {
+                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                }
+            }
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+}
+
+function eliminaTema(idTema){
+    mostrarModal("myModal", "Espere por favor..", "Eliminando la información en la base de datos");
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "eliminarTema",
+            idxTema: idTema
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "E~") {
+                cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
+            } else {
+                setTimeout(obtenerTemas, 2000);// hace una pausa y consulta la información de la base de datos
+            }
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+}
+
+function cargarTablaTemas(datos){    
+    $("#paginacion-tabla-temas").pagination({
+        dataSource: datos,
+        pageSize: 10,
+        autoHidePrevious: false,
+        autoHideNext: false,
+        callback: function (data, pagination) {
+            $("#gesion-temas-tabla").html("");
+            //muestra el enzabezado de la tabla
+            var head = $("<thead />");
+            var row = $("<tr />");
+            head.append(row);
+            $("#gesion-temas-tabla").append(head);
+            row.append($("<th><b>NOMBRE</b></th>"));
+            row.append($("<th><b>COSTO POR MINUTO</b></th>"));
+            row.append($("<th><b>ESTADO</b></th>"));
+            row.append($("<th><b>ACCIÓN</th>"));
+            //carga la tabla con el json devuelto
+            for (var i = 0; i < data.length; i++) {
+                dibujarFila(data[i]);
+            }
+        }
+    });
+}
+
+function dibujarFilaTemas(rowData) {
+    var row = $("<tr />");
+    $("#gesion-temas-tabla").append(row);
+    row.append($("<td>" + rowData.nombreTema + "</td>"));
+    row.append($("<td>" + rowData.costoXminuto + "</td>"));
+    row.append($("<td>" + rowData.estado + "</td>"));
+    row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="llenarFormTema(' + rowData.idTemas + ');">' +
+            '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+            '</button>' +
+            '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="eliminaTema(' + rowData.idTemas + ');">' +
+            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+            '</button></td>'));
+}
+
+function limpiaFormTema(){
+    $("#gestionar-tema-nombre").val("");
+    $("#gestionar-tema-costo-minuto").val("");
+    $("#gestionar-tema-observaciones").val("");
+    $("#gestionar-tema-estado").val("0");
+}
+
+function llenarFormTema(temaID){    
+    mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "obtenerTemaXid",
+            idxTema: temaID
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            $("#gestionar-tema-id").val(data.idxTema);
+            $("#gestionar-tema-nombre").val(data.nombreTema);
+            $("#gestionar-tema-costo-minuto").val(data.costoXminuto);
+            $("#gestionar-tema-observaciones").val(data.observaciones);
+            $("#gestionar-tema-estado").val(data.estado);
+            gestionTemasBotones('1');
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+    
+}
+
+function gestionTemasBotones(val){
+    if(val === '1'){
+        $("#gestionar-tema-guardar").removeClass();
+        $("#gestionar-tema-guardar").addClass("hidden");
+        $("#gestionar-tema-modificar").removeClass();      
+        $("#gestionar-tema-modificar").addClass("btn boton-left");
+    }else{
+        $("#gestionar-tema-guardar").removeClass();
+        $("#gestionar-tema-guardar").addClass("btn boton-left");
+        $("#gestionar-tema-modificar").removeClass();      
+        $("#gestionar-tema-modificar").addClass("hidden");
+    }        
+}
+
+//******************************************************************************    
+//******************************************************************************
+    // EXPERTOS
+function obtenerExpertos(){
+    
+}
+function modificaExpertos(){
+    
+}
+function eliminaExpertos(){
+    
+}
+//******************************************************************************
+//******************************* UTILIDADES ***********************************
+//******************************************************************************
+function limpiarTabla(idTabla) {
+    var tabla = document.getElementById(idTabla);
+    if (tabla.rows.length > 1) {
+        while (tabla.rows.length > 1)
+            tabla.deleteRow(1);
+    }
 }

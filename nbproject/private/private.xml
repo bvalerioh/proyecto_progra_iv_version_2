@@ -3,29 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/usuario/contenido-categorias.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/public/content-public-nav-bar.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/domain/Usuario.java</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/public/contenido-formulario-login.html</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/css/bootstrap/css/bootstrap.min.css</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/bl/UsuarioBL.java</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/css/main.css</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/domain/Gestiontemas.java</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/test/Pruebas.java</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/administrador/contenido-facturacion.html</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/usuario/contenido-usuario-nav-bar.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/public/contenido-inicio.html</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/controller/LoginServlet.java</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/domain/Historialconsultas.java</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/index.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/administrador/contenido-admin-nav-bar.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/public/contenido-head.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/usuario/contenido-experto-nav-bar.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/administrador/contenido-reportes.html</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/usuario/contenido-chat.jsp</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/usuario/contenido-categorias.html</file>
-            <file>file:/C:/Users/ghost/Documents/NetBeansProjects/proyecto_progra_iv_version_2/web/scripts/main.js</file>
+            <file>file:/G:/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/controller/AdminServlet.java</file>
+            <file>file:/G:/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/test/Pruebas.java</file>
+            <file>file:/G:/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/dao/gestionTemaDAO.java</file>
+            <file>file:/G:/proyecto_progra_iv_version_2/src/java/cr/ac/una/prograiv/proyecto/controller/UsuarioServlet.java</file>
         </group>
     </open-files>
 </project-private>

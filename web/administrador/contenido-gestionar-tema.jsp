@@ -7,49 +7,47 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-gestionar-tema">
     <h1>GESTION DE TEMAS</h1>
-    <form class="form-horizontal">
-        <br/>
-        <div class="form-group">
-            <label for="gestionar-tema-id-categoria">Id categoría:</label>
-            <select class="form-control" id="gestionar-tema-id-categoria">
-                <option>Tema 01</option>
-                <option>Tema 02</option>
-                <option>Tema 03</option>
-                <option>Tema 04</option>
-            </select>
-            <button type="submit" class="btn boton-left" 
-                        id="gestionar-tema-nuevo-id">Nuevo Id</button>
+    <div class="container">
+        <div class="col-md-6 text-center">
+            <h4>Temas existentes.</h4>
+            <table class="table table-bordered" id="gesion-temas-tabla"></table>
+            <div id="paginacion-tabla-temas"></div>
         </div>
-        <div class="form-group"> 
-                
+        <div class="col-md-6 text-center">
+            <form class="form-horizontal">
+                <input type="hidden" id="gestionar-tema-id" value="" />
+                <div class="form-group">
+                    <label for="gestionar-tema-nombre">Nombre de la categoría:</label>
+                    <input type="text" class="form-control" id="gestionar-tema-nombre" 
+                           placeholder="Ejemplo: Informatica">
+                </div>
+                <div class="form-group">
+                    <label for="gestionar-tema-costo-minuto">Costo por minuto:</label>
+                    <input type="text" class="form-control" id="gestionar-tema-costo-minuto"
+                           placeholder="Ejemplo: 15">
+                </div>
+                <div class="form-group">
+                    <label for="gestionar-tema-observaciones">Observaciones:</label>
+                    <textarea class="form-control" id="gestionar-tema-observaciones" rows="4" 
+                              placeholder="¿Alguna observación?."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="gestionar-tema-estado">Estado:</label>
+                    <select class="form-control" id="gestionar-tema-estado">
+                        <option value="0"> ........ </option>
+                        <option value="1">  Activo. </option>
+                        <option value="2">Desactivo</option>
+                    </select>
+                </div>
+                <div class="form-group"> 
+                    <button type="button" class="btn boton-rigth" 
+                            id="gestionar-tema-cancela">Cancelar</button>
+                    <button type="button" class="btn boton-left" 
+                            id="gestionar-tema-guardar">Guardar</button>
+                    <button type="button" class="hidden" 
+                            id="gestionar-tema-modificar">Modificar</button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="gestionar-tema-nombre">Nombre de la categoría:</label>
-            <input type="text" class="form-control" id="gestionar-tema-nombre" 
-                   placeholder="Ejemplo: Informatica">
-        </div>
-        <div class="form-group">
-            <label for="gestionar-tema-costo-minuto">Costo por minuto:</label>
-            <input type="text" class="form-control" id="gestionar-tema-costo-minuto"
-                   placeholder="Ejemplo: 15">
-        </div>
-        <div class="form-group">
-            <label for="gestionar-tema-observaciones">Observaciones:</label>
-            <textarea class="form-control" id="gestionar-tema-observaciones" rows="4" 
-                      placeholder="¿Alguna observación?."></textarea>
-        </div>
-        <div class="form-group">
-            <label for="gestionar-tema-estado">Estado:</label>
-            <select class="form-control" id="gestionar-tema-estado">
-                <option value="0"> ........ </option>
-                <option value="1">  Activo. </option>
-                <option value="2">Desactivo</option>
-            </select>
-        </div>
-        <br />
-        <div class="form-group"> 
-                <button type="submit" class="btn boton-left" 
-                        id="gestionar-tema-guardar">Guardar</button>
-        </div>
-    </form>
+    </div>
 </div>

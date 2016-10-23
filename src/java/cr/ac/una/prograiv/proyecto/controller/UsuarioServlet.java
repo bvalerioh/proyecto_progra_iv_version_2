@@ -66,7 +66,7 @@ public class UsuarioServlet extends HttpServlet {
             //**********************************************************************
             String accion = request.getParameter("accion");
             switch (accion) {          
-                case "obtenerTodos":
+                 case "obtenerTodos":
                     json = new Gson().toJson(usuBL.findAll(Usuario.class.getName()));
                     out.print(json);
                     break;

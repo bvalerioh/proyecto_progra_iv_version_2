@@ -17,13 +17,17 @@ public class BaseBL {
     private final LinkedHashMap<String, IBaseDAO> daos;
 
     public BaseBL() {
-        daos = new LinkedHashMap(6);        
+        daos = new LinkedHashMap();
+        try{
         daos.put("cr.ac.una.prograiv.proyecto.domain.Usuario", new usuarioDAO());
-        daos.put("cr.ac.una.prograiv.proyecto.domain.Chat", new chatDAO());
-        daos.put("cr.ac.una.prograiv.proyecto.domain.Feedback", new feedbackDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Gestiontemas", new gestionTemaDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Chat", new chatDAO());
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Feedback", new feedbackDAO());        
         daos.put("cr.ac.una.prograiv.proyecto.domain.Historialconsultas", new historialConsultasDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Historialfacturasxservicio", new historialFacturasXservicioDAO());        
+        }catch(Exception e){
+            System.out.println("Error en el BaseBL"+e.getMessage());
+        }
     }
     
     public IBaseDAO getDao(String className){

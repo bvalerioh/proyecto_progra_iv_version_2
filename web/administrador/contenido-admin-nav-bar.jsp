@@ -33,12 +33,12 @@
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombreUsuarioEnSession%><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <!--<li role="separator" class="divider"></li><li class="dropdown-header">NUEVO USUARIO</li>-->
-                        <li onclick="cargarContenido('');"><a href="#">Facturacion</a></li> 
-                        <li onclick="cargarContenido('');"><a href="#">Gestrionar Expertos</a></li>
-                        <li onclick="cargarContenido('');"><a href="#">Gestionar Temas</a></li>
-                        <li onclick="cargarContenido('');"><a href="#">Gestionar Usuarios</a></li>
-                        <li onclick="cargarContenido('');"><a href="#">Reportes</a></li>
-                        <li onclick="cargarContenido('');"><a href="#">Logout</a></li>
+                        <li onclick="cargarContenido('13');"><a href="#">Facturacion</a></li> 
+                        <li onclick="cargarContenido('17');"><a href="#">Gestrionar Expertos</a></li>
+                        <li onclick="cargarContenido('16');"><a href="#">Gestionar Temas</a></li>
+                        <li onclick="cargarContenido('15');"><a href="#">Gestionar Usuarios</a></li>
+                        <li onclick="cargarContenido('14');"><a href="#">Reportes</a></li>
+                        <li onclick="cargarContenido('18');"><a href="#">Logout</a></li>
                     </ul>
                 </li>
             </ul>

@@ -11,8 +11,8 @@
 <% 
     boolean estaLogueado = false;// Define si el usuario esta logueado.
     // Obtiene el nombre de usuario.
-    String nombreUsuario = (String)session.getAttribute("username"); 
-    Integer rolusuario = (Integer)session.getAttribute("rolusuario");
+    String nombreUsuario = "marito";// (String)session.getAttribute("username"); 
+    Integer rolusuario = 2;// (Integer)session.getAttribute("rolusuario");
     //String nombreUsuario = "Carlos";
     if( nombreUsuario != null && rolusuario != null ){
         estaLogueado = true;

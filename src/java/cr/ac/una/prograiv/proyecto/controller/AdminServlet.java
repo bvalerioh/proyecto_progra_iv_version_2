@@ -5,8 +5,9 @@
  */
 package cr.ac.una.prograiv.proyecto.controller;
 
-import cr.ac.una.prograiv.proyecto.domain.*;
-import cr.ac.una.prograiv.proyecto.bl.*;
+import com.google.gson.Gson;
+import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
+import cr.ac.una.prograiv.proyecto.bl.GestiontemasBL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -41,13 +42,13 @@ public class AdminServlet extends HttpServlet {
             String json;
             
             // Creación de Objetos
-            Gestiontemas gt = new Gestiontemas(); 
+            Gestiontemas gt;// = new Gestiontemas(); 
             
             // Creación de BLS
             GestiontemasBL gtBL = new GestiontemasBL();
             
             // Creación de LISTAS
-            List<Gestiontemas> gtlist;
+          //  List<Gestiontemas> gtlist;
             
             //Se hace una pausa para ver el modal
             Thread.sleep(1000);            
@@ -67,6 +68,7 @@ public class AdminServlet extends HttpServlet {
                     estadoT = Integer.parseInt(request.getParameter("estadoT"));
                     if (accion.equals("guardarTema")) {
                         // verifiquemos que el tema no exista ya.
+                        gt = new Gestiontemas(); 
                         gt = gtBL.findByName(Gestiontemas.class.getName(), nombreT);
                         //si no es null
                         if (gt != null) {
@@ -81,14 +83,40 @@ public class AdminServlet extends HttpServlet {
                     break;
                 case "eliminarTema":
                         try{
+                            gt = new Gestiontemas(); 
                             gt.setIdTemas(Integer.parseInt(request.getParameter("idxTema")));
                             gt.setEstado(0);
                             gtBL.delete(gt);
                             out.print("C~El Tema fue eliminado exitosamente.");
                         }catch(Exception e){
-                            out.print("E~Hubo un error elimiando el tema.");
+                            out.print("E~Hubo un error elimiando el tema."+ e.getMessage());
                         }
-                    break;                       
+                    break;      
+                case "obtenerTodosTemas":
+                    json = new Gson().toJson(gtBL.findAll(Gestiontemas.class.getName()));
+                    out.print(json);
+                    break;
+                case "obtenerTemaXid":
+                    gt = new Gestiontemas(); 
+                    gt = gtBL.findById(Integer.parseInt(request.getParameter("idxTema")));
+                    //se pasa la informacion del objeto a formato JSON
+                    json = new Gson().toJson(gt);
+                    out.print(json);
+                    break;    
+                case "asignarTemaExperto":
+                    break;
+                    
+                case "eliminarTemaExperto":
+                    break;
+                    
+                case "cambiaUsuarioExperto":
+                    break;
+                    
+                case "cambiaExpertoUsuario":
+                    break;
+                    
+                case "getReporte":
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
