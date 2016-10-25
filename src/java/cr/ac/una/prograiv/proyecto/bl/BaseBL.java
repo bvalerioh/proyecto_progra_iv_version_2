@@ -25,6 +25,7 @@ public class BaseBL {
         daos.put("cr.ac.una.prograiv.proyecto.domain.Feedback", new feedbackDAO());        
         daos.put("cr.ac.una.prograiv.proyecto.domain.Historialconsultas", new historialConsultasDAO());
         daos.put("cr.ac.una.prograiv.proyecto.domain.Historialfacturasxservicio", new historialFacturasXservicioDAO());        
+        daos.put("cr.ac.una.prograiv.proyecto.domain.Temasexperto", new temasExpertoDAO());        
         }catch(Exception e){
             System.out.println("Error en el BaseBL"+e.getMessage());
         }

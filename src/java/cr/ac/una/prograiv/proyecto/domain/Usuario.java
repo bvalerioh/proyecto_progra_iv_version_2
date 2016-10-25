@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 12/10/2016 05:10:01 PM by Hibernate Tools 4.3.1
+// Generated 24/10/2016 07:11:30 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -139,6 +139,10 @@ public class Usuario  implements java.io.Serializable {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
+
+
+
+
 }
 
 

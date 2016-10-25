@@ -44,10 +44,10 @@ public class AdminServlet extends HttpServlet {
             
             // Creación de Objetos
             Gestiontemas gt;// = new Gestiontemas(); 
-            
+            Usuario usu = new Usuario();
             // Creación de BLS
-            GestiontemasBL gtBL = null;
-            gtBL = new GestiontemasBL();
+            GestiontemasBL gtBL = new GestiontemasBL();
+            UsuarioBL usuBL = new UsuarioBL();
             //Se hace una pausa para ver el modal
             Thread.sleep(1000);            
             //**********************************************************************
@@ -134,8 +134,11 @@ public class AdminServlet extends HttpServlet {
     //**************************************************************************                
     //**************************************************************************
                 case "asignarTemaExperto":
-                    Usuario usu = new Usuario();
-                    UsuarioBL usuBL = new UsuarioBL();/*
+                    int idTemaExpertoUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    int idTemaExpertoTema = Integer.parseInt(request.getParameter("idTema"));
+                    // modificamos al usuario
+                    usuBL.merge(usu);
+                    /*
                     usuario = request.getParameter("usuario");
                     contrasena = request.getParameter("contra");
                     nombre = request.getParameter("nombre");
@@ -143,19 +146,25 @@ public class AdminServlet extends HttpServlet {
                     email = request.getParameter("email");
                     direccion = request.getParameter("direccion");
                     telTrabajo = request.getParameter("telTrabajo");
-                    telCelular = request.getParameter("telCelular");  */                  
+                    telCelular = request.getParameter("telCelular");                 
                     try{
                         idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                     }catch(Exception e){
                         idUsuario = 0; 
                    }                       
-                    tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario"));
+                    tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario")); */  
                     break;
                     
                 case "modificarTemaExperto":
+                    
                     break;
                     
                 case "cambiaUsuarioExperto":
+                    
+                    usu.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
+                    usu.setTipoUsuario(Integer.parseInt(request.getParameter("tipoUsuario")));
+                    // modificamos al usuario
+                    usuBL.merge(usu);
                     break;
                     
                 case "obtenerFacturación":
