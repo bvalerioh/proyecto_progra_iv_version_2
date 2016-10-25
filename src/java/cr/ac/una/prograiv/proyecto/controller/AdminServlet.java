@@ -8,7 +8,9 @@ package cr.ac.una.prograiv.proyecto.controller;
 import com.google.gson.Gson;
 import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
 import cr.ac.una.prograiv.proyecto.bl.GestiontemasBL;
+import cr.ac.una.prograiv.proyecto.bl.TemasexpertoBL;
 import cr.ac.una.prograiv.proyecto.bl.UsuarioBL;
+import cr.ac.una.prograiv.proyecto.domain.Temasexperto;
 import cr.ac.una.prograiv.proyecto.domain.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -134,29 +136,36 @@ public class AdminServlet extends HttpServlet {
     //**************************************************************************                
     //**************************************************************************
                 case "asignarTemaExperto":
-                    int idTemaExpertoUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-                    int idTemaExpertoTema = Integer.parseInt(request.getParameter("idTema"));
-                    // modificamos al usuario
-                    usuBL.merge(usu);
-                    /*
-                    usuario = request.getParameter("usuario");
-                    contrasena = request.getParameter("contra");
-                    nombre = request.getParameter("nombre");
-                    apellidos = request.getParameter("apellidos");
-                    email = request.getParameter("email");
-                    direccion = request.getParameter("direccion");
-                    telTrabajo = request.getParameter("telTrabajo");
-                    telCelular = request.getParameter("telCelular");                 
-                    try{
-                        idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-                    }catch(Exception e){
-                        idUsuario = 0; 
-                   }                       
-                    tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario")); */  
+                    Temasexperto te = new Temasexperto();
+                    te.setIdTema(Integer.parseInt(request.getParameter("idTema")));
+                    te.setIdExperto(Integer.parseInt(request.getParameter("idUsuario")));
+                    // se guarda el tema al experto
+                    TemasexpertoBL teBL = new TemasexpertoBL();
+                    teBL.save(te);
+                    out.print("C~El tema fue asignado correctamente");
                     break;
                     
-                case "modificarTemaExperto":
+                case "eliminarTemaExperto":
+                    try{
+                        Temasexperto te2 = new Temasexperto();
+                        te2.setIdTema(Integer.parseInt(request.getParameter("idTemaexperto")));
+                        // se guarda el tema al experto
+                        TemasexpertoBL teBL2 = new TemasexpertoBL();
+                        teBL2.delete(te2);
+                        out.print("C~Se le elimino el Tema fue eliminado exitosamente.");
+                        }catch(Exception e){
+                            out.print("E~Hubo un error elimiando el tema."+ e.getMessage());
+                        }
+                    break;
                     
+                case "obtenerMisTemas":
+                    Temasexperto te3 = new Temasexperto();
+                    te3.setIdExperto(Integer.parseInt(request.getParameter("idTemaexperto")));
+                    // se guarda el tema al experto
+                    TemasexpertoBL teBL3 = new TemasexpertoBL();
+                    json = new Gson().toJson(teBL3.findAllById(Temasexperto.class.getName(), te3));
+                    
+                    out.print(json);
                     break;
                     
                 case "cambiaUsuarioExperto":
