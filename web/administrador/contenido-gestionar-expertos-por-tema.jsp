@@ -1,50 +1,49 @@
 <div id="contenido-expertos-por-tema">
     <h1>GESTION EXPERTOS POR TEMA</h1>
-    <form class="form-horizontal">
-        <br/>
-        <div class="form-group">
-            <label for="gestionar-experto-id-usuario">Id usuario:</label>
-            <select class="form-control" id="gestionar-experto-usuario">
-                <option>exp01</option>
-                <option>exp02</option>
-                <option>exp03</option>
-                <option>exp04</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="gestionar-experto-usuario">Nombre usuario:</label>
-            <input type="text" class="form-control" id="gestionar-experto-usuario" 
-                   readonly value="Pedro Cordoba">
-        </div>
-        <div class="form-group">
-            <label for="gestionar-experto-id-categoria">Id de la categorÃ­a:</label>
-            <select class="form-control" id="gestionar-experto-id-categoria">
-                <option>cat01</option>
-                <option>cat02</option>
-                <option>cat03</option>
-                <option>cat04</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="gestionar-experto-categoria">Nombre de la categorÃ­a:</label>
-            <input type="text" class="form-control" id="gestionar-experto-categoria" 
-                   readonly value="HTML">
-        </div>
-        <div class="form-group">
-            <label for="gestionar-experto-observaciones">Observaciones:</label>
-            <textarea class="form-control" id="gestionar-experto-observaciones" rows="4" 
-                      placeholder="Â¿Alguna observaciÃ³n?."></textarea>
-        </div>
-        <div class="form-group">
-            <label for="gestionar-experto-estado">Estado:</label>
-            <div id="gestionar-experto-estado">
-                <label class="radio-inline"><input type="radio" name="optradio">Activo</label>
-                <label class="radio-inline"><input type="radio" name="optradio">Desactivo</label>
+    <div class="col-md-6 text-center">
+        <h4>Lista de usuarios expertos.</h4>
+        <table class="table table-bordered" id="gesion-expertosTema-tabla"></table>
+        <div id="paginacion-expertosTema-tabla"></div>
+    </div>
+    <div class="col-md-6 text-center">
+        <form class="form-horizontal">
+            <br/>
+            <input id="id-usuario-experto" type="hidden" />
+            <div class="form-group">
+                <label for="usuario-experto-nombre">Nombre usuario experto:</label>
+                <input type="text" class="form-control" id="usuario-experto-nombre" 
+                       readonly>
             </div>
-        </div>
-        <br />
-        <div class="form-group"> 
-                <button type="submit" class="btn boton-left" id="gestionar-experto-guardar">Guardar</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="gestionar-experto-categoria">Categoría:</label>
+                <select class="form-control" id="gestionar-experto-categoria">
+                    <option value="0">cat01</option>
+                    <option value="1">cat02</option>
+                    <option value="2">cat03</option>
+                    <option value="3">cat04</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gestionar-experto-observaciones">Observaciones:</label>
+                <textarea class="form-control" id="gestionar-experto-observaciones" rows="4" 
+                          placeholder="¿Alguna observación?."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gestionar-experto-estado">Activar la categoría:</label>
+                <div id="gestionar-experto-estado">
+                    <label class="radio-inline"><input type="radio" name="optradio">Sí</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">No</label>
+                </div>
+            </div>
+            <br />
+            <div class="form-group"> 
+                <button type="button" class="btn boton-rigth" 
+                            id="gestionar-expxtema-cancelar" onclick="cancelarExpXTema()">Cancelar</button>
+                <button type="button" class="btn boton-left" 
+                            id="gestionar-expxtema-guardar" onclick="guardarExpXtema()">Guardar</button>
+                <button type="button" class="hidden" 
+                            id="gestionar-expxtema-modificar" onclick="modificaExpXtema()">Modificar</button>
+            </div>
+        </form>
+    </div>
 </div>
