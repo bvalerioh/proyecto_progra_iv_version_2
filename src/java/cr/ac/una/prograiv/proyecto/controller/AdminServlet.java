@@ -8,6 +8,8 @@ package cr.ac.una.prograiv.proyecto.controller;
 import com.google.gson.Gson;
 import cr.ac.una.prograiv.proyecto.domain.Gestiontemas;
 import cr.ac.una.prograiv.proyecto.bl.GestiontemasBL;
+import cr.ac.una.prograiv.proyecto.bl.UsuarioBL;
+import cr.ac.una.prograiv.proyecto.domain.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -132,18 +134,34 @@ public class AdminServlet extends HttpServlet {
     //**************************************************************************                
     //**************************************************************************
                 case "asignarTemaExperto":
+                    Usuario usu = new Usuario();
+                    UsuarioBL usuBL = new UsuarioBL();/*
+                    usuario = request.getParameter("usuario");
+                    contrasena = request.getParameter("contra");
+                    nombre = request.getParameter("nombre");
+                    apellidos = request.getParameter("apellidos");
+                    email = request.getParameter("email");
+                    direccion = request.getParameter("direccion");
+                    telTrabajo = request.getParameter("telTrabajo");
+                    telCelular = request.getParameter("telCelular");  */                  
+                    try{
+                        idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    }catch(Exception e){
+                        idUsuario = 0; 
+                   }                       
+                    tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario"));
                     break;
                     
-                case "eliminarTemaExperto":
+                case "modificarTemaExperto":
                     break;
                     
                 case "cambiaUsuarioExperto":
                     break;
                     
-                case "cambiaExpertoUsuario":
+                case "obtenerFacturación":
                     break;
                     
-                case "getReporte":
+                case "obtenerReporte":
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

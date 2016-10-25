@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group"> 
                     <button type="button" class="btn boton-rigth" 
-                            id="gestionar-tema-cancela">Cancelar</button>
+                            id="gestionar-tema-cancela" onclick="limpiaFormTema()">Cancelar</button>
                     <button type="button" class="btn boton-left" 
                             id="gestionar-tema-guardar" onclick="guardarTema()">Guardar</button>
                     <button type="button" class="hidden" 

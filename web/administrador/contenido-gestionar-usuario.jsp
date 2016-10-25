@@ -6,21 +6,43 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-gestionar-usuario">
-        <h1>GESTIONAR USUARIO</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-        </p>
+        <h1>GESTION DE USUARIOS</h1>
+    <div class="col-md-6 text-center">
+        <h4>Lista de usuarios.</h4>
+        <table class="table table-bordered" id="gesion-usuarios-tabla"></table>
+        <div id="paginacion-getionusuarios-tabla"></div>
+    </div>
+    <div class="col-md-6 text-center">
+        <form class="form-horizontal">
+            <br/>
+            <input id="id-gestion-idusuario" type="hidden" />
+            <div class="form-group">
+                <label for="gestion-usuario-nombre">Nombre usuario experto:</label>
+                <input type="text" class="form-control" id="gestion-usuario-nombre" 
+                       readonly>
+            </div>
+            <div class="form-group">
+                <label for="gestion-usuario-estado">Es experto<</label>
+                <div id="gestion-usuario-estado">
+                    <label class="radio-inline"><input type="radio" name="optradio">Si</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gestion-usuario-observaciones">Observaciones:</label>
+                <textarea class="form-control" id="gestion-usuario-observaciones" rows="4" 
+                          placeholder="¿Alguna observación?."></textarea>
+            </div>
+            
+            <br />
+            <div class="form-group"> 
+                <button type="button" class="btn boton-rigth" 
+                            id="gestionar-expxtema-cancelar" onclick="cancelarExpXTema()">Cancelar</button>
+                <button type="button" class="btn boton-left" 
+                            id="gestionar-expxtema-guardar" onclick="guardarExpXtema()">Guardar</button>
+                <button type="button" class="hidden" 
+                            id="gestionar-expxtema-modificar" onclick="modificaExpXtema()">Modificar</button>
+            </div>
+        </form>
+    </div>
 </div>
