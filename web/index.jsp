@@ -9,16 +9,20 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
-    boolean estaLogueado = false;// Define si el usuario esta logueado.
-    // Obtiene el nombre de usuario.
-    String nombreUsuario = "marito";// (String)session.getAttribute("username"); 
-    Integer rolusuario = 2;// (Integer)session.getAttribute("rolusuario");
-    //String nombreUsuario = "Carlos";
-    if( nombreUsuario != null && rolusuario != null ){
-        estaLogueado = true;
+    HttpSession sesion = request.getSession(true);
+    Integer rolusuario = 0;
+    boolean estaLogueado = false;
+    String nombreUsuario = "";
+    
+    if(sesion!=null){
+        if (sesion.getAttribute("usuario")  != null) {
+            estaLogueado = true;
+            rolusuario = (Integer)sesion.getAttribute("rolusuario");
+            nombreUsuario = (String)sesion.getAttribute("username");
+        }else{
+           estaLogueado = false;
+        }
     }
-    // Define el rol de un suario segun su nivel de acceso.
-    //int rolUsuario = 2; // 0 - normal, 1 - Experto, 2 - Administrador.
     
 %>
 <!DOCTYPE html>
