@@ -29,7 +29,7 @@ public class TemasexpertoBL  extends BaseBL implements IBaseBL<Temasexperto, Int
 
     @Override
     public void delete(Temasexperto o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.getDao(o.getClass().getName()).delete(o);
     }
 
     @Override

@@ -9,6 +9,7 @@ import cr.ac.una.prograiv.proyecto.domain.Temasexperto;
 import cr.ac.una.prograiv.proyecto.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 
 /**
  *
@@ -45,7 +46,15 @@ public class temasExpertoDAO  extends HibernateUtil implements IBaseDAO<Temasexp
 
     @Override
     public void delete(Temasexperto o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            iniciaOperacion();
+            getSesion().delete(o);
+            getTransac().commit();
+        }catch(HibernateException he){
+            throw he;
+        }finally{
+            getSesion().close();
+        }
     }
 
     @Override
@@ -78,7 +87,19 @@ public class temasExpertoDAO  extends HibernateUtil implements IBaseDAO<Temasexp
 
     @Override
     public List<Temasexperto> findAllById(Temasexperto o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Temasexperto> list;
+        try{
+            iniciaOperacion();           // de la tabla en MySQL
+            String sql = "from TemasExperto where idExperto = :idExperto";
+            Query query = getSesion().createQuery(sql);
+            query.setInteger("idExperto", o.getIdExperto());
+            list = query.list();            
+        }catch(HibernateException he){
+            throw he;
+        }finally{
+            getSesion().close();
+        }
+        return list;
     }
 
     @Override

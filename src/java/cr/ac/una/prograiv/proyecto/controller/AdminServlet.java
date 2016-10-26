@@ -135,6 +135,12 @@ public class AdminServlet extends HttpServlet {
                     break;   
     //**************************************************************************                
     //**************************************************************************
+                    // Metodo unico.
+                case "obtenerExpertos":
+                    json = new Gson().toJson(usuBL.findAllExpert());
+                    out.print(json);
+                    break;
+                    
                 case "asignarTemaExperto":
                     Temasexperto te = new Temasexperto();
                     te.setIdTema(Integer.parseInt(request.getParameter("idTema")));

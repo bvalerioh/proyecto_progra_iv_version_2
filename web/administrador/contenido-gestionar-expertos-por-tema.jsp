@@ -15,7 +15,7 @@
                        readonly>
             </div>
             <div class="form-group">
-                <label for="gestionar-experto-categoria">Categoría:</label>
+                <label for="gestionar-experto-categoria">Tema:</label>
                 <select class="form-control" id="gestionar-experto-categoria">
                     <option value="0">cat01</option>
                     <option value="1">cat02</option>
@@ -24,16 +24,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="gestionar-experto-observaciones">Observaciones:</label>
-                <textarea class="form-control" id="gestionar-experto-observaciones" rows="4" 
-                          placeholder="¿Alguna observación?."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="gestionar-experto-estado">Activar la categoría:</label>
-                <div id="gestionar-experto-estado">
-                    <label class="radio-inline"><input type="radio" name="optradio">Sí</label>
-                    <label class="radio-inline"><input type="radio" name="optradio">No</label>
-                </div>
+                <h4>Temas asignados actualmente</h4>
+                <table class="table table-bordered" id="gesion-expertosMisTemas-tabla"></table>
+                <div id="paginacion-expertosMisTemas-tabla"></div>
             </div>
             <br />
             <div class="form-group"> 

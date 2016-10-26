@@ -203,7 +203,11 @@ public class UsuarioServlet extends HttpServlet {
                     json = new Gson().toJson(chat);
                     out.print(json);
                     break;
-                    
+                
+                case "usuarioEnEspera":
+
+                    break;                    
+                
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;

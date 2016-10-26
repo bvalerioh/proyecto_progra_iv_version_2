@@ -114,4 +114,18 @@ public class usuarioDAO extends HibernateUtil implements IBaseDAO<Usuario, Integ
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public List<Usuario> findAllExpert(){
+        List<Usuario> listusu;
+        try{
+            iniciaOperacion();
+            listusu = getSesion().createQuery("from Usuario where estado = 1 and tipoUsuario = 1").list();
+        }catch(HibernateException he){
+            System.out.print(he.getMessage());
+            throw he;
+        }finally{
+            getSesion().close();
+        }
+        return listusu;
+    }
+    
 }

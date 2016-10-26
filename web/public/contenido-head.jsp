@@ -18,7 +18,6 @@
         <!-- AJAX -->
         <script src="scripts/ajax/ajax.js" type="text/javascript"></script>
         <!-- Utils -->
-        <script src="scripts/utils.js" type="text/javascript"></script>
         <script src="scripts/datetimepicker.js" type="text/javascript"></script>
         <script src="scripts/star-rating.js" type="text/javascript"></script>        
         <!-- Bootstrap -->

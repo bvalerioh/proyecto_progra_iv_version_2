@@ -96,7 +96,7 @@ public class historialConsultasDAO extends HibernateUtil implements IBaseDAO<His
             iniciaOperacion();           // de la tabla en MySQL
             String sql = "from HistorialConsultas where fkUsuario = :idusuario";
             Query query = getSesion().createQuery(sql);
-            query.setInteger(sql, o.getFkUsuario());
+            query.setInteger("idusuario", o.getFkUsuario());
             hc = query.list();            
         }catch(HibernateException he){
             throw he;

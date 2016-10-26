@@ -64,6 +64,18 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="modalEliminar" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header" id="modalEliminarHeader"></div>                    
+                    <div class="modal-body" id="modalEliminarMessage"></div>                
+                    <div class="modal-footer" id="modalEliminarBotones">                        
+                        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Cancelar</a>
+                        <a href="#" id="btnYesEliminar" class="btn btn-danger btn-ok">Eliminar</a>
+                    </div>                   
+                </div>
+            </div>
+        </div>
         </section>
         <!-- Fin modal de bootstrap para mostrar mensajes -->  
         <!-- Barra de navegacion global. -->
