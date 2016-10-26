@@ -114,8 +114,14 @@ function cargarContenido(idContenido) {
                 }); 
             }
             if (idContenido === '17') {
-                $("#contenido-wrapper").load("./administrador/contenido-gestionar-expertos-por-tema.jsp");
-            }
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-expertos-por-tema.jsp", function(responseText, statusText, xhr){
+                    if(statusText === "success")
+                        obtenerExpertos();
+                        obtenerTodosTemas();
+                    if(statusText === "error")
+                        alert("An error occurred: " + xhr.status + " - " + xhr.statusText);
+                }); 
+            }            
             if (idContenido === '18') {
                 //logout
                 desconectar();
@@ -658,9 +664,25 @@ function llenarFormTema(temaID){
             accion: "obtenerTemaXid",
             idxTema: temaID
         },
-        error: function () { //si existe un error en la respuesta del ajax
+        error:function (jqXHR, exception) { //si existe un error en la respuesta del ajax
             ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             ocultarModal("myModal");
@@ -698,7 +720,9 @@ function gestionTemasBotones(val){
 //******************************************************************************
 // 
 function obtenerExpertos(){
-    limpiarTabla("gesion-expertosTema-tabla");
+    try{ 
+        limpiarTabla("gesion-temas-tabla");
+    }catch(error){}
     mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
     $.ajax({
         url: 'AdminServlet',
@@ -735,7 +759,31 @@ function obtenerExpertos(){
     }); 
 }
 
-function modificaExpertosXtemas(){
+function guardarExpXtema(){
+    mostrarModal("myModal", "Espere por favor..", "Guardando la información en la base de datos");
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "asignarTemaExperto",
+            idUsuario: $("#id-usuario-experto").val(),
+            idTema: $("#gestionar-experto-categoria").val()
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "E~") {
+                cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
+            } else {
+                mostrarMensaje("alert alert-success", respuestaTxt, "!Accion correcta!");
+            }
+        },
+        type: 'POST'       
+    }); 
+    
     
 }
 
@@ -758,7 +806,7 @@ function cargarTablaExpertoXtemas(datos){
             row.append($("<th><b>ACCION</b></th>"));
             //carga la tabla con el json devuelto
             for (var i = 0; i < data.length; i++) {
-                dibujarFilaTemas(data[i]);
+                dibujarFilaExpertoXtemas(data[i]);
             }
         }
     });
@@ -774,51 +822,84 @@ function dibujarFilaExpertoXtemas(rowData) {
             '</button>'));
 }
 
-function llenarFormExpertoXtema(temaID){   
-    
+function llenarFormExpertoXtema(Idusuario){   
+        
+    obtenerUsuarioExperto(Idusuario);
+    obtenerMisTemas(Idusuario);
+}
+
+function obtenerUsuarioExperto(Idusuario){
     mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
     $.ajax({
-        url: 'AdminServlet',
+        url: 'UsuarioServlet',
         data: {
-            accion: "obtenerMisTemas",
-            idTemaexperto: temaID
+            accion: "usuarioXid",
+            idPersona: Idusuario
         },
-        error: function () { //si existe un error en la respuesta del ajax
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
             ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             ocultarModal("myModal");
-            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
-            sessionStorage.setItem("idxTema", data.idTemas);
-            //$("#gestionar-tema-id").val(data.idTemas);
-            $("#gestionar-tema-nombre").val(data.nombreTema);
-            $("#gestionar-tema-costo-minuto").val(data.costoXminuto);
-            $("#gestionar-tema-observaciones").val(data.observaciones);
-            $("#gestionar-tema-estado").val(data.estado);
-            gestionExpertoXtemasBotones('1');
+            $("#id-usuario-experto").val(data.IdUsuario);
+            $("#usuario-experto-nombre").val(data.Nombre+" "+data.Apellidos);
         },
         type: 'POST',
         dataType: "json"        
     }); 
-    
+}
+
+function obtenerMisTemas(Idusuario){
     // consultando temas usuario
     $.ajax({
         url: 'AdminServlet',
         data: {
             accion: "obtenerMisTemas",
-            idTemaexperto: temaID
+            idTemaexperto: Idusuario
         },
-        error: function () { //si existe un error en la respuesta del ajax
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
             ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
-            ocultarModal("myModal");
-            llenarTablaMisTemas(data);
+            if(data){
+                llenarTablaMisTemas(data);
+            }        
         },
-        type: 'POST',
-        dataType: "json"        
+        type: 'POST'       
     }); 
 }
 
@@ -856,29 +937,77 @@ function dibujarFilaExpertoMistemas(rowData) {
             '</button>'));
 }
 
-function eliminaTemaAexperto(id){
-    
+function eliminaTemaAexperto(idTema){
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "eliminarTemaExperto",
+            idTema: idTema,
+            idexperto: $("#id-usuario-experto").val()
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            ocultarModal("myModal");
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "E~") {
+                cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
+            } else {
+                mostrarMensaje("alert alert-success", respuestaTxt, "!Accion correcta!");
+            }
+        },
+        type: 'POST'       
+    }); 
 }
 
 function limpiaFormExpertoXtema(){
-    $("#gestionar-tema-nombre").val("");
-    $("#gestionar-tema-costo-minuto").val("");
-    $("#gestionar-tema-observaciones").val("");
-    $("#gestionar-tema-estado").val("0");
+    // limpia todo formulario de expertos por temas.
+    $("#usuario-experto").val("");
+    $("#usuario-experto-nombre").val("");
+    $('#gestionar-experto-categoria').children('option:not(:first)').remove();
+    limpiarTabla("#gesion-expertosMisTemas-tabla");    
+    $("#paginacion-expertosMisTemas-tabla").empty();
 }
 
-function gestionExpertoXtemasBotones(val){
-    if(val === '1'){
-        $("#gestionar-expxtema-guardar").removeClass();
-        $("#gestionar-expxtema-guardar").addClass("hidden");
-        $("#gestionar-expxtema-modificar").removeClass();      
-        $("#gestionar-expxtema-modificar").addClass("btn boton-left");
-    }else{
-        $("#gestionar-expxtema-guardar").removeClass();
-        $("#gestionar-expxtema-guardar").addClass("btn boton-left");
-        $("#gestionar-expxtema-modificar").removeClass();      
-        $("#gestionar-expxtema-modificar").addClass("hidden");
-    }        
+function obtenerTodosTemas(){
+    try{ 
+        limpiarTabla("gesion-temas-tabla");
+    }catch(error){}
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "obtenerTodosTemas"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            llenarSelectTemas(data);
+        },
+        type: 'POST',
+        dataType: "json"        
+    });  
+}
+
+function llenarSelectTemas(data){
+    //'option:not(:first)'
+    $('#gestionar-experto-categoria').children().remove();
+    for(var i = 0; i < data.length; i ++){
+        var tema = data[i];
+        $('#gestionar-experto-categoria')
+         .append($("<option></option>")
+         .attr("value",tema.idTemas)
+         .text(tema.nombreTema));
+    }/*
+    $.each(data, function(value) {
+     $('#gestionar-experto-categoria')
+         .append($("<option></option>")
+         .attr("value",value.IdTemas)
+         .text(value.NombreTema));
+    });*/
 }
 
 //******************************************************************************
@@ -925,7 +1054,7 @@ function mostrarMensaje(classCss, msg, neg) {
 
 
 $(window).on('beforeunload', function() {
-    desconectar();
+    //desconectar();
     mostrarModal("myModal", "Espere por favor..", "Se esta cerrando los procesos...");
     sleep(300);    
 });

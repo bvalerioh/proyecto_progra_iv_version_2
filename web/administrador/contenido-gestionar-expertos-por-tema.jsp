@@ -31,11 +31,9 @@
             <br />
             <div class="form-group"> 
                 <button type="button" class="btn boton-rigth" 
-                            id="gestionar-expxtema-cancelar" onclick="cancelarExpXTema()">Cancelar</button>
+                            id="gestionar-expxtema-cancelar" onclick="limpiaFormExpertoXtema()">Cancelar</button>
                 <button type="button" class="btn boton-left" 
                             id="gestionar-expxtema-guardar" onclick="guardarExpXtema()">Guardar</button>
-                <button type="button" class="hidden" 
-                            id="gestionar-expxtema-modificar" onclick="modificaExpXtema()">Modificar</button>
             </div>
         </form>
     </div>
