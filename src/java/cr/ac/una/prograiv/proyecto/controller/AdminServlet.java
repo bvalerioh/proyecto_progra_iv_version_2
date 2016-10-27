@@ -154,7 +154,8 @@ public class AdminServlet extends HttpServlet {
                 case "eliminarTemaExperto":
                     try{
                         Temasexperto te2 = new Temasexperto();
-                        te2.setIdTema(Integer.parseInt(request.getParameter("idTemaexperto")));
+                        te2.setIdTema(Integer.parseInt(request.getParameter("idTema")));
+                        te2.setIdExperto(Integer.parseInt(request.getParameter("idexperto")));
                         // se guarda el tema al experto
                         TemasexpertoBL teBL2 = new TemasexpertoBL();
                         teBL2.delete(te2);
