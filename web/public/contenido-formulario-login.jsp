@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="contenido-formulario-login">
+    <%@include file="content-public-nav-bar.jsp"%>
     <div class="container">
         <div class="row">
             <div class="col-md-6">

@@ -5,6 +5,25 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- Barra de navegacion global. -->
+<div id="barra-navegacion-global">
+    <div>
+        <% if (session.getAttribute("username") != null && (Integer) session.getAttribute("rolusuario") == 0) {
+        %>
+        <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
+        <%
+                System.out.println("nav-user");
+            }
+        %>
+        <% if (session.getAttribute("username") != null && (Integer) session.getAttribute("rolusuario") == 1) { %>
+        <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
+        <%
+                System.out.println("nav-user");
+            }
+        %>
+    </div>
+</div>
+<!-- Fin de la barra de navegacion global --> 
 <div id="contenido-mis-datos-personales" onload="mis_datos_personales();">    
     <h1>MIS DATOS PERSONALES</h1>
     <br/>
@@ -12,64 +31,64 @@
         <div class="form-group">
             <label for="datos-personales-usuario"  class="control-label col-sm-3">Usuario:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="text" id="datos-personales-usuario" 
-                   placeholder="Ingrese su usuario">
+                <input class="form-control" type="text" id="datos-personales-usuario" 
+                       placeholder="Ingrese su usuario">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-contrasena" class="control-label col-sm-3">Contraseña:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="password" id="datos-personales-contrasena" 
-                   placeholder="Ingrese su contraseña">
+                <input class="form-control" type="password" id="datos-personales-contrasena" 
+                       placeholder="Ingrese su contraseña">
             </div>            
         </div>
         <div class="form-group">
             <label for="datos-personales-confirmar-contrasena" class="control-label col-sm-3">Confirmar contraseña:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="password" id="datos-personales-confirmar-contrasena" 
-                   placeholder="Confirmé su contraseña">
+                <input class="form-control" type="password" id="datos-personales-confirmar-contrasena" 
+                       placeholder="Confirmé su contraseña">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-nombre" class="control-label col-sm-3">Nombre:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="text" id="datos-personales-nombre" 
-                   placeholder="Ingrese su nombre">
+                <input class="form-control" type="text" id="datos-personales-nombre" 
+                       placeholder="Ingrese su nombre">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-apellidos" class="control-label col-sm-3">Apellidos:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="text" id="datos-personales-apellidos" 
-                   placeholder="Ingrese sus apellidos">
+                <input class="form-control" type="text" id="datos-personales-apellidos" 
+                       placeholder="Ingrese sus apellidos">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-correo-electronico" class="control-label col-sm-3">Correo electrónico:</label>
             <div class="col-sm-8">
-            <input type="email" class="form-control" id="datos-personales-correo-electronico" 
-                   placeholder="Ingrese su correo electronico.">
+                <input type="email" class="form-control" id="datos-personales-correo-electronico" 
+                       placeholder="Ingrese su correo electronico.">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-fecha-nacimiento" class="control-label col-sm-3">Fecha de Nacimiento:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="text" id="datos-personales-fecha-nacimiento" 
-                   placeholder="Fecha de Nacimiento">
+                <input class="form-control" type="text" id="datos-personales-fecha-nacimiento" 
+                       placeholder="Fecha de Nacimiento">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-telefono-trabajo" class="control-label col-sm-3">Teléfono de trabajo:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="tel" id="datos-personales-telefono-trabajo" 
-                   placeholder="Ingrese su telefono">
+                <input class="form-control" type="tel" id="datos-personales-telefono-trabajo" 
+                       placeholder="Ingrese su telefono">
             </div>
         </div>
         <div class="form-group">
             <label for="datos-personales-celular" class="control-label col-sm-3">Celular:</label>
             <div class="col-sm-8">
-            <input class="form-control" type="tel" id="datos-personales-celular" 
-                   placeholder="Ingrese su número celular">
+                <input class="form-control" type="tel" id="datos-personales-celular" 
+                       placeholder="Ingrese su número celular">
             </div>
         </div>           
         <div class="form-group">
