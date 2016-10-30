@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2016 07:11:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cr.ac.una.prograiv.proyecto.domain.Feedback" table="feedback" catalog="mypiv" optimistic-lock="version">
+        <id name="idFeedBack" type="int">
+            <column name="idFeedBack" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreTema" type="string">
+            <column name="nombreTema" length="45" />
+        </property>
+        <property name="costoXminuto" type="java.lang.Integer">
+            <column name="costoXminuto" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="200" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <property name="estrellas" type="java.lang.Integer">
+            <column name="estrellas" />
+        </property>
+    </class>
+</hibernate-mapping>

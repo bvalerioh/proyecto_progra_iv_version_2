@@ -1,0 +1,181 @@
+/*==============================================================================
+<!--
+    ============================================================================
+    Universidad Nacional de Costa Rica.
+    Curso           : Programacion IV.
+    Profesor        : Christian Garita.
+    Estudiantes     : Dennis Bonilla Ramirez | Bryan Valerio Herrera.           
+    Proyecto # 1     
+    ============================================================================
+-->
+================================================================================*/
+/*===================     ESTILIZADO A NIVEL GENERAL     =======================*/
+/* IMPORTS UTILES. */
+@import "normalize/normalize.css";
+/* Reset de paddings, margins y borders de elementos de nivel de bloque. */
+*{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+    background: #ffffff /*#C8D3FF*/;
+}
+
+body {
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+/*==============================================================================
+                          ESTILOS DE TIPOGRAFIA.
+================================================================================*/
+/* FUENTES. */
+/* Roboto condensed light. */
+@font-face{
+    font-family: roboto_condensed_light;
+    src: url(../fonts/roboto/Roboto-Light.ttf);
+}
+
+.heading-one{
+    font-size: 40px;
+    font-family: roboto_condensed_light;
+    text-align: center;
+    font-weight: 100;
+}
+
+/*==============================================================================
+                       ESTILOS PERSONALIZADOS PARA EL SITIO.
+ ==============================================================================*/
+/*==============================================================================
+                               ESTILOS PAGINA INICIO
+================================================================================*/
+nav{
+    color: #122b40;
+}
+.img-portfolio {
+    margin-bottom: 29px;
+    border-radius: 161px 0px 161px 0px;
+    -moz-border-radius: 161px 0px 161px 0px;
+    -webkit-border-radius: 161px 0px 161px 0px;
+}
+.img-hover:hover {
+    opacity: 0.8;
+}
+/* Home Page Carousel */
+header.carousel{
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+#myCarousel, #myCarousel img{
+    max-height: 45em;
+    width: 100%;
+}
+
+/* 404 Page Styles */
+
+.error-404 {
+    font-size: 100px;
+}
+
+/* Pricing Page Styles */
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+/* Footer Styles */
+footer {
+    margin: 50px 0px;
+    font-size: 16px;
+    vertical-align: middle;
+    color: white;
+    margin-bottom: 0px;
+    background-color: rgb(90,90,90);
+    height: 90px;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+@media (max-width: 1200px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+
+/*==============================================================================
+                       ESTILOS PAGINA REFERENTE INSTRUCCIONAL
+================================================================================*/

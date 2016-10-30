@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2016 07:11:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cr.ac.una.prograiv.proyecto.domain.Historialconsultas" table="historialconsultas" catalog="mypiv" optimistic-lock="version">
+        <id name="idhistorialConsultas" type="int">
+            <column name="idhistorialConsultas" />
+            <generator class="assigned" />
+        </id>
+        <property name="fechaHistorial" type="date">
+            <column name="fechaHistorial" length="10" />
+        </property>
+        <property name="fkUsuario" type="java.lang.Integer">
+            <column name="fk_usuario" />
+        </property>
+        <property name="fkGestionExpertos" type="java.lang.Integer">
+            <column name="fk_gestionExpertos" />
+        </property>
+        <property name="fkGestionTemas" type="java.lang.Integer">
+            <column name="fk_gestionTemas" />
+        </property>
+        <property name="fkFeedBack" type="java.lang.Integer">
+            <column name="fk_FeedBack" />
+        </property>
+        <property name="fkHistorialFacturasXservicio" type="java.lang.Integer">
+            <column name="fk_historialFacturasXServicio" />
+        </property>
+        <property name="fkChat" type="java.lang.Integer">
+            <column name="fk_chat" />
+        </property>
+    </class>
+</hibernate-mapping>
