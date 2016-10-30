@@ -27,7 +27,7 @@ function myajax(){
             contra: $("#txtContrasena").val()
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("modalAlert");
+            //ocultarModal("modalAlert");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -44,20 +44,20 @@ function myajax(){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "¡Hubo un error!");
+            cambiarMensajeModal("alert alert-danger", msg, "¡Hubo un error!");
             //$("#mensaje").val(msg);
         },
         success: function (data) { //si todo esta correcto en la respuesta del ajax, la respuesta queda en el data
-            ocultarModal("modalAlert");
+            
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "C~") {
                 document.location.href = "index.jsp";
             } else {
-                if (tipoRespuesta === "E~") {                     
-                    mostrarMensaje("alert alert-danger", respuestaTxt, "¡Error!");
+                if (tipoRespuesta === "E~") {           
+                    cambiarMensajeModal("alert alert-danger", respuestaTxt, "¡Error!");
                 } else {
-                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                    cambiarMensajeModal("alert alert-danger", "Se genero un error inesperado, contacte al administrador", "¡Error!");
                 }
             }
         },
@@ -82,4 +82,12 @@ function mostrarMensaje(classCss, msg, neg) {
     $("#mesajeResultDirec").fadeIn("slow");
     $("#mesajeResultDirecNeg").html(neg);
     $("#AlertDirecMesaje").html(msg);
+}
+
+function cambiarMensajeModal(classCss, mensaje, titulo){
+    $("#mesajeResultDirecNeg").html(titulo);
+    $("#AlertDirecMesaje").html(mensaje);
+    $("#mesajeResultDirec").removeClass();
+    //se setean los estilos
+    $("#mesajeResultDirec").addClass(classCss);
 }
