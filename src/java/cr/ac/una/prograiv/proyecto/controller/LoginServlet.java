@@ -90,18 +90,16 @@ public class LoginServlet extends HttpServlet {
                                 response.addCookie(userName);
                                 flag = 1;                                
                                 // devolvemos el usuario
-                                response.sendRedirect("index.jsp");
+                                //response.sendRedirect("/index.jsp");
+                                //return;
                                // json = new Gson().toJson(usu);
-                               // out.print(json);
+                               out.print("C~True");
                             }
                         }
                     }
                     // el usuario no existe
                     if(flag == 0){
-                        usu.setIdUsuario(101);
-                        usu.setUsuario("No encontrado");
-                        json = new Gson().toJson(usu);
-                                out.print(json);     
+                        out.print("E~El usuario no existe, compruebe sus datos personales");     
                     }
                     break;
                     

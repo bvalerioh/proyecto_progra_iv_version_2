@@ -25,12 +25,20 @@
 %>
 <!DOCTYPE html>
 <html>    
-    <head>               
-        <script src="css/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>        
+    <head>     
+        <!--Scripts-->        
+        <!-- JQuery -->
         <script src="scripts/jquery/jquery.js" type="text/javascript"></script>
-        <script src="scripts/ajax/ajax.js" type="text/javascript"></script>
+        <!-- JQuery UI -->
+        <script src="scripts/jquery-ui/jquery-ui.js" type="text/javascript"></script>
+        <!-- AJAX -->
+        <script src="scripts/ajax/ajax.js" type="text/javascript"></script>    
+        <!-- Bootstrap -->
+        <script src="css/bootstrap/js/bootstrap.js" type="text/javascript"></script>        
         <script src="scripts/Login.js" type="text/javascript"></script>
+        <!-- CSS -->
         <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="scripts/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="css/Login.css" rel="stylesheet" type="text/css"/>
         <title>Identificación</title>
     </head>    

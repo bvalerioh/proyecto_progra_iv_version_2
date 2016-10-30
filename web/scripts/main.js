@@ -358,7 +358,7 @@ function desconectar(){
         success: function () {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
             ocultarModal("myModal");
-            var url = 'proyecto-progra-iv-v2/index.jsp';
+            var url = '/index.jsp';
             window.location.replace(url);
         },
         type: 'POST'      

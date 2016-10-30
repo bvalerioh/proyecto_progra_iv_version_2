@@ -19,10 +19,6 @@ public class Feedback  implements java.io.Serializable {
     public Feedback() {
     }
 
-	
-    public Feedback(int idFeedBack) {
-        this.idFeedBack = idFeedBack;
-    }
     public Feedback(int idFeedBack, String nombreTema, Integer costoXminuto, String observaciones, Integer estado, Integer estrellas) {
        this.idFeedBack = idFeedBack;
        this.nombreTema = nombreTema;
@@ -30,6 +26,14 @@ public class Feedback  implements java.io.Serializable {
        this.observaciones = observaciones;
        this.estado = estado;
        this.estrellas = estrellas;
+    }
+    
+    public Feedback(String nombreTema, Integer costoXminuto, String observaciones, Integer estado, Integer estrellas) {
+        this.nombreTema = nombreTema;
+        this.costoXminuto = costoXminuto;
+        this.observaciones = observaciones;
+        this.estado = estado;
+        this.estrellas = estrellas;
     }
    
     public int getIdFeedBack() {
