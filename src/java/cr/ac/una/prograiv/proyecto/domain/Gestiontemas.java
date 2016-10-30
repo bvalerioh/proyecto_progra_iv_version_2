@@ -29,6 +29,13 @@ public class Gestiontemas  implements java.io.Serializable {
        this.observaciones = observaciones;
        this.estado = estado;
     }
+    
+    public Gestiontemas(String nombreTema, Integer costoXminuto, String observaciones, Integer estado) {
+       this.nombreTema = nombreTema;
+       this.costoXminuto = costoXminuto;
+       this.observaciones = observaciones;
+       this.estado = estado;
+    }
    
     public int getIdTemas() {
         return this.idTemas;
