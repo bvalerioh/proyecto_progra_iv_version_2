@@ -12,13 +12,15 @@
 <%
 
     HttpSession sesion = request.getSession(true);
-    String nombre = "";
-    Integer rol = null;
+    String nombre = "usuNatsuki";
+    Integer rol = 2;
 
     if (sesion.getAttribute("id") != null) {
         rol = (Integer) sesion.getAttribute("rolusuario");
         nombre = (String) sesion.getAttribute("username");
     }
+
+
 %>
 
 
@@ -78,39 +80,49 @@
                 </div>
             </div>
         </section>
+        <!-- barra de navegacion global evalua segun el usuario -->
+        <section id="barra-navegacion-global">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">CONSULTORIA EXPERTO</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li onclick="cargarContenido('1');"><a href="#">INICIO</a></li>
+                            <li onclick="cargarContenido('2'); colapsar_Accordion('');"><a href="#">REFERENTE INSTRUCCIONAL</a></li>
+                            <li onclick="cargarContenido('3');"><a href="#">NUESTRA HISTORIA</a></li>
+                            <li onclick="cargarContenido('4');"><a href="#">CONTÁCTENOS</a></li>
+                            <li onclick="cargarContenido('16');"><a href="#">Gestionar Tema</a></li>
+                            <li onclick="cargarContenido('17');"><a href="#">Gestionar Expertos por Tema</a></li>
+                            <% if( rol == 2) { %>
+                              <li onclick="cargarContenido('16');"><a href="#">Gestionar Tema</a></li>
+                            <%}%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCEDER A MI CUENTA<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li onclick="cargarContenido('9');"><a href="#">LOGIN</a></li>
+                                    <li role="separator" class="divider"></li><li class="dropdown-header">NUEVO USUARIO</li>
+                                    <li onclick="cargarContenido('10');"><a href="#">REGISTRARSE</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </nav>
+        </section> 
         <!-- Fin modal de bootstrap para mostrar mensajes -->  
         <!-- Inicio de todo el contenido -->
         <section id="contenido-wrapper">
-            <!-- Barra de navegacion global. -->
-            <div id="barra-navegacion-global">
-                <div>
-                    <% if (session.getAttribute("username") == null) { %>
-                    <%@include file="public/content-public-nav-bar.jsp"%>
-                    <%
-                            System.out.println("nav-publico");
-                        }
-                    %>
-                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 0) {
-                       %>
-                    <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
-                    <%
-                            System.out.println("nav-user");
-                        }
-                    %>
-                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 1) { %>
-                    <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
-                    <%
-                            System.out.println("nav-user");
-                        }
-                    %>
-                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 2) {%>
-                    <%@include file="administrador/contenido-admin-nav-bar.jsp"%>
-                    <%                        System.out.println("nav-user");
-                        }
-                    %>
-                </div>
-            </div>
-            <!-- Fin de la barra de navegacion global --> 
             <div>
                 <!-- Header Carousel --> 
                 <header>
