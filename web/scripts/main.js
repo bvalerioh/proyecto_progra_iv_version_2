@@ -245,7 +245,7 @@ function getUsuarioById(id){
             idUsuario: id
         },
         error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
+            //ocultarModal("myModal");
             mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
@@ -270,7 +270,6 @@ function getUsuarioById(id){
 //******************************************************************************
 // IDENTIFICARSE/LOGIN
 function identificarse(){
-    mostrarModal("myModal", "Espere por favor..", "Se esta comprobando los datos...");
     //Se envia la información por ajax
     $.ajax({
         url: 'LoginServlet',
@@ -280,7 +279,6 @@ function identificarse(){
             contra: $("#contrasenaLogin").val()
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -297,10 +295,9 @@ function identificarse(){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarModal("myModal", "Error en AJAX", msg);
         },
         success: function (data) { //si todo esta correcto en la respuesta del ajax, la respuesta queda en el data
-            ocultarModal("myModal");
+         
             if (data.usuario === "No encontrado" && data.idUsuario === 101) {                     
                     mostrarMensaje("alert alert-danger", "Error el usuario no Existe", "¡Ups problemas!");
             }else{                
@@ -348,16 +345,15 @@ function desconectar(){
     $("#navbar-login").addClass("menu-left");
     document.getElementById('lblBienvenida').innerHTML = "";*/
     //verificaUsuarioLogueado();
-     mostrarModal("myModal", "Espere por favor..", "Desconectando...");
+    mostrarMensaje("alert alert-info", "Espere por favor....", "¡Desconectando!");
     $.ajax({
         url: 'LogoutServlet',
         error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function () {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
-            ocultarModal("myModal");
+            ocultarModalClase();
             var url = '/index.jsp';
             window.location.replace(url);
         },
@@ -370,7 +366,7 @@ function desconectar(){
 //******************************************************************************
 
 function cargarMisDatos(){
-    mostrarModal("myModal", "Espere por favor..", "Cargando datos...");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     try{
         $("#datos-personales-usuario").val(sessionStorage.getItem("usuario"));
         $("#datos-personales-nombre").val(sessionStorage.getItem("nombre"));
@@ -392,13 +388,13 @@ function cargarMisDatos(){
         });
     }catch(error){
         //parte donde los cargamos si el explorador no soporta el sessionStorage
-         mostrarMensaje("alert alert-danger", error, "Error!");
+         cambiarMensajeModalClase("alert alert-danger", error, "Error!");
     }
 }
 //******************************************************************************
 // MODIFICAR USUARIO
 function modificarDatosPersonales(){
-    mostrarModal("myModal", "Espere por favor..", "Comprobando datos...");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'UsuarioServlet',
         data: {
@@ -416,21 +412,19 @@ function modificarDatosPersonales(){
             telCelular: $("#datos-personales-celular").val()
         },
         error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
-            ocultarModal("myModal");
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
-            ocultarModal("myModal");
+            
             if (tipoRespuesta === "C~") {
                 limpiarFormDireccion();
-                mostrarMensaje("alert alert-success", "Los datos fueron modificados, exitosamente!!!","¡Exito! "+respuestaTxt);              
+                cambiarMensajeModalClase("alert alert-success", "Los datos fueron modificados, exitosamente!!!","¡Exito! "+respuestaTxt);              
             } else {
                 if (tipoRespuesta === "E~") {                     
-                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                    cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "Error!");
                 } else {
                     mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
                 }
@@ -452,19 +446,18 @@ function modificarDatosPersonales(){
 // 
 function obtenerTemas(){
     limpiarTabla("gesion-temas-tabla");
-    mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
             accion: "obtenerTodosTemas"
         },
-        error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        error: function () { //si existe un error en la respuesta del ajax            
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
-            ocultarModal("myModal");
+            ocultarModalClase();
             cargarTablaTemas(data);
         },
         type: 'POST',
@@ -474,7 +467,7 @@ function obtenerTemas(){
 
 function guardarTema(){
     limpiarTabla("gesion-temas-tabla");
-    mostrarModal("myModal", "Espere por favor..", "Guardando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
@@ -486,7 +479,6 @@ function guardarTema(){
             estadoT: $("#gestionar-tema-estado").val()
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -503,23 +495,23 @@ function guardarTema(){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "Error!");
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
-            ocultarModal("myModal");
+          
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "C~") {
-                mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "Correcto!");
                 // Vuelve a conseguir la lista de los temas
                 obtenerTemas();
                 limpiaFormTema();
             } else {
-                ocultarModal("myModal");
+          
                 if (tipoRespuesta === "E~") {
-                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                    cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "Error!");
                 } else {
-                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                    cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
                 }
             }
         },
@@ -528,7 +520,7 @@ function guardarTema(){
 }
 
 function modificaTemas(){
-    mostrarModal("myModal", "Espere por favor..", "Modificando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
@@ -540,7 +532,6 @@ function modificaTemas(){
             estadoT: $("#gestionar-tema-estado").val()
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -557,14 +548,13 @@ function modificaTemas(){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "Error!");
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "C~") {
-                ocultarModal("myModal");
-                mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "Correcto!");
                 // Vuelve a conseguir la lista de los temas
                 limpiarTabla("gesion-temas-tabla");
                 obtenerTemas();
@@ -573,9 +563,9 @@ function modificaTemas(){
                 limpiaFormTema();
             } else {
                 if (tipoRespuesta === "E~") {
-                    mostrarMensaje("alert alert-danger", respuestaTxt, "Error!");
+                    cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "Error!");
                 } else {
-                    mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
+                    cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador", "Error!");
                 }
             }
         },
@@ -584,7 +574,7 @@ function modificaTemas(){
 }
 
 function eliminaTema(idTema){
-    mostrarModal("myModal", "Espere por favor..", "Eliminando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
@@ -592,8 +582,7 @@ function eliminaTema(idTema){
             idxTema: idTema
         },
         error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
@@ -602,7 +591,7 @@ function eliminaTema(idTema){
             if (tipoRespuesta === "E~") {
                 cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
             } else {
-                mostrarMensaje("alert alert-success", respuestaTxt, "!Accion correcta!");
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");
                 setTimeout(obtenerTemas, 2000);// hace una pausa y consulta la información de la base de datos
             }
         },
@@ -658,7 +647,7 @@ function limpiaFormTema(){
 }
 
 function llenarFormTema(temaID){    
-    mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
@@ -666,7 +655,6 @@ function llenarFormTema(temaID){
             idxTema: temaID
         },
         error:function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -683,10 +671,10 @@ function llenarFormTema(temaID){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "Error!");
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
-            ocultarModal("myModal");
+            ocultarModalClase();
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
             sessionStorage.setItem("idxTema", data.idTemas);
             //$("#gestionar-tema-id").val(data.idTemas);
@@ -724,14 +712,13 @@ function obtenerExpertos(){
     try{ 
         limpiarTabla("gesion-temas-tabla");
     }catch(error){}
-    mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
             accion: "obtenerExpertos"
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -748,11 +735,11 @@ function obtenerExpertos(){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "Error!");
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
-            ocultarModal("myModal");
+            ocultarModalClase();
             cargarTablaExpertoXtemas(data);
         },
         type: 'POST',
@@ -761,7 +748,7 @@ function obtenerExpertos(){
 }
 
 function guardarExpXtema(){
-    mostrarModal("myModal", "Espere por favor..", "Guardando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
@@ -770,16 +757,15 @@ function guardarExpXtema(){
             idTema: $("#gestionar-experto-categoria").val()
         },
         error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "E~") {
-                cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
+                cambiarMensajeModalClase("myModal", "Resultado acción", respuestaTxt);
             } else {
-                mostrarMensaje("alert alert-success", respuestaTxt, "!Accion correcta!");
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");
             }
         },
         type: 'POST'       
@@ -830,7 +816,7 @@ function llenarFormExpertoXtema(Idusuario){
 }
 
 function obtenerUsuarioExperto(Idusuario){
-    mostrarModal("myModal", "Espere por favor..", "Consultando la información en la base de datos");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'UsuarioServlet',
         data: {
@@ -838,7 +824,6 @@ function obtenerUsuarioExperto(Idusuario){
             idPersona: Idusuario
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -855,10 +840,10 @@ function obtenerUsuarioExperto(Idusuario){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "Error!");
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
-            ocultarModal("myModal");
+            ocultarModalClase();
             $("#id-usuario-experto").val(data.idUsuario);
             $("#usuario-experto-nombre").val(data.nombre+" "+data.apellidos);
         },
@@ -876,7 +861,6 @@ function obtenerMisTemas(Idusuario){
             idTemaexperto: Idusuario
         },
         error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -939,6 +923,7 @@ function dibujarFilaExpertoMistemas(rowData) {
 }
 
 function eliminaTemaAexperto(idTema){
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
     $.ajax({
         url: 'AdminServlet',
         data: {
@@ -947,16 +932,15 @@ function eliminaTemaAexperto(idTema){
             idexperto: $("#id-usuario-experto").val()
         },
         error: function () { //si existe un error en la respuesta del ajax
-            ocultarModal("myModal");
-            mostrarMensaje("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
         success: function (data) {
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "E~") {
-                cambiarMensajeModal("myModal", "Resultado acción", respuestaTxt);
+                cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "¡Error!");
             } else {
-                mostrarMensaje("alert alert-success", respuestaTxt, "!Accion correcta!");
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");
             }
         },
         type: 'POST'       
@@ -1010,6 +994,9 @@ function llenarSelectTemas(data){
          .text(value.NombreTema));
     });*/
 }
+function filtroExpertosTema(){    
+    filtrarTabla("expXtem-filtro-usuario", "gesion-expertosTema-tabla");
+}
 
 //******************************************************************************
 //******************************* UTILIDADES ***********************************
@@ -1020,6 +1007,21 @@ function limpiarTabla(idTabla) {
         while (tabla.rows.length > 1)
             tabla.deleteRow(1);
     }
+}
+
+
+
+
+$(window).on('beforeunload', function() {
+    //desconectar();
+    //("myModal", "Espere por favor..", "Se esta cerrando los procesos...");
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
+    sleep(300);    
+    ocultarModalClase();
+});
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 function llamaModalEliminar(Metodo, id) {
@@ -1052,29 +1054,34 @@ function mostrarMensaje(classCss, msg, neg) {
     $("#mesajeResultDirecNeg").html(neg);
     $("#AlertDirecMesaje").html(msg);
 }
-
-
-$(window).on('beforeunload', function() {
-    //desconectar();
-    mostrarModal("myModal", "Espere por favor..", "Se esta cerrando los procesos...");
-    sleep(300);    
-});
-
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
+function cambiarMensajeModalClase(classCss, mensaje, titulo){
+    $("#mesajeResultDirecNeg").html(titulo);
+    $("#AlertDirecMesaje").html(mensaje);
+    $("#mesajeResultDirec").removeClass();
+    //se setean los estilos
+    $("#mesajeResultDirec").addClass(classCss);
+}
+function ocultarModalClase(){
+    $("#modalAlert").modal("hide");	
 }
 
-function mostrarModal(idDiv ,titulo, mensaje){
-    $("#"+idDiv+"Title").html(titulo);
-    $("#"+idDiv+"Message").html(mensaje);
-    $("#"+idDiv).modal();
-}
-
-function ocultarModal(idDiv){
-    $("#"+idDiv).modal("hide");	
-}
-
-function cambiarMensajeModal(idDiv ,titulo, mensaje){
-    $("#"+idDiv+"Title").html(titulo);
-    $("#"+idDiv+"Message").html(mensaje);
+// Resibe como parametro el id del input y el de la tabla
+function filtrarTabla(idDiv, table){
+    var tabla, tr, td, i;
+    // idDiv es el id del input
+    filter = $("#"+idDiv).val();
+    // conseguirmos el id de la tabla
+    tabla = document.getElementById(table);
+    tr = tabla.getElementsByTagName("tr");
+    // Aplicamos el filtro a toda la tabla
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        } 
+    }
 }

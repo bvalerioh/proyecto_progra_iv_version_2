@@ -40,20 +40,6 @@
         <!-- Modal del BootsTrap para mostrar mensajes                  -->
         <!-- ********************************************************** -->
         <section>
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
-                        </div>
-                        <div class="modal-body" id="myModalMessage">
-                            <p>This is a small modal.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="modal fade" id="modalAlert" role="dialog">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
