@@ -12,12 +12,14 @@
 <%
 
     HttpSession sesion = request.getSession(true);
-    String nombre = "usuNatsuki";
-    Integer rol = 2;
+    String nombre = "";
+    Integer rol = -1;
+    boolean usuarioLogueado = false;
 
     if (sesion.getAttribute("id") != null) {
         rol = (Integer) sesion.getAttribute("rolusuario");
         nombre = (String) sesion.getAttribute("username");
+        usuarioLogueado = true;
     }
 
 
@@ -101,11 +103,7 @@
                             <li onclick="cargarContenido('2'); colapsar_Accordion('');"><a href="#">REFERENTE INSTRUCCIONAL</a></li>
                             <li onclick="cargarContenido('3');"><a href="#">NUESTRA HISTORIA</a></li>
                             <li onclick="cargarContenido('4');"><a href="#">CONTÁCTENOS</a></li>
-                            <li onclick="cargarContenido('16');"><a href="#">Gestionar Tema</a></li>
-                            <li onclick="cargarContenido('17');"><a href="#">Gestionar Expertos por Tema</a></li>
-                            <% if( rol == 2) { %>
-                              <li onclick="cargarContenido('16');"><a href="#">Gestionar Tema</a></li>
-                            <%}%>
+                           <% if(usuarioLogueado == false ){ %>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCEDER A MI CUENTA<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li onclick="cargarContenido('9');"><a href="#">LOGIN</a></li>
@@ -113,6 +111,57 @@
                                     <li onclick="cargarContenido('10');"><a href="#">REGISTRARSE</a></li>
                                 </ul>
                             </li>
+                           <%}%>
+                           <% if(usuarioLogueado == true ){ %>
+                            <% if( rol == 1){%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                    </ul>
+                                </li>
+                            <%}%>
+                            <% if( rol == 2){%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion experto</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Mis Categorias</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver usuario en espera</a></li>
+                                    </ul>
+                                </li>
+                            <%}%>
+                             <% if( rol == 3){%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Asministra informacion personal</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion experto</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Mis Categorias</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver usuario en espera</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion administrativa</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Gestionar Usuario</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Gestionar temas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Gestionar expertos por tema</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Consultar facturacion global</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Consultar reporte web</a></li>
+                                    </ul>
+                                </li>
+                            <%}%>
+                           <%}%>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

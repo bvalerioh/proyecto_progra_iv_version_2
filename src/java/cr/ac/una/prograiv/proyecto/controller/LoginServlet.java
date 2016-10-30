@@ -70,7 +70,8 @@ public class LoginServlet extends HttpServlet {
                     // comparando si existe los dos parametros                    
                     for(int i = 0; i < liusu.size(); i++){
                         if(liusu.get(i).getUsuario().equals(usu.getUsuario())){
-                            if(liusu.get(i).getContrasena().equals(usu.getContrasena())){
+                            if(liusu.get(i).getContrasena().equals(usu.getContrasena())
+                               && liusu.get(i).getEstado() == 1){
                                 session = request.getSession(true);
                                 // El usuario Existe y es regresado.                                
                                 usu = liusu.get(i);
