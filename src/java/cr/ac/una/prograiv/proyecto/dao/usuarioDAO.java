@@ -67,8 +67,10 @@ public class usuarioDAO extends HibernateUtil implements IBaseDAO<Usuario, Integ
        // SELECT * FROM usuario where idUsuario = 1001;
         Usuario usu = null;
         try{
+            iniciaOperacion();
             String hql = "from Usuario where idUsuario = :idUsuario";
-            Query q = getSesion().createQuery(hql);
+            Query q;
+            q = getSesion().createQuery(hql);
             q.setInteger("idUsuario", o);
             usu = (Usuario)q.uniqueResult();
         }catch(HibernateException he){

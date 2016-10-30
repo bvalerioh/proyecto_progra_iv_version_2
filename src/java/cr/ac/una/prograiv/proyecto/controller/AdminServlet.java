@@ -73,7 +73,7 @@ public class AdminServlet extends HttpServlet {
                         //si no es null
                         if(gt == null){
                             gt = new Gestiontemas(); 
-                            gt.setIdTemas(idxTema);
+                            //gt.setIdTemas(idxTema);
                             gt.setEstado(estadoT);
                             gt.setCostoXminuto(costoxT);
                             gt.setNombreTema(nombreT);

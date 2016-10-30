@@ -89,8 +89,9 @@ public class LoginServlet extends HttpServlet {
                                 response.addCookie(userName);
                                 flag = 1;                                
                                 // devolvemos el usuario
-                                json = new Gson().toJson(usu);
-                                out.print(json);
+                                response.sendRedirect("index.jsp");
+                               // json = new Gson().toJson(usu);
+                               // out.print(json);
                             }
                         }
                     }
