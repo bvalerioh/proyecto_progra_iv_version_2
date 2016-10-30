@@ -99,7 +99,7 @@
                             </li>
                            <%}%>
                            <% if(usuarioLogueado == true ){ %>
-                            <% if( rol == 1){%>
+                            <% if( rol == 0){%>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
@@ -111,7 +111,7 @@
                                     </ul>
                                 </li>
                             <%}%>
-                            <% if( rol == 2){%>
+                            <% if( rol == 1){%>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
@@ -126,7 +126,7 @@
                                     </ul>
                                 </li>
                             <%}%>
-                             <% if( rol == 3){%>
+                             <% if( rol == 2){%>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
