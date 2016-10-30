@@ -506,10 +506,10 @@ function guardarTema(){
             mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
+            ocultarModal("myModal");
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "C~") {
-                ocultarModal("myModal");
                 mostrarMensaje("alert alert-success", respuestaTxt, "Correcto!");
                 // Vuelve a conseguir la lista de los temas
                 obtenerTemas();

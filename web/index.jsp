@@ -13,12 +13,16 @@
 
     HttpSession sesion = request.getSession(true);
     String nombre = "";
-    Integer rol = null;
+    Integer rol = -1;
+    boolean usuarioLogueado = false;
 
     if (sesion.getAttribute("id") != null) {
         rol = (Integer) sesion.getAttribute("rolusuario");
         nombre = (String) sesion.getAttribute("username");
+        usuarioLogueado = true;
     }
+
+
 %>
 
 
@@ -78,39 +82,96 @@
                 </div>
             </div>
         </section>
+        <!-- barra de navegacion global evalua segun el usuario -->
+        <section id="barra-navegacion-global">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">CONSULTORIA EXPERTO</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li onclick="cargarContenido('1');"><a href="#">INICIO</a></li>
+                            <li onclick="cargarContenido('2'); colapsar_Accordion('');"><a href="#">REFERENTE INSTRUCCIONAL</a></li>
+                            <li onclick="cargarContenido('3');"><a href="#">NUESTRA HISTORIA</a></li>
+                            <li onclick="cargarContenido('4');"><a href="#">CONTÁCTENOS</a></li>
+                           <% if(usuarioLogueado == false ){ %>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCEDER A MI CUENTA<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li onclick="cargarContenido('9');"><a href="#">LOGIN</a></li>
+                                    <li role="separator" class="divider"></li><li class="dropdown-header">NUEVO USUARIO</li>
+                                    <li onclick="cargarContenido('10');"><a href="#">REGISTRARSE</a></li>
+                                </ul>
+                            </li>
+                           <%}%>
+                           <% if(usuarioLogueado == true ){ %>
+                            <% if( rol == 1){%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                    </ul>
+                                </li>
+                            <%}%>
+                            <% if( rol == 2){%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion experto</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Mis Categorias</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver usuario en espera</a></li>
+                                    </ul>
+                                </li>
+                            <%}%>
+                             <% if( rol == 3){%>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Asministra informacion personal</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion experto</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Mis Categorias</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Ver usuario en espera</a></li>
+                                        <li role="separator" class="divider"></li><li class="dropdown-header">Gestion administrativa</li>
+                                        <li onclick="cargarContenido('');"><a href="#">Gestionar Usuario</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Gestionar temas</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Gestionar expertos por tema</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Consultar facturacion global</a></li>
+                                        <li onclick="cargarContenido('');"><a href="#">Consultar reporte web</a></li>
+                                    </ul>
+                                </li>
+                            <%}%>
+                           <%}%>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </nav>
+        </section> 
         <!-- Fin modal de bootstrap para mostrar mensajes -->  
         <!-- Inicio de todo el contenido -->
         <section id="contenido-wrapper">
-            <!-- Barra de navegacion global. -->
-            <div id="barra-navegacion-global">
-                <div>
-                    <% if (session.getAttribute("username") == null) { %>
-                    <%@include file="public/content-public-nav-bar.jsp"%>
-                    <%
-                            System.out.println("nav-publico");
-                        }
-                    %>
-                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 0) {
-                       %>
-                    <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
-                    <%
-                            System.out.println("nav-user");
-                        }
-                    %>
-                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 1) { %>
-                    <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
-                    <%
-                            System.out.println("nav-user");
-                        }
-                    %>
-                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 2) {%>
-                    <%@include file="administrador/contenido-admin-nav-bar.jsp"%>
-                    <%                        System.out.println("nav-user");
-                        }
-                    %>
-                </div>
-            </div>
-            <!-- Fin de la barra de navegacion global --> 
             <div>
                 <!-- Header Carousel --> 
                 <header>
