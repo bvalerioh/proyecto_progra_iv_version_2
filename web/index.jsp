@@ -7,24 +7,21 @@
     Proyecto # 1     
     ============================================================================
 --%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% 
+<%
+
     HttpSession sesion = request.getSession(true);
-    Integer rolusuario = 0;
-    boolean estaLogueado = false;
-    String nombreUsuario = "";
-    
-    if(sesion!=null){
-        if (sesion.getAttribute("usuario")  != null) {
-            estaLogueado = true;
-            rolusuario = (Integer)sesion.getAttribute("rolusuario");
-            nombreUsuario = (String)sesion.getAttribute("username");
-        }else{
-           estaLogueado = true;
-        }
+    String nombre = "";
+    Integer rol = null;
+
+    if (sesion.getAttribute("id") != null) {
+        rol = (Integer) sesion.getAttribute("rolusuario");
+        nombre = (String) sesion.getAttribute("username");
     }
-    
 %>
+
+
 <!DOCTYPE html>
 <html>
     <!-- Inicio del Head --> 
@@ -69,39 +66,51 @@
                 </div>
             </div>
             <div class="modal fade" id="modalEliminar" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header" id="modalEliminarHeader"></div>                    
-                    <div class="modal-body" id="modalEliminarMessage"></div>                
-                    <div class="modal-footer" id="modalEliminarBotones">                        
-                        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Cancelar</a>
-                        <a href="#" id="btnYesEliminar" class="btn btn-danger btn-ok">Eliminar</a>
-                    </div>                   
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header" id="modalEliminarHeader"></div>                    
+                        <div class="modal-body" id="modalEliminarMessage"></div>                
+                        <div class="modal-footer" id="modalEliminarBotones">                        
+                            <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Cancelar</a>
+                            <a href="#" id="btnYesEliminar" class="btn btn-danger btn-ok">Eliminar</a>
+                        </div>                   
+                    </div>
                 </div>
             </div>
-        </div>
         </section>
         <!-- Fin modal de bootstrap para mostrar mensajes -->  
-        <!-- Barra de navegacion global. -->
-        <section id="barra-navegacion-global">
-            <div>
-                <% if (estaLogueado == false) { %>
-                <%@include file="public/content-public-nav-bar.jsp"%>
-                <%}%>
-                <% if (estaLogueado == true && rolusuario == 0) { %>
-                <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
-                <%}%>
-                <% if (estaLogueado == true && rolusuario == 1) { %>
-                <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
-                <%}%>
-                <% if (estaLogueado == true && rolusuario == 2) { %>
-                <%@include file="administrador/contenido-admin-nav-bar.jsp"%>
-                <%}%>
-            </div>
-        </section>
-        <!-- Fin de la barra de navegacion global --> 
         <!-- Inicio de todo el contenido -->
         <section id="contenido-wrapper">
+            <!-- Barra de navegacion global. -->
+            <div id="barra-navegacion-global">
+                <div>
+                    <% if (session.getAttribute("username") == null) { %>
+                    <%@include file="public/content-public-nav-bar.jsp"%>
+                    <%
+                            System.out.println("nav-publico");
+                        }
+                    %>
+                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 0) {
+                       %>
+                    <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
+                    <%
+                            System.out.println("nav-user");
+                        }
+                    %>
+                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 1) { %>
+                    <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
+                    <%
+                            System.out.println("nav-user");
+                        }
+                    %>
+                    <% if (session.getAttribute("username") != null && (Integer)session.getAttribute("rolusuario") == 2) {%>
+                    <%@include file="administrador/contenido-admin-nav-bar.jsp"%>
+                    <%                        System.out.println("nav-user");
+                        }
+                    %>
+                </div>
+            </div>
+            <!-- Fin de la barra de navegacion global --> 
             <div>
                 <!-- Header Carousel --> 
                 <header>
@@ -132,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="item">
-                            <a href="#"><img src="images/003.png" /></a>
+                                <a href="#"><img src="images/003.png" /></a>
                                 <!--<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>-->
                                 <div class="carousel-caption">
                                     <h2>Caption 3</h2>

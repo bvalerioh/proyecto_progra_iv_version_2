@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
                                 session.setAttribute("username",usu.getUsuario());
                                 // Se guarda el roll del usuario en sesion.
                                 session.setAttribute("rolusuario",usu.getTipoUsuario());
-                                //setting session to expiry in 30 mins
+                                //setting session to expiry in 30 min
                                 session.setMaxInactiveInterval(30*60);
                                 // agregando cookie
                                 Cookie userName = new Cookie("usuario", usu.getUsuario());
