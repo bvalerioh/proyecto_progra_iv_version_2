@@ -20,7 +20,7 @@
             rolusuario = (Integer)sesion.getAttribute("rolusuario");
             nombreUsuario = (String)sesion.getAttribute("username");
         }else{
-           estaLogueado = false;
+           estaLogueado = true;
         }
     }
     

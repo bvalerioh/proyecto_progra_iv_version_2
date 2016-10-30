@@ -83,7 +83,8 @@ function cargarContenido(idContenido) {
                 $("#contenido-wrapper").load("./usuario/contenido-consulta-facturas.jsp");
             }
             if (idContenido === '9') {
-                $("#contenido-wrapper").load("./public/contenido-formulario-login.jsp");
+                document.location.href = "login.jsp";
+                // $("#contenido-wrapper").load("./public/contenido-formulario-login.jsp");
             }
             if (idContenido === '10') {
                 $("#contenido-wrapper").load("./public/contenido-registrarse.jsp");
@@ -858,8 +859,8 @@ function obtenerUsuarioExperto(Idusuario){
         },
         success: function (data) {
             ocultarModal("myModal");
-            $("#id-usuario-experto").val(data.IdUsuario);
-            $("#usuario-experto-nombre").val(data.Nombre+" "+data.Apellidos);
+            $("#id-usuario-experto").val(data.idUsuario);
+            $("#usuario-experto-nombre").val(data.nombre+" "+data.apellidos);
         },
         type: 'POST',
         dataType: "json"        
