@@ -102,7 +102,7 @@
                             <% if( rol == 0){%>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li onclick="cargarContenido('18');"><a href="#">LOGOUT</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
                                         <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
                                         <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
@@ -114,7 +114,7 @@
                             <% if( rol == 1){%>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li onclick="cargarContenido('18');"><a href="#">LOGOUT</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
                                         <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
                                         <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
@@ -129,7 +129,7 @@
                              <% if( rol == 2){%>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=nombre%><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li onclick="cargarContenido('');"><a href="#">LOGOUT</a></li>
+                                        <li onclick="cargarContenido('18');"><a href="#">LOGOUT</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
                                         <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
                                         <li onclick="cargarContenido('');"><a href="#">Asministra informacion personal</a></li>

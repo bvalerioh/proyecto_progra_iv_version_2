@@ -39,7 +39,7 @@ public class LogoutServlet extends HttpServlet {
                 response.setDateHeader("Expires", 0);
                 session.invalidate();
             }
-        response.sendRedirect("/index.jsp");
+        //response.sendRedirect("proyecto-progra-iv-v2/index.jsp");
         return;
         
     }

@@ -295,6 +295,7 @@ function identificarse(){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
+             mostrarMensaje("alert alert-danger", msg, "¡Ups problemas!");
         },
         success: function (data) { //si todo esta correcto en la respuesta del ajax, la respuesta queda en el data
          
@@ -348,13 +349,29 @@ function desconectar(){
     mostrarMensaje("alert alert-info", "Espere por favor....", "¡Desconectando!");
     $.ajax({
         url: 'LogoutServlet',
-        error: function () { //si existe un error en la respuesta del ajax
-            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+             mostrarMensaje("alert alert-danger", msg, "¡Ups problemas!");
         },
         success: function () {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
             ocultarModalClase();
-            var url = '/index.jsp';
+            var url = '/proyecto-progra-iv-v2/index.jsp';
             window.location.replace(url);
         },
         type: 'POST'      
