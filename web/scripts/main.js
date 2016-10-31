@@ -1084,9 +1084,11 @@ function ocultarModalClase(){
 
 // Resibe como parametro el id del input y el de la tabla
 function filtrarTabla(idDiv, table){
-    var tabla, tr, td, i;
+    var tabla, tr, td, i, filtro, input;
     // idDiv es el id del input
-    filter = $("#"+idDiv).val();
+    input = document.getElementById(idDiv);
+    filtro = input.value.toUpperCase();
+   // filter = $("#"+idDiv).val();
     // conseguirmos el id de la tabla
     tabla = document.getElementById(table);
     tr = tabla.getElementsByTagName("tr");
@@ -1094,7 +1096,7 @@ function filtrarTabla(idDiv, table){
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
         if (td) {
-            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            if (td.innerHTML.toUpperCase().indexOf(filtro) > -1) {
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";

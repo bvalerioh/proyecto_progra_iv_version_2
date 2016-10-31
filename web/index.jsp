@@ -12,9 +12,9 @@
 <%
 
     HttpSession sesion = request.getSession(true);
-    String nombre = "";
-    Integer rol = -1;
-    boolean usuarioLogueado = false;
+    String nombre = "Bryan";
+    Integer rol = 2;
+    boolean usuarioLogueado = true;
 
     if (sesion.getAttribute("id") != null) {
         rol = (Integer) sesion.getAttribute("rolusuario");
@@ -131,19 +131,19 @@
                                     <ul class="dropdown-menu">
                                         <li onclick="cargarContenido('18');"><a href="#">LOGOUT</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
-                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Asministra informacion personal</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li onclick="cargarContenido('5');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('6');"><a href="#">Asministra informacion personal</a></li>
+                                        <li onclick="cargarContenido('7');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('8');"><a href="#">Ver Facturas por servicios</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion experto</li>
-                                        <li onclick="cargarContenido('');"><a href="#">Mis Categorias</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver usuario en espera</a></li>
+                                        <li onclick="cargarContenido('12');"><a href="#">Mis Categorias</a></li>
+                                        <li onclick="cargarContenido('11');"><a href="#">Ver usuario en espera</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion administrativa</li>
-                                        <li onclick="cargarContenido('');"><a href="#">Gestionar Usuario</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Gestionar temas</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Gestionar expertos por tema</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Consultar facturacion global</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Consultar reporte web</a></li>
+                                        <li onclick="cargarContenido('15');"><a href="#">Gestionar Usuario</a></li>
+                                        <li onclick="cargarContenido('16');"><a href="#">Gestionar temas</a></li>
+                                        <li onclick="cargarContenido('17');"><a href="#">Gestionar expertos por tema</a></li>
+                                        <li onclick="cargarContenido('13');"><a href="#">Consultar facturacion global</a></li>
+                                        <li onclick="cargarContenido('14');"><a href="#">Consultar reporte web</a></li>
                                     </ul>
                                 </li>
                             <%}%>
