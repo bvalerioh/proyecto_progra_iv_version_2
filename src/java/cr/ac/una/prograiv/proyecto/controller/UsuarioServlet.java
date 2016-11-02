@@ -96,17 +96,8 @@ public class UsuarioServlet extends HttpServlet {
                     Date date = format.parse(fechatxt);
                                      
                     if(accion.equals("guardarUsuario")){ //es insertar personas
-                        usu.setNombre(nombre);
-                        usu.setApellidos(apellidos);
-                        usu.setDireccion(direccion);
-                        usu.setEmail(email);
-                        usu.setFeNacimiento(date);
-                        usu.setTelCelular(telCelular);
-                        usu.setTipoUsuario(0);
-                        usu.setTelTrabajo(telTrabajo);
-                        usu.setEstado(estado);
-                        usu.setObservaciones("Nuevo usuario");
-                        usu.setContrasena(contrasena);
+                        usu = new Usuario(usuario, nombre, apellidos, email, date, direccion, 
+                                telTrabajo, telCelular, contrasena, "Nuevo usuario", 0, estado);
                         // Validación de que la persona no existe.
                         usuAux = usuBL.findByName(Usuario.class.getName(),usu.getUsuario());
                         if(usuAux == null){

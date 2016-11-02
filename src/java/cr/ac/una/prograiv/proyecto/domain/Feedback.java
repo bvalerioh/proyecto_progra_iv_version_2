@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 24/10/2016 07:11:30 PM by Hibernate Tools 4.3.1
+// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
 
 
 
@@ -19,6 +19,10 @@ public class Feedback  implements java.io.Serializable {
     public Feedback() {
     }
 
+	
+    public Feedback(int idFeedBack) {
+        this.idFeedBack = idFeedBack;
+    }
     public Feedback(int idFeedBack, String nombreTema, Integer costoXminuto, String observaciones, Integer estado, Integer estrellas) {
        this.idFeedBack = idFeedBack;
        this.nombreTema = nombreTema;
@@ -27,13 +31,12 @@ public class Feedback  implements java.io.Serializable {
        this.estado = estado;
        this.estrellas = estrellas;
     }
-    
     public Feedback(String nombreTema, Integer costoXminuto, String observaciones, Integer estado, Integer estrellas) {
-        this.nombreTema = nombreTema;
-        this.costoXminuto = costoXminuto;
-        this.observaciones = observaciones;
-        this.estado = estado;
-        this.estrellas = estrellas;
+       this.nombreTema = nombreTema;
+       this.costoXminuto = costoXminuto;
+       this.observaciones = observaciones;
+       this.estado = estado;
+       this.estrellas = estrellas;
     }
    
     public int getIdFeedBack() {

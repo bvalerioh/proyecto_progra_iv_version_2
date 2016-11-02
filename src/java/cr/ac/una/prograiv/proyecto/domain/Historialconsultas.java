@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 24/10/2016 07:11:30 PM by Hibernate Tools 4.3.1
+// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -28,6 +28,15 @@ public class Historialconsultas  implements java.io.Serializable {
     }
     public Historialconsultas(int idhistorialConsultas, Date fechaHistorial, Integer fkUsuario, Integer fkGestionExpertos, Integer fkGestionTemas, Integer fkFeedBack, Integer fkHistorialFacturasXservicio, Integer fkChat) {
        this.idhistorialConsultas = idhistorialConsultas;
+       this.fechaHistorial = fechaHistorial;
+       this.fkUsuario = fkUsuario;
+       this.fkGestionExpertos = fkGestionExpertos;
+       this.fkGestionTemas = fkGestionTemas;
+       this.fkFeedBack = fkFeedBack;
+       this.fkHistorialFacturasXservicio = fkHistorialFacturasXservicio;
+       this.fkChat = fkChat;
+    }
+    public Historialconsultas(Date fechaHistorial, Integer fkUsuario, Integer fkGestionExpertos, Integer fkGestionTemas, Integer fkFeedBack, Integer fkHistorialFacturasXservicio, Integer fkChat) {
        this.fechaHistorial = fechaHistorial;
        this.fkUsuario = fkUsuario;
        this.fkGestionExpertos = fkGestionExpertos;

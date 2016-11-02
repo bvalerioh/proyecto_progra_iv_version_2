@@ -661,6 +661,7 @@ function limpiaFormTema(){
     $("#gestionar-tema-costo-minuto").val("");
     $("#gestionar-tema-observaciones").val("");
     $("#gestionar-tema-estado").val("0");
+    gestionTemasBotones('0');
 }
 
 function llenarFormTema(temaID){    

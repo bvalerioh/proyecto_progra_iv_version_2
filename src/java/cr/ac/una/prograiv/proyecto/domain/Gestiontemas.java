@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 24/10/2016 07:11:30 PM by Hibernate Tools 4.3.1
+// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
 
 
 
@@ -29,7 +29,6 @@ public class Gestiontemas  implements java.io.Serializable {
        this.observaciones = observaciones;
        this.estado = estado;
     }
-    
     public Gestiontemas(String nombreTema, Integer costoXminuto, String observaciones, Integer estado) {
        this.nombreTema = nombreTema;
        this.costoXminuto = costoXminuto;

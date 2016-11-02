@@ -30,7 +30,11 @@ public class Pruebas {
                          "En la casa de bryan", "22636333","88541122", "usu", "ninguna", 2, 1);     
      usubl.save(usu3);
      
-     Usuario usu4 = new Usuario( "pedro1", "Pedro", "Avila", "pto@gmail.com", new Date(),
+     Usuario usu6 = new Usuario("Mikoto", "Mikoto", "Kuga", "Natto@gmail.com", new Date(),
+                         "En la casa de bryan", "22636333","88541122", "usu", "ninguna", 2, 1);     
+     usubl.save(usu6);
+     
+     Usuario usu4 = new Usuario("pedro1", "Pedro", "Avila", "pto@gmail.com", new Date(),
                          "En la casa de bryan", "22636333","88541122", "usu", "ninguna", 1, 0);     
      usubl.save(usu4);
      

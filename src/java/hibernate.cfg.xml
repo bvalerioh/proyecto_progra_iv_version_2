@@ -6,13 +6,13 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mypiv?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password">admin</property>
+    <mapping resource="cr/ac/una/prograiv/proyecto/domain/Feedback.hbm.xml"/>
+    <mapping resource="cr/ac/una/prograiv/proyecto/domain/Gestiontemas.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Historialfacturasxservicio.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Usuario.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Historialconsultas.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Chat.hbm.xml"/>
-    <mapping resource="cr/ac/una/prograiv/proyecto/domain/Feedback.hbm.xml"/>
     <mapping resource="cr/ac/una/prograiv/proyecto/domain/Temasexperto.hbm.xml"/>
-    <mapping resource="cr/ac/una/prograiv/proyecto/domain/Gestiontemas.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

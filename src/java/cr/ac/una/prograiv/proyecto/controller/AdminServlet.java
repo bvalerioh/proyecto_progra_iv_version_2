@@ -72,12 +72,9 @@ public class AdminServlet extends HttpServlet {
                         gt = gtBL.findByName(Gestiontemas.class.getName(), nombreT);
                         //si no es null
                         if(gt == null){
-                            gt = new Gestiontemas(); 
-                            //gt.setIdTemas(idxTema);
-                            gt.setEstado(estadoT);
-                            gt.setCostoXminuto(costoxT);
-                            gt.setNombreTema(nombreT);
-                            gt.setObservaciones(observT);
+                          //  Usuario usu1 = new Usuario( "Mai", "Mai", "Tokiha", "maito@gmail.com", new Date(),
+                       //  "En la casa de bryan", "22636333","88541122", "usu", "ninguna", 0, 1); 
+                            gt = new Gestiontemas(nombreT, costoxT, observT, estadoT); 
                             //Se guarda el objeto
                             gtBL.save(gt);
                             //Se imprime la respuesta con el response
@@ -142,10 +139,8 @@ public class AdminServlet extends HttpServlet {
                     break;
                     
                 case "asignarTemaExperto":
-                    Temasexperto te = new Temasexperto();
-                    te.setIdTema(Integer.parseInt(request.getParameter("idTema")));
-                    te.setIdExperto(Integer.parseInt(request.getParameter("idUsuario")));
-                    // se guarda el tema al experto
+                    Temasexperto te = new Temasexperto(Integer.parseInt(request.getParameter("idTema")), Integer.parseInt(request.getParameter("idUsuario")));
+                    //se guarda el tema al experto
                     TemasexpertoBL teBL = new TemasexpertoBL();
                     teBL.save(te);
                     out.print("C~El tema fue asignado correctamente");
@@ -175,8 +170,7 @@ public class AdminServlet extends HttpServlet {
                     out.print(json);
                     break;
                     
-                case "cambiaUsuarioExperto":
-                    
+                case "cambiaUsuarioExperto":                    
                     usu.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
                     usu.setTipoUsuario(Integer.parseInt(request.getParameter("tipoUsuario")));
                     // modificamos al usuario

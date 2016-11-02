@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 24/10/2016 07:11:30 PM by Hibernate Tools 4.3.1
+// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
 
 
 
@@ -22,6 +22,10 @@ public class Temasexperto  implements java.io.Serializable {
     }
     public Temasexperto(int idTemasExperto, Integer idExperto, Integer idTema) {
        this.idTemasExperto = idTemasExperto;
+       this.idExperto = idExperto;
+       this.idTema = idTema;
+    }
+    public Temasexperto(Integer idExperto, Integer idTema) {
        this.idExperto = idExperto;
        this.idTema = idTema;
     }

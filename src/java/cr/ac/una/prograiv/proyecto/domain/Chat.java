@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 24/10/2016 07:11:30 PM by Hibernate Tools 4.3.1
+// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -26,6 +26,13 @@ public class Chat  implements java.io.Serializable {
     }
     public Chat(int idchat, String usuario, String experto, String enviado, String recibido, Date tiempo) {
        this.idchat = idchat;
+       this.usuario = usuario;
+       this.experto = experto;
+       this.enviado = enviado;
+       this.recibido = recibido;
+       this.tiempo = tiempo;
+    }
+    public Chat(String usuario, String experto, String enviado, String recibido, Date tiempo) {
        this.usuario = usuario;
        this.experto = experto;
        this.enviado = enviado;

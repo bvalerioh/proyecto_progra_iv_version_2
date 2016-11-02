@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/10/2016 07:11:34 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 01/11/2016 05:39:32 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="cr.ac.una.prograiv.proyecto.domain.Temasexperto" table="temasexperto" catalog="mypiv" optimistic-lock="version">
         <id name="idTemasExperto" type="int">
             <column name="idTemasExperto" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="idExperto" type="java.lang.Integer">
             <column name="idExperto" />
