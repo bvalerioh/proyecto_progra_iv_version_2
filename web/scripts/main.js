@@ -767,13 +767,16 @@ function obtenerExpertos(){
 
 function guardarExpXtema(){
     mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
-    $.ajax({
+    var tema = $("#gestionar-experto-categoria option:selected").text();
+    var promise =  $.ajax({
         url: 'AdminServlet',
         data: {
             accion: "asignarTemaExperto",
             idUsuario: $("#id-usuario-experto").val(),
-            idTema: $("#gestionar-experto-categoria").val()
+            idTema: $("#gestionar-experto-categoria").val(),
+            temaNombre: tema
         },
+        
         error: function () { //si existe un error en la respuesta del ajax
             cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
         },
@@ -781,15 +784,21 @@ function guardarExpXtema(){
             var respuestaTxt = data.substring(2);
             var tipoRespuesta = data.substring(0, 2);
             if (tipoRespuesta === "E~") {
-                cambiarMensajeModalClase("myModal", "Resultado acción", respuestaTxt);
-            } else {
+                cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "Resultado acción" );
+            } else {                
+                limpiarTabla("gesion-expertosMisTemas-tabla");    
+                $("#paginacion-expertosMisTemas-tabla").empty(); 
+                
                 cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");
             }
         },
+        
         type: 'POST'       
     }); 
-    
-    
+    promise.then(function(){
+        var id = $("#id-usuario-experto").val();
+        obtenerMisTemas(id);
+    });
 }
 
 function cargarTablaExpertoXtemas(datos){    
@@ -827,10 +836,8 @@ function dibujarFilaExpertoXtemas(rowData) {
             '</button>'));
 }
 
-function llenarFormExpertoXtema(Idusuario){   
-        
+function llenarFormExpertoXtema(Idusuario){           
     obtenerUsuarioExperto(Idusuario);
-    obtenerMisTemas(Idusuario);
 }
 
 function obtenerUsuarioExperto(Idusuario){
@@ -861,9 +868,10 @@ function obtenerUsuarioExperto(Idusuario){
             cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
-            ocultarModalClase();
+                         
             $("#id-usuario-experto").val(data.idUsuario);
             $("#usuario-experto-nombre").val(data.nombre+" "+data.apellidos);
+            obtenerMisTemas(data.idUsuario);
         },
         type: 'POST',
         dataType: "json"        
@@ -882,9 +890,9 @@ function obtenerMisTemas(Idusuario){
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
-            } else if (jqXHR.status == 404) {
+            } else if (jqXHR.status === 404) {
                 msg = 'Requested page not found. [404]';
-            } else if (jqXHR.status == 500) {
+            } else if (jqXHR.status === 500) {
                 msg = 'Internal Server Error [500].';
             } else if (exception === 'parsererror') {
                 msg = 'Requested JSON parse failed.';
@@ -895,14 +903,20 @@ function obtenerMisTemas(Idusuario){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            mostrarMensaje("alert alert-danger", msg, "Error!");
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             if(data){
+                limpiarTabla("gesion-expertosMisTemas-tabla");    
+                $("#paginacion-expertosMisTemas-tabla").empty();
                 llenarTablaMisTemas(data);
-            }        
+                ocultarModalClase();
+            } else {
+                cambiarMensajeModalClase("alert alert-danger", "Hubo un error cargando mis temas.", "Resultado acción" );
+            }    
         },
-        type: 'POST'       
+        type: 'POST',
+        dataType: 'JSON'
     }); 
 }
 
@@ -932,22 +946,20 @@ function llenarTablaMisTemas(datos){
 function dibujarFilaExpertoMistemas(rowData) {
     var row = $("<tr />");
     $("#gesion-expertosMisTemas-tabla").append(row);
-    row.append($("<td>" + rowData.nombreTema + "</td>"));
+    row.append($("<td>" + rowData.temaNombre + "</td>"));
     row.append($(
             '<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align"\n\
-             onclick="llamaModalEliminar( eliminaTemaAexperto, '+ rowData.idTemas + ');">' +
-            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
-            '</button>'));
+             onclick="eliminaTemaAexperto('+ rowData.idTemasExperto+ ');">' +
+            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>'));
 }
 
-function eliminaTemaAexperto(idTema){
+function eliminaTemaAexperto(id){
     mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
-    $.ajax({
+    var promise =  $.ajax({
         url: 'AdminServlet',
         data: {
             accion: "eliminarTemaExperto",
-            idTema: idTema,
-            idexperto: $("#id-usuario-experto").val()
+            idTemasExperto: id
         },
         error: function () { //si existe un error en la respuesta del ajax
             cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
@@ -958,11 +970,19 @@ function eliminaTemaAexperto(idTema){
             if (tipoRespuesta === "E~") {
                 cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "¡Error!");
             } else {
+                
+                limpiarTabla("gesion-expertosMisTemas-tabla");    
+                $("#paginacion-expertosMisTemas-tabla").empty();  
                 cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");
+                ocultarModalClase();
             }
         },
         type: 'POST'       
     }); 
+    promise.then(function(){
+        var id = $("#id-usuario-experto").val();
+        obtenerMisTemas(id);
+    });
 }
 
 function limpiaFormExpertoXtema(){
@@ -970,7 +990,7 @@ function limpiaFormExpertoXtema(){
     $("#usuario-experto").val("");
     $("#usuario-experto-nombre").val("");
     $('#gestionar-experto-categoria').children('option:not(:first)').remove();
-    limpiarTabla("#gesion-expertosMisTemas-tabla");    
+    limpiarTabla("gesion-expertosMisTemas-tabla");    
     $("#paginacion-expertosMisTemas-tabla").empty();
 }
 
@@ -1015,15 +1035,24 @@ function llenarSelectTemas(data){
 function filtroExpertosTema(){    
     filtrarTabla("expXtem-filtro-usuario", "gesion-expertosTema-tabla");
 }
-
+function filtroTemas(){    
+    filtrarTabla("filtro-temas", "gesion-temas-tabla");
+}
+function filtroUsuarios(){    
+    filtrarTabla("filtro-Usuarios", "gesion-usuarios-tabla");
+}
 //******************************************************************************
 //******************************* UTILIDADES ***********************************
 //******************************************************************************
 function limpiarTabla(idTabla) {
-    var tabla = document.getElementById(idTabla);
-    if (tabla.rows.length > 1) {
-        while (tabla.rows.length > 1)
-            tabla.deleteRow(1);
+    try{
+        var tabla = document.getElementById(idTabla);
+        if (tabla.rows.length > 1) {
+            while (tabla.rows.length > 1)
+                tabla.deleteRow(1);
+        }
+    }catch(error){
+        error.print();
     }
 }
 
@@ -1042,7 +1071,7 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function llamaModalEliminar(Metodo, id) {
+function llamaModalEliminar(Metodo) {
     $("#modalEliminar").modal();
     $('#modalEliminarHeader').empty();
     $("#modalEliminarHeader").append("<a href='#' data-dismiss='modal' aria-hidden='true' class='close'>×</a>"+
@@ -1053,8 +1082,8 @@ function llamaModalEliminar(Metodo, id) {
     $('#modalEliminarBotones').empty();
     $("#modalEliminarBotones").append(
             "<a href='#' data-dismiss='modal' aria-hidden='true' class='btn secondary'>Cancelar</a>"+
-            '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="'+ Metodo + '(' + id + ');">' +
-            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>');
+            '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="'+ Metodo + ';">' +
+            '<span aria-hidden="true">Eliminar</span></button>');
     
             
 };

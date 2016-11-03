@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01/11/2016 05:39:32 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 02/11/2016 03:36:52 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="cr.ac.una.prograiv.proyecto.domain.Temasexperto" table="temasexperto" catalog="mypiv" optimistic-lock="version">
-        <id name="idTemasExperto" type="int">
+        <id name="idTemasExperto" type="java.lang.Integer">
             <column name="idTemasExperto" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
-        <property name="idExperto" type="java.lang.Integer">
-            <column name="idExperto" />
+        <property name="idExperto" type="int">
+            <column name="idExperto" not-null="true" />
         </property>
-        <property name="idTema" type="java.lang.Integer">
-            <column name="idTema" />
+        <property name="idTema" type="int">
+            <column name="idTema" not-null="true" />
+        </property>
+        <property name="temaNombre" type="string">
+            <column name="temaNombre" length="45" />
         </property>
     </class>
 </hibernate-mapping>

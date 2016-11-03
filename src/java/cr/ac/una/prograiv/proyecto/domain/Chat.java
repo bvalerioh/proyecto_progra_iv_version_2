@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
+// Generated 02/11/2016 03:36:49 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,41 +10,38 @@ import java.util.Date;
 public class Chat  implements java.io.Serializable {
 
 
-     private int idchat;
+     private Integer idchat;
      private String usuario;
      private String experto;
      private String enviado;
      private String recibido;
      private Date tiempo;
+     private int sessionId;
 
     public Chat() {
     }
 
 	
-    public Chat(int idchat) {
-        this.idchat = idchat;
+    public Chat(String usuario, String experto, Date tiempo, int sessionId) {
+        this.usuario = usuario;
+        this.experto = experto;
+        this.tiempo = tiempo;
+        this.sessionId = sessionId;
     }
-    public Chat(int idchat, String usuario, String experto, String enviado, String recibido, Date tiempo) {
-       this.idchat = idchat;
+    public Chat(String usuario, String experto, String enviado, String recibido, Date tiempo, int sessionId) {
        this.usuario = usuario;
        this.experto = experto;
        this.enviado = enviado;
        this.recibido = recibido;
        this.tiempo = tiempo;
-    }
-    public Chat(String usuario, String experto, String enviado, String recibido, Date tiempo) {
-       this.usuario = usuario;
-       this.experto = experto;
-       this.enviado = enviado;
-       this.recibido = recibido;
-       this.tiempo = tiempo;
+       this.sessionId = sessionId;
     }
    
-    public int getIdchat() {
+    public Integer getIdchat() {
         return this.idchat;
     }
     
-    public void setIdchat(int idchat) {
+    public void setIdchat(Integer idchat) {
         this.idchat = idchat;
     }
     public String getUsuario() {
@@ -81,6 +78,13 @@ public class Chat  implements java.io.Serializable {
     
     public void setTiempo(Date tiempo) {
         this.tiempo = tiempo;
+    }
+    public int getSessionId() {
+        return this.sessionId;
+    }
+    
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
     }
 
 

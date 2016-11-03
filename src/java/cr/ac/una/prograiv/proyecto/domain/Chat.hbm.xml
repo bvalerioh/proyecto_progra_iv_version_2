@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01/11/2016 05:39:32 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 02/11/2016 03:36:52 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="cr.ac.una.prograiv.proyecto.domain.Chat" table="chat" catalog="mypiv" optimistic-lock="version">
-        <id name="idchat" type="int">
+        <id name="idchat" type="java.lang.Integer">
             <column name="idchat" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
         <property name="usuario" type="string">
-            <column name="usuario" length="45" />
+            <column name="usuario" length="45" not-null="true" />
         </property>
         <property name="experto" type="string">
-            <column name="experto" length="45" />
+            <column name="experto" length="45" not-null="true" />
         </property>
         <property name="enviado" type="string">
             <column name="enviado" length="250" />
@@ -21,7 +21,10 @@
             <column name="recibido" length="250" />
         </property>
         <property name="tiempo" type="timestamp">
-            <column name="tiempo" length="19" />
+            <column name="tiempo" length="19" not-null="true" />
+        </property>
+        <property name="sessionId" type="int">
+            <column name="sessionId" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

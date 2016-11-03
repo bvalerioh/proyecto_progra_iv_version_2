@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
+// Generated 02/11/2016 03:36:49 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,38 +9,33 @@ package cr.ac.una.prograiv.proyecto.domain;
 public class Gestiontemas  implements java.io.Serializable {
 
 
-     private int idTemas;
+     private Integer idTemas;
      private String nombreTema;
-     private Integer costoXminuto;
+     private int costoXminuto;
      private String observaciones;
-     private Integer estado;
+     private int estado;
 
     public Gestiontemas() {
     }
 
 	
-    public Gestiontemas(int idTemas) {
-        this.idTemas = idTemas;
+    public Gestiontemas(String nombreTema, int costoXminuto, int estado) {
+        this.nombreTema = nombreTema;
+        this.costoXminuto = costoXminuto;
+        this.estado = estado;
     }
-    public Gestiontemas(int idTemas, String nombreTema, Integer costoXminuto, String observaciones, Integer estado) {
-       this.idTemas = idTemas;
-       this.nombreTema = nombreTema;
-       this.costoXminuto = costoXminuto;
-       this.observaciones = observaciones;
-       this.estado = estado;
-    }
-    public Gestiontemas(String nombreTema, Integer costoXminuto, String observaciones, Integer estado) {
+    public Gestiontemas(String nombreTema, int costoXminuto, String observaciones, int estado) {
        this.nombreTema = nombreTema;
        this.costoXminuto = costoXminuto;
        this.observaciones = observaciones;
        this.estado = estado;
     }
    
-    public int getIdTemas() {
+    public Integer getIdTemas() {
         return this.idTemas;
     }
     
-    public void setIdTemas(int idTemas) {
+    public void setIdTemas(Integer idTemas) {
         this.idTemas = idTemas;
     }
     public String getNombreTema() {
@@ -50,11 +45,11 @@ public class Gestiontemas  implements java.io.Serializable {
     public void setNombreTema(String nombreTema) {
         this.nombreTema = nombreTema;
     }
-    public Integer getCostoXminuto() {
+    public int getCostoXminuto() {
         return this.costoXminuto;
     }
     
-    public void setCostoXminuto(Integer costoXminuto) {
+    public void setCostoXminuto(int costoXminuto) {
         this.costoXminuto = costoXminuto;
     }
     public String getObservaciones() {
@@ -64,11 +59,11 @@ public class Gestiontemas  implements java.io.Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    public Integer getEstado() {
+    public int getEstado() {
         return this.estado;
     }
     
-    public void setEstado(Integer estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01/11/2016 05:39:32 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 02/11/2016 03:36:52 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="cr.ac.una.prograiv.proyecto.domain.Gestiontemas" table="gestiontemas" catalog="mypiv" optimistic-lock="version">
-        <id name="idTemas" type="int">
+        <id name="idTemas" type="java.lang.Integer">
             <column name="idTemas" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
         <property name="nombreTema" type="string">
-            <column name="nombreTema" length="45" />
+            <column name="nombreTema" length="45" not-null="true" />
         </property>
-        <property name="costoXminuto" type="java.lang.Integer">
-            <column name="costoXminuto" />
+        <property name="costoXminuto" type="int">
+            <column name="costoXminuto" not-null="true" />
         </property>
         <property name="observaciones" type="string">
             <column name="observaciones" length="200" />
         </property>
-        <property name="estado" type="java.lang.Integer">
-            <column name="estado" />
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

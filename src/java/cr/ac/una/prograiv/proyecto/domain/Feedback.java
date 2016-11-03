@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
+// Generated 02/11/2016 03:36:49 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,29 +9,22 @@ package cr.ac.una.prograiv.proyecto.domain;
 public class Feedback  implements java.io.Serializable {
 
 
-     private int idFeedBack;
+     private Integer idFeedBack;
      private String nombreTema;
      private Integer costoXminuto;
      private String observaciones;
-     private Integer estado;
+     private int estado;
      private Integer estrellas;
 
     public Feedback() {
     }
 
 	
-    public Feedback(int idFeedBack) {
-        this.idFeedBack = idFeedBack;
+    public Feedback(String nombreTema, int estado) {
+        this.nombreTema = nombreTema;
+        this.estado = estado;
     }
-    public Feedback(int idFeedBack, String nombreTema, Integer costoXminuto, String observaciones, Integer estado, Integer estrellas) {
-       this.idFeedBack = idFeedBack;
-       this.nombreTema = nombreTema;
-       this.costoXminuto = costoXminuto;
-       this.observaciones = observaciones;
-       this.estado = estado;
-       this.estrellas = estrellas;
-    }
-    public Feedback(String nombreTema, Integer costoXminuto, String observaciones, Integer estado, Integer estrellas) {
+    public Feedback(String nombreTema, Integer costoXminuto, String observaciones, int estado, Integer estrellas) {
        this.nombreTema = nombreTema;
        this.costoXminuto = costoXminuto;
        this.observaciones = observaciones;
@@ -39,11 +32,11 @@ public class Feedback  implements java.io.Serializable {
        this.estrellas = estrellas;
     }
    
-    public int getIdFeedBack() {
+    public Integer getIdFeedBack() {
         return this.idFeedBack;
     }
     
-    public void setIdFeedBack(int idFeedBack) {
+    public void setIdFeedBack(Integer idFeedBack) {
         this.idFeedBack = idFeedBack;
     }
     public String getNombreTema() {
@@ -67,11 +60,11 @@ public class Feedback  implements java.io.Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    public Integer getEstado() {
+    public int getEstado() {
         return this.estado;
     }
     
-    public void setEstado(Integer estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     public Integer getEstrellas() {

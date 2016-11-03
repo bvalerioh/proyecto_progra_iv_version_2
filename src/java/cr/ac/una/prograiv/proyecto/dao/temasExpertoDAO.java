@@ -89,11 +89,12 @@ public class temasExpertoDAO  extends HibernateUtil implements IBaseDAO<Temasexp
     public List<Temasexperto> findAllById(Temasexperto o) {
         List<Temasexperto> list;
         try{
-            iniciaOperacion();           // de la tabla en MySQL
-            String sql = "from TemasExperto where idExperto = :idExperto";
-            Query query = getSesion().createQuery(sql);
-            query.setInteger("idExperto", o.getIdExperto());
-            list = query.list();            
+            iniciaOperacion();           // de la tabla en MySQLSELECT * FROM  where idExperto = 1001;
+            String sql = "from Temasexperto where idExperto = :id";
+            Query query;
+            query = getSesion().createQuery(sql);
+            query.setInteger("id", o.getIdExperto());
+            list = query.list(); 
         }catch(HibernateException he){
             throw he;
         }finally{

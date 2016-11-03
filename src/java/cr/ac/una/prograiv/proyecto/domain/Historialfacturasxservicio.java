@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
+// Generated 02/11/2016 03:36:49 PM by Hibernate Tools 4.3.1
 
 
 

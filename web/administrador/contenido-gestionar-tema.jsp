@@ -10,6 +10,19 @@
     <div class="container">
         <div class="col-md-6 text-center">
             <h4>Temas existentes.</h4>
+            <label class="col-sm-2 control-label"
+                    for="filtro-temas">Buscar:</label>
+            <div class="col-sm-10 inner-addon right-addon">  
+                <div class="input-group">
+                <input type="text" value="" placeholder="Por temas." 
+                   onkeyup="filtroTemas()"id="filtro-temas"
+                   class="form-control" />  
+                <span class="input-group-addon">                     
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                </div>   
+                <br>
+            </div> 
             <table class="table table-bordered" id="gesion-temas-tabla"></table>
             <div id="paginacion-tabla-temas"></div>
         </div>

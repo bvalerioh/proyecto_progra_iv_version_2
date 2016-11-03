@@ -81,7 +81,7 @@ public class AdminServlet extends HttpServlet {
                             out.print("C~El tema fue ingresado correctamente");
                         }
                         else{
-                            if(gt.getEstado().equals(0)){
+                            if(gt.getEstado()==0){
                                 gt.setEstado(estadoT);
                                 gt.setCostoXminuto(costoxT);
                                 gt.setNombreTema(nombreT);
@@ -139,7 +139,10 @@ public class AdminServlet extends HttpServlet {
                     break;
                     
                 case "asignarTemaExperto":
-                    Temasexperto te = new Temasexperto(Integer.parseInt(request.getParameter("idTema")), Integer.parseInt(request.getParameter("idUsuario")));
+                    int idExpeXte = Integer.parseInt(request.getParameter("idUsuario"));
+                    int idTemaxExp = Integer.parseInt(request.getParameter("idTema"));
+                    String temaNomExp = request.getParameter("temaNombre");
+                    Temasexperto te = new Temasexperto(idExpeXte, idTemaxExp, temaNomExp);
                     //se guarda el tema al experto
                     TemasexpertoBL teBL = new TemasexpertoBL();
                     teBL.save(te);
@@ -148,9 +151,9 @@ public class AdminServlet extends HttpServlet {
                     
                 case "eliminarTemaExperto":
                     try{
+                        int idTemasExperto = Integer.parseInt(request.getParameter("idTemasExperto"));
                         Temasexperto te2 = new Temasexperto();
-                        te2.setIdTema(Integer.parseInt(request.getParameter("idTema")));
-                        te2.setIdExperto(Integer.parseInt(request.getParameter("idexperto")));
+                        te2.setIdTemasExperto(idTemasExperto);
                         // se guarda el tema al experto
                         TemasexpertoBL teBL2 = new TemasexpertoBL();
                         teBL2.delete(te2);

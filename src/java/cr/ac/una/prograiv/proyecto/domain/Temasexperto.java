@@ -1,5 +1,5 @@
 package cr.ac.una.prograiv.proyecto.domain;
-// Generated 01/11/2016 05:39:29 PM by Hibernate Tools 4.3.1
+// Generated 02/11/2016 03:36:49 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,47 +9,52 @@ package cr.ac.una.prograiv.proyecto.domain;
 public class Temasexperto  implements java.io.Serializable {
 
 
-     private int idTemasExperto;
-     private Integer idExperto;
-     private Integer idTema;
+     private Integer idTemasExperto;
+     private int idExperto;
+     private int idTema;
+     private String temaNombre;
 
     public Temasexperto() {
     }
 
 	
-    public Temasexperto(int idTemasExperto) {
-        this.idTemasExperto = idTemasExperto;
+    public Temasexperto(int idExperto, int idTema) {
+        this.idExperto = idExperto;
+        this.idTema = idTema;
     }
-    public Temasexperto(int idTemasExperto, Integer idExperto, Integer idTema) {
-       this.idTemasExperto = idTemasExperto;
+    public Temasexperto(int idExperto, int idTema, String temaNombre) {
        this.idExperto = idExperto;
        this.idTema = idTema;
-    }
-    public Temasexperto(Integer idExperto, Integer idTema) {
-       this.idExperto = idExperto;
-       this.idTema = idTema;
+       this.temaNombre = temaNombre;
     }
    
-    public int getIdTemasExperto() {
+    public Integer getIdTemasExperto() {
         return this.idTemasExperto;
     }
     
-    public void setIdTemasExperto(int idTemasExperto) {
+    public void setIdTemasExperto(Integer idTemasExperto) {
         this.idTemasExperto = idTemasExperto;
     }
-    public Integer getIdExperto() {
+    public int getIdExperto() {
         return this.idExperto;
     }
     
-    public void setIdExperto(Integer idExperto) {
+    public void setIdExperto(int idExperto) {
         this.idExperto = idExperto;
     }
-    public Integer getIdTema() {
+    public int getIdTema() {
         return this.idTema;
     }
     
-    public void setIdTema(Integer idTema) {
+    public void setIdTema(int idTema) {
         this.idTema = idTema;
+    }
+    public String getTemaNombre() {
+        return this.temaNombre;
+    }
+    
+    public void setTemaNombre(String temaNombre) {
+        this.temaNombre = temaNombre;
     }
 
 

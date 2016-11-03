@@ -3,9 +3,19 @@
     <div class="container">
         <div class="col-md-6 text-center">
             <h4>Lista de usuarios expertos.</h4>
-            <label for="expXtem-filtro-usuario">Filtrar experto:</label>
-            <input type="text" value="" placeholder="Filtro por usuarios" 
-                   onkeyup="filtroExpertosTema()"id="expXtem-filtro-usuario"/>
+            <label class="col-sm-2 control-label"
+                    for="expXtem-filtro-usuario">Buscar:</label>
+            <div class="col-sm-10 inner-addon right-addon">  
+                <div class="input-group">
+                <input type="text" value="" placeholder="Por usuarios expertos" 
+                   onkeyup="filtroExpertosTema()"id="expXtem-filtro-usuario"
+                   class="form-control" />  
+                <span class="input-group-addon">                     
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                </div>   
+                <br>
+            </div> 
             <table class="table table-bordered" id="gesion-expertosTema-tabla"></table>
             <div id="paginacion-expertosTema-tabla"></div>
         </div>
