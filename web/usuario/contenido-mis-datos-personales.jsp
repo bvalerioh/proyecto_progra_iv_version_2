@@ -5,26 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!-- Barra de navegacion global. -->
-<div id="barra-navegacion-global">
-    <div>
-        <% if (session.getAttribute("username") != null && (Integer) session.getAttribute("rolusuario") == 0) {
-        %>
-        <%@include file="usuario/contenido-usuario-nav-bar.jsp"%>
-        <%
-                System.out.println("nav-user");
-            }
-        %>
-        <% if (session.getAttribute("username") != null && (Integer) session.getAttribute("rolusuario") == 1) { %>
-        <%@include file="usuario/contenido-experto-nav-bar.jsp"%>
-        <%
-                System.out.println("nav-user");
-            }
-        %>
-    </div>
-</div>
-<!-- Fin de la barra de navegacion global --> 
-<div id="contenido-mis-datos-personales" onload="mis_datos_personales();">    
+
+<div id="contenido-mis-datos-personales">    
     <h1>MIS DATOS PERSONALES</h1>
     <br/>
     <form class="form-horizontal">       
@@ -92,9 +74,11 @@
             </div>
         </div>           
         <div class="form-group">
-            <label for="txt">Direción:</label>
-            <textarea class="form-control" id="datos-personales-direccion" rows="6" 
-                      placeholder="API de google maps."></textarea>
+            <label for="datos-personales-direccion" class="control-label col-sm-3">Direción:</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="datos-personales-direccion" rows="8" 
+                      placeholder="API de google maps." />
+            </div>
         </div>
         <div class="form-group"> 
             <button type="button" class="btn boton-left" id="btModificarDatosPersonales"

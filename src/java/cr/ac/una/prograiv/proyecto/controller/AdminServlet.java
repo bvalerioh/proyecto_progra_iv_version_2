@@ -51,7 +51,7 @@ public class AdminServlet extends HttpServlet {
             GestiontemasBL gtBL = new GestiontemasBL();
             UsuarioBL usuBL = new UsuarioBL();
             //Se hace una pausa para ver el modal
-            Thread.sleep(1000);            
+            Thread.sleep(600);            
             //**********************************************************************
             //se consulta cual accion se desea realizar
             //**********************************************************************

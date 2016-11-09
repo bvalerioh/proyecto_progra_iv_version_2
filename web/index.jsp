@@ -12,23 +12,23 @@
 <%
 
     HttpSession sesion = request.getSession(true);
-    String nombre = "Bryan";
-    Integer rol = 2;
-    boolean usuarioLogueado = true;
+    String nombre = "";
+    Integer rol = -1;    
+    boolean usuarioLogueado = false;
 
     if (sesion.getAttribute("id") != null) {
         rol = (Integer) sesion.getAttribute("rolusuario");
         nombre = (String) sesion.getAttribute("username");
         usuarioLogueado = true;
     }
-
-
+    
 %>
 
 
 <!DOCTYPE html>
 <html>
     <!-- Inicio del Head --> 
+    <input type="hidden" id="idUsuarioIdentificado" value="${sessionScope.id}" />
     <%@include file="public/contenido-head.jsp"%>
     <!-- Final del Head --> 
     <!-- Inicio del body -->
@@ -104,10 +104,10 @@
                                     <ul class="dropdown-menu">
                                         <li onclick="cargarContenido('18');"><a href="#">LOGOUT</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
-                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li onclick="cargarContenido('5');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('6');"><a href="#">Administra informacion personal</a></li>
+                                        <li onclick="cargarContenido('7');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('8');"><a href="#">Ver Facturas por servicios</a></li>
                                     </ul>
                                 </li>
                             <%}%>
@@ -116,13 +116,13 @@
                                     <ul class="dropdown-menu">
                                         <li onclick="cargarContenido('18');"><a href="#">LOGOUT</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion basica</li>
-                                        <li onclick="cargarContenido('');"><a href="#">Solicitar atencion experto</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Administra informacion personal</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver historico de consultas</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver Facturas por servicios</a></li>
+                                        <li onclick="cargarContenido('5');"><a href="#">Solicitar atencion experto</a></li>
+                                        <li onclick="cargarContenido('6');"><a href="#">Administra informacion personal</a></li>
+                                        <li onclick="cargarContenido('7');"><a href="#">Ver historico de consultas</a></li>
+                                        <li onclick="cargarContenido('8');"><a href="#">Ver Facturas por servicios</a></li>
                                         <li role="separator" class="divider"></li><li class="dropdown-header">Gestion experto</li>
-                                        <li onclick="cargarContenido('');"><a href="#">Mis Categorias</a></li>
-                                        <li onclick="cargarContenido('');"><a href="#">Ver usuario en espera</a></li>
+                                        <li onclick="cargarContenido('12');"><a href="#">Mis Categorias</a></li>
+                                        <li onclick="cargarContenido('11');"><a href="#">Ver usuario en espera</a></li>
                                     </ul>
                                 </li>
                             <%}%>

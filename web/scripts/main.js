@@ -383,29 +383,57 @@ function desconectar(){
 //******************************************************************************
 
 function cargarMisDatos(){
-    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
-    try{
-        $("#datos-personales-usuario").val(sessionStorage.getItem("usuario"));
-        $("#datos-personales-nombre").val(sessionStorage.getItem("nombre"));
-        $("#datos-personales-apellidos").val(sessionStorage.getItem("apellidos"));
-        $("#datos-personales-correo-electronico").val(sessionStorage.getItem("email"));
-        $("#datos-personales-fecha-nacimiento").val(sessionStorage.getItem("Nacimiento"));
-        $("#datos-personales-telefono-trabajo").val(sessionStorage.getItem("telTrabajo"));
-        $("#datos-personales-celular").val(sessionStorage.getItem("telCelular"));
-        $("#datos-personales-direccion").val(sessionStorage.getItem("direccion"));
-       // ya que no lo carga desde el menu.
-        $("#datos-personales-fecha-nacimiento").datetimepicker({
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-    }catch(error){
-        //parte donde los cargamos si el explorador no soporta el sessionStorage
-         cambiarMensajeModalClase("alert alert-danger", error, "Error!");
+    $("#datos-personales-fecha-nacimiento").datetimepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    var id = $("#idUsuarioIdentificado").val();
+    if(id){
+        mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
+        $.ajax({
+            url: 'UsuarioServlet',
+            data: {
+                accion: "usuarioXid",
+                idPersona: id
+            },
+            error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status === 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status === 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+            },
+            success: function (data) {
+                ocultarModalClase();
+                $("#datos-personales-usuario").val(data.usuario);
+                $("#datos-personales-nombre").val(data.nombre);
+                $("#datos-personales-apellidos").val(data.apellidos);
+                $("#datos-personales-correo-electronico").val(data.email);
+                $("#datos-personales-fecha-nacimiento").val(data.feNacimiento);
+                $("#datos-personales-telefono-trabajo").val(data.telTrabajo);
+                $("#datos-personales-celular").val(data.telCelular);
+                $("#datos-personales-direccion").val(data.direccion);
+            },
+            type: 'POST',
+            dataType: 'JSON'
+        });  
     }
 }
 //******************************************************************************
@@ -428,8 +456,24 @@ function modificarDatosPersonales(){
             telTrabajo: $("#datos-personales-telefono-trabajo").val(),
             telCelular: $("#datos-personales-celular").val()
         },
-        error: function () { //si existe un error en la respuesta del ajax
-            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
@@ -469,8 +513,24 @@ function obtenerTemas(){
         data: {
             accion: "obtenerTodosTemas"
         },
-        error: function () { //si existe un error en la respuesta del ajax            
-            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
