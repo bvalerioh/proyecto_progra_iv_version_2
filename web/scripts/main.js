@@ -65,7 +65,12 @@ function cargarContenido(idContenido) {
             }
             /* USUARIO REGISTRADO */
             if (idContenido === '5') {
-                $("#contenido-wrapper").load("./usuario/contenido-chat.jsp");
+                $("#contenido-wrapper").load("./usuario/contenido-chat.jsp" , function(responseText, statusText, xhr){
+                    if(statusText === "success")
+                        obtenerTodosTemasParaChat();
+                    if(statusText === "error")
+                        alert("An error occurred: " + xhr.status + " - " + xhr.statusText);
+                }); 
             }
             if (idContenido === '6') {
                 $("#contenido-wrapper").load("./usuario/contenido-mis-datos-personales.jsp"
@@ -1360,6 +1365,69 @@ function eliminaGUsuarios(id){
 //************************** FIN GESTION USUARIO *******************************
 //******************************************************************************
 
+//******************************************************************************
+//******************************** PARTE CHAT **********************************
+//******************************************************************************
+//1. cargar los demas de a consultar.
+function obtenerTodosTemasParaChat(){
+    mostrarMensaje("alert alert-info", "Espere por favor, se estan obteniendo los temas existentes desde la base de datos.", "¡Consultando!");
+    // parte ajax
+    $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "obtenerTodosTemas"
+        },
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+        },
+        success: function (data) {
+            // si el usuario esta logueado Guardamos el usuario en un sessionStorage.
+            llenarSelectTemasChat(data);
+            ocultarModalClase();
+        },
+        type: 'POST',
+        dataType: "json"        
+    });  
+}
+//1.1 llenar el select option con los datos de los temas
+function llenarSelectTemasChat(data){
+    //Se limpia el select para que no se repitan temas.
+    $('#select-temas-chat').children().remove();
+    // Se llena el select con las options de la base de datos
+    for(var i = 0; i < data.length; i ++){
+        var tema = data[i];
+        $('#select-temas-chat')
+         .append($("<option></option>")
+         .attr("value",tema.idTemas)
+         .text(tema.nombreTema));
+    }
+}
+//2. llamar al servidor.
+ 
+//3. Inicializar el chat.
+
+//4. 
+
+
+//********************************** FIN CHAT **********************************
+//******************************************************************************
+
 function filtroExpertosTema(){    
     filtrarTabla("expXtem-filtro-usuario", "gesion-expertosTema-tabla");
 }
@@ -1371,6 +1439,7 @@ function filtroTemas(){
 function filtroUsuarios(){    
     filtrarTabla("filtro-Usuarios", "gesion-usuarios-tabla");
 }
+
 //******************************************************************************
 //******************************* UTILIDADES ***********************************
 //******************************************************************************
