@@ -50,8 +50,10 @@ public class AdminServlet extends HttpServlet {
             // Creación de BLS
             GestiontemasBL gtBL = new GestiontemasBL();
             UsuarioBL usuBL = new UsuarioBL();
+            Temasexperto te3;
+            TemasexpertoBL teBL3;
             //Se hace una pausa para ver el modal
-            Thread.sleep(600);            
+            Thread.sleep(1000);            
             //**********************************************************************
             //se consulta cual accion se desea realizar
             //**********************************************************************
@@ -164,20 +166,23 @@ public class AdminServlet extends HttpServlet {
                     break;
                     
                 case "obtenerMisTemas":
-                    Temasexperto te3 = new Temasexperto();
+                    te3 = new Temasexperto();
                     te3.setIdExperto(Integer.parseInt(request.getParameter("idTemaexperto")));
                     // se guarda el tema al experto
-                    TemasexpertoBL teBL3 = new TemasexpertoBL();
+                    teBL3 = new TemasexpertoBL();
                     json = new Gson().toJson(teBL3.findAllById(Temasexperto.class.getName(), te3));
                     
                     out.print(json);
                     break;
                     
-                case "cambiaUsuarioExperto":                    
-                    usu.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
-                    usu.setTipoUsuario(Integer.parseInt(request.getParameter("tipoUsuario")));
-                    // modificamos al usuario
+                case "cambiaUsuarioExperto":     
+                    int idGUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    usu = usuBL.findById(idGUsuario);
+                    usu.setTipoUsuario(Integer.parseInt(request.getParameter("tipoUsuar")));
+                    usu.setObservaciones(request.getParameter("observaci"));
+                    // Modificamos.
                     usuBL.merge(usu);
+                    out.print("C~Se ha modificado el usuario correctamente.");
                     break;
                     
                 case "obtenerFacturación":

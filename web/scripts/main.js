@@ -104,7 +104,12 @@ function cargarContenido(idContenido) {
                 $("#contenido-wrapper").load("./administrador/contenido-reportes.jsp");
             }
             if (idContenido === '15') {
-                $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.jsp");
+                $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.jsp", function(responseText, statusText, xhr){
+                    if(statusText === "success")
+                        ObtenerGUsuarios();
+                    if(statusText === "error")
+                        alert("An error occurred: " + xhr.status + " - " + xhr.statusText);
+                }); 
             }
             if (idContenido === '16') {
                 $("#contenido-wrapper").load("./administrador/contenido-gestionar-tema.jsp", function(responseText, statusText, xhr){
@@ -902,7 +907,7 @@ function llenarFormExpertoXtema(Idusuario){
 
 function obtenerUsuarioExperto(Idusuario){
     mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
-    $.ajax({
+    var promise =  $.ajax({
         url: 'UsuarioServlet',
         data: {
             accion: "usuarioXid",
@@ -931,11 +936,15 @@ function obtenerUsuarioExperto(Idusuario){
                          
             $("#id-usuario-experto").val(data.idUsuario);
             $("#usuario-experto-nombre").val(data.nombre+" "+data.apellidos);
-            obtenerMisTemas(data.idUsuario);
         },
         type: 'POST',
         dataType: "json"        
     }); 
+    promise.then(function(){
+        var id = $("#id-usuario-experto").val();
+        ocultarModalClase();
+        obtenerMisTemas(id);
+    });
 }
 
 function obtenerMisTemas(Idusuario){
@@ -963,16 +972,13 @@ function obtenerMisTemas(Idusuario){
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+            mostrarMensaje("alert alert-danger", msg, "Error!");
         },
         success: function (data) {
             if(data){
                 limpiarTabla("gesion-expertosMisTemas-tabla");    
                 $("#paginacion-expertosMisTemas-tabla").empty();
                 llenarTablaMisTemas(data);
-                ocultarModalClase();
-            } else {
-                cambiarMensajeModalClase("alert alert-danger", "Hubo un error cargando mis temas.", "Resultado acción" );
             }    
         },
         type: 'POST',
@@ -981,26 +987,28 @@ function obtenerMisTemas(Idusuario){
 }
 
 function llenarTablaMisTemas(datos){
-    $("#paginacion-expertosMisTemas-tabla").pagination({
-        dataSource: datos,
-        pageSize: 10,
-        autoHidePrevious: false,
-        autoHideNext: false,
-        callback: function (data, pagination) {
-            $("#gesion-expertosMisTemas-tabla").html("");
-            //muestra el enzabezado de la tabla
-            var head = $("<thead />");
-            var row = $("<tr />");
-            head.append(row);
-            $("#gesion-expertosMisTemas-tabla").append(head);
-            row.append($("<th><b>NOMBRE TEMA</b></th>"));
-            row.append($("<th><b>ACCION</b></th>"));
-            //carga la tabla con el json devuelto
-            for (var i = 0; i < data.length; i++) {
-                dibujarFilaExpertoMistemas(data[i]);
+    if(datos){
+        $("#paginacion-expertosMisTemas-tabla").pagination({
+            dataSource: datos,
+            pageSize: 10,
+            autoHidePrevious: false,
+            autoHideNext: false,
+            callback: function (data, pagination) {
+                $("#gesion-expertosMisTemas-tabla").html("");
+                //muestra el enzabezado de la tabla
+                var head = $("<thead />");
+                var row = $("<tr />");
+                head.append(row);
+                $("#gesion-expertosMisTemas-tabla").append(head);
+                row.append($("<th><b>NOMBRE TEMA</b></th>"));
+                row.append($("<th><b>ACCION</b></th>"));
+                //carga la tabla con el json devuelto
+                for (var i = 0; i < data.length; i++) {
+                    dibujarFilaExpertoMistemas(data[i]);
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function dibujarFilaExpertoMistemas(rowData) {
@@ -1084,20 +1092,282 @@ function llenarSelectTemas(data){
          .append($("<option></option>")
          .attr("value",tema.idTemas)
          .text(tema.nombreTema));
-    }/*
-    $.each(data, function(value) {
-     $('#gestionar-experto-categoria')
-         .append($("<option></option>")
-         .attr("value",value.IdTemas)
-         .text(value.NombreTema));
-    });*/
+    }
 }
+
+//************************ FIN EXPERTOS X TEMAS *******************************
+//******************************************************************************
+
+
+//******************************************************************************
+//*************************** GESTION USUARIO **********************************
+//******************************************************************************
+ //1. obtener usuarios
+function ObtenerGUsuarios(){
+    // limpia la tabla si tiene algo
+    limpiarTabla("gesion-usuarios-tabla");
+    //Obtener lista de Usuarios
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
+    $.ajax({
+        url: 'UsuarioServlet',
+        data: {
+            accion: "obtenerTodos"
+        },
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+        },
+        success: function (data) {
+            // Ocultamos el Modal
+            ocultarModalClase();
+            // Cargar la tabla de usuarios
+            createGUPagination(data);
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+}
+//2. crear paginación de usuarios
+function createGUPagination(data){
+    $("#paginacion-gUsuarios-tabla").pagination({
+        dataSource: data,
+        pageSize: 10,
+        autoHidePrevious: false,
+        autoHideNext: false,
+        callback: function (data, pagination) {
+            $("#gesion-usuarios-tabla").html("");
+            //muestra el enzabezado de la tabla
+            var head = $("<thead />");
+            var row = $("<tr />");
+            head.append(row);
+            $("#gesion-usuarios-tabla").append(head);
+            row.append($("<th><b>NOMBRE</b></th>"));
+            row.append($("<th><b>APELLIDOS</b></th>"));
+            row.append($("<th><b>TIPO</b></th>"));
+            row.append($("<th><b>ACCION</b></th>"));
+            //carga la tabla con el json devuelto
+            for (var i = 0; i < data.length; i++) {
+                llenarTablaGUsuarios(data[i]);
+            }
+        }
+    });
+}
+//3. crear tabla usuarios
+function llenarTablaGUsuarios(rowData){
+    var row = $("<tr />");
+    $("#gesion-usuarios-tabla").append(row);
+    row.append($("<td>" + rowData.nombre + "</td>"));
+    row.append($("<td>" + rowData.apellidos + "</td>"));
+    if(rowData.tipoUsuario === 0){
+        row.append($("<td>Usuario</td>"));
+    }else{
+        if(rowData.tipoUsuario === 1){
+            row.append($("<td>Experto</td>"));
+        }else{
+            row.append($("<td>Admini.</td>"));
+        }
+    }
+    row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left \n\
+            Align" onclick="llenarFormGUsuario(' + rowData.idUsuario + ');">' +
+            '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
+            '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" \n\
+            onclick="eliminaGUsuarios('+ rowData.idUsuario + ');"> <span class="glyphicon \n\
+            glyphicon-remove" aria-hidden="true"></span></button></td>'));
+}
+//4. Obtener por id de usuario
+function llenarFormGUsuario(Idusuario){
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
+    $.ajax({
+        url: 'UsuarioServlet',
+        data: {
+            accion: "usuarioXid",
+            idPersona: Idusuario
+        },
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+        },
+        success: function (data) {
+            ocultarModalClase();  
+            $("#id-gestion-idusuario").val(data.idUsuario);
+            $("#gestion-usuario-usuario").val(data.usuario);
+            $("#gestion-usuario-nombre").val(data.nombre+" "+data.apellidos);
+            $("#gestion-usuario-Tipo").val(data.tipoUsuario);
+            $("#gestion-usuario-observaciones").val(data.observaciones);
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+}
+//5. Modificar usuario
+function modificaGUsuario(){
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
+    var promise =  $.ajax({
+        url: 'AdminServlet',
+        data: {
+            accion: "cambiaUsuarioExperto",
+            idUsuario: $("#id-gestion-idusuario").val(),
+            tipoUsuar: $("#gestion-usuario-Tipo").val(),
+            observaci: $("#gestion-usuario-observaciones").val()
+        },
+        
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+        },
+        success: function (data) {
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "E~") {
+                cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "Resultado acción" );
+                sleep(1000);
+            } else {
+                $("#paginacion-getionusuarios-tabla").empty();                 
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");                
+                limpiaFormGUsuario();
+            }
+        },        
+        type: 'POST'       
+    }); 
+    promise.then(function(){
+        sleep(500);
+        ObtenerGUsuarios2();
+    });
+}
+// Extras
+//6. limpiar form
+function limpiaFormGUsuario(){
+    $("#gestion-usuario-usuario").val("");
+    $("#id-gestion-idusuario").val(-1);
+    $("#gestion-usuario-nombre").val("");
+    $("#gestion-usuario-Tipo").val(0);
+    $("#gestion-usuario-observaciones").val("");
+}
+//7. Lo mismo pero los los mensajes
+function ObtenerGUsuarios2(){
+    // limpia la tabla si tiene algo
+    limpiarTabla("gesion-usuarios-tabla");
+    //Obtener lista de Usuarios
+    $.ajax({
+        url: 'UsuarioServlet',
+        data: {
+            accion: "obtenerTodos"
+        },
+        error: function (jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            cambiarMensajeModalClase("alert alert-danger", msg, "Error!");
+        },
+        success: function (data) {
+            // Ocultamos el Modal
+            ocultarModalClase();
+            // Cargar la tabla de usuarios
+            createGUPagination(data);
+        },
+        type: 'POST',
+        dataType: "json"        
+    }); 
+}
+//8. FuncionEliminarUsuario
+function eliminaGUsuarios(id){
+    mostrarMensaje("alert alert-info", "Espere por favor, se esta comprobando los datos.", "¡Consultando!");
+    var promise =  $.ajax({
+        url: 'UsuarioServlet',
+        data: {
+            accion: "eliminarUsuario",
+            idPersona: id
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            cambiarMensajeModalClase("alert alert-danger", "Se genero un error, contacte al administrador (Error del ajax)", "Error!");
+        },
+        success: function (data) {
+            var respuestaTxt = data.substring(2);
+            var tipoRespuesta = data.substring(0, 2);
+            if (tipoRespuesta === "E~") {
+                cambiarMensajeModalClase("alert alert-danger", respuestaTxt, "¡Error!");
+            } else {
+                cambiarMensajeModalClase("alert alert-success", respuestaTxt, "!Accion correcta!");
+            }
+        },
+        type: 'POST'       
+    }); 
+    promise.then(function(){
+        sleep(500);
+        $("#paginacion-expertosMisTemas-tabla").empty();  
+        ocultarModalClase();
+        ObtenerGUsuarios2();
+    });
+}
+//************************** FIN GESTION USUARIO *******************************
+//******************************************************************************
+
 function filtroExpertosTema(){    
     filtrarTabla("expXtem-filtro-usuario", "gesion-expertosTema-tabla");
 }
+
 function filtroTemas(){    
     filtrarTabla("filtro-temas", "gesion-temas-tabla");
 }
+
 function filtroUsuarios(){    
     filtrarTabla("filtro-Usuarios", "gesion-usuarios-tabla");
 }
@@ -1115,9 +1385,6 @@ function limpiarTabla(idTabla) {
         error.print();
     }
 }
-
-
-
 
 $(window).on('beforeunload', function() {
     //desconectar();
@@ -1161,6 +1428,7 @@ function mostrarMensaje(classCss, msg, neg) {
     $("#mesajeResultDirecNeg").html(neg);
     $("#AlertDirecMesaje").html(msg);
 }
+
 function cambiarMensajeModalClase(classCss, mensaje, titulo){
     $("#mesajeResultDirecNeg").html(titulo);
     $("#AlertDirecMesaje").html(mensaje);
@@ -1168,17 +1436,16 @@ function cambiarMensajeModalClase(classCss, mensaje, titulo){
     //se setean los estilos
     $("#mesajeResultDirec").addClass(classCss);
 }
+
 function ocultarModalClase(){
     $("#modalAlert").modal("hide");	
 }
-
 // Resibe como parametro el id del input y el de la tabla
 function filtrarTabla(idDiv, table){
     var tabla, tr, td, i, filtro, input;
     // idDiv es el id del input
     input = document.getElementById(idDiv);
     filtro = input.value.toUpperCase();
-   // filter = $("#"+idDiv).val();
     // conseguirmos el id de la tabla
     tabla = document.getElementById(table);
     tr = tabla.getElementsByTagName("tr");

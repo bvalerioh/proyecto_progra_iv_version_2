@@ -28,6 +28,7 @@
 <!DOCTYPE html>
 <html>
     <!-- Inicio del Head --> 
+    <link rel="shortcut icon" href="images/favicon.png" /> 
     <input type="hidden" id="idUsuarioIdentificado" value="${sessionScope.id}" />
     <%@include file="public/contenido-head.jsp"%>
     <!-- Final del Head --> 
@@ -41,7 +42,7 @@
         <!-- ********************************************************** -->
         <section>
             <div class="modal fade" id="modalAlert" role="dialog">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header">
                             <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
@@ -56,7 +57,7 @@
                 </div>
             </div>
             <div class="modal fade" id="modalEliminar" role="dialog">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header" id="modalEliminarHeader"></div>                    
                         <div class="modal-body" id="modalEliminarMessage"></div>                

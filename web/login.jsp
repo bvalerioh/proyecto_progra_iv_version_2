@@ -41,6 +41,7 @@
         <link href="scripts/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="css/Login.css" rel="stylesheet" type="text/css"/>
         <title>Identificación</title>
+        <link rel="shortcut icon" href="images/favicon.png" /> 
     </head>    
     <body>
         <section id="barra-navegacion-global">
@@ -171,7 +172,7 @@
         </section>
         <section>
             <div class="modal fade" id="modalAlert" role="dialog">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header">
                             <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
