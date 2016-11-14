@@ -1370,6 +1370,8 @@ function eliminaGUsuarios(id){
 //******************************************************************************
 //1. cargar los demas de a consultar.
 function obtenerTodosTemasParaChat(){
+    // Ocultamos el chat
+    hideChat();
     mostrarMensaje("alert alert-info", "Espere por favor, se estan obteniendo los temas existentes desde la base de datos.", "¡Consultando!");
     // parte ajax
     $.ajax({
@@ -1418,12 +1420,50 @@ function llenarSelectTemasChat(data){
          .text(tema.nombreTema));
     }
 }
+
 //2. llamar al servidor.
- 
+function callServer(){
+    $("#modalWaiting").modal("show");
+}
 //3. Inicializar el chat.
+function inicializaChat(){
+    
+}
+//4. Function EnviarMensaje
+function sendMessage(){
+    
+}
+//5. Function RecibeMensaje
+function recbMessaje(){
+    
+}
+//6. Function Iniciarlizar el temporizador.
+function startTime(){
+    
+}
+//7. Funcion que detiene el tiempo
+function stopTime(){
+    
+}
+//8. Terminar conversación del chat.
+function cancelarEsperaChat(){
+  $("#modalWaiting").modal("hide");
+}
+function terminarChat(){
+    
+}
 
-//4. 
-
+//Extras
+//-OcultarChat
+function hideChat(){
+    $("#areaChat").removeClass();
+    $("#areaChat").addClass("hidden");
+}
+//-MostrarChat
+function showChat(){
+    $("#areaChat").removeClass();
+    $("#areaChat").addClass("container");
+}
 
 //********************************** FIN CHAT **********************************
 //******************************************************************************
