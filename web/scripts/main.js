@@ -1424,10 +1424,75 @@ function llenarSelectTemasChat(data){
 //2. llamar al servidor.
 function callServer(){
     $("#modalWaiting").modal("show");
+    // Función principal del chat
+    (function(window, document, JSON){
+        var url = 'ws://'+window.location.host+'/proyecto-progra-iv-v2/index/chat',
+                ws = new WebSocket(url),
+                mensajes = document.getElementById("conversacion"),                
+                nombre = document.getElementById('usuario'),
+                mensaje = document.getElementById('mensaje');
+                
+        ws.open = onOpen;
+        ws.close = onClose;
+        ws.recibir = onMesage;
+        ws.enviar = enMesage;
+         
+        function onOpen(){
+            console.log('conectado...');
+            inicializaChat();
+        }
+        
+        function onClose(){
+            console.log('Desconectado...');
+            terminarChat();
+        }
+        // Log errors
+        ws.onerror = function(jqXHR, exception) { //si existe un error en la respuesta del ajax
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status === 404) {
+                msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status === 500) {
+                msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+            } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+            } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            console.log('WebSocket Error ' + msg);
+        };
+        
+        function enMesage(){
+            var msg = {
+                nombre: $("#NombreUsuarioIdentificado").val(),//nombre.value,
+                mensaje: $("#btn-input").val()//mensaje.value
+            };
+            // va el acomodar en el div chat
+            ws.send(JSON.stringify(msg));
+        }
+
+        function onMesage(evt){
+            var obj = JSON.parse(evt.data),
+                    msg = 'Nombre: '+obj.nombre+' dice: '+obj.mesaje;
+            // aquí se ingresa en el chat
+            mensajes.innerHTML +='<br/>'+msg;
+        }
+
+    })(window,document,JSON);
 }
 //3. Inicializar el chat.
 function inicializaChat(){
-    
+    // mostramos el chat
+    showChat();
+    // Iniciamos el conometro
+    startTime();
+    // Llenamos el form del chat los datos
+    llenarDatosChat();
 }
 //4. Function EnviarMensaje
 function sendMessage(){
@@ -1450,6 +1515,9 @@ function cancelarEsperaChat(){
   $("#modalWaiting").modal("hide");
 }
 function terminarChat(){
+    // detener el chat
+    stopTime();
+    // activar el boton de pagar.
     
 }
 

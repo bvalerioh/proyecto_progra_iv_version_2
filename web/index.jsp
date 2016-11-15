@@ -30,6 +30,7 @@
     <!-- Inicio del Head --> 
     <link rel="shortcut icon" href="images/favicon.png" /> 
     <input type="hidden" id="idUsuarioIdentificado" value="${sessionScope.id}" />
+    <input type="hidden" id="NombreUsuarioIdentificado" value="${sessionScope.nombre}" />
     <%@include file="public/contenido-head.jsp"%>
     <!-- Final del Head --> 
     <!-- Inicio del body -->

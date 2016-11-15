@@ -15,13 +15,11 @@
                     <div class="modal-header">
                         <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
                         <h4 id="mesajeResultDirecNeg">¡Solicitando la atención!</h4> 
-                    </div>   
-                    <br />
+                    </div>  
                     <div class="alert alert-success hiddenDiv">
                         <img src="images/loading.gif" height="80" width="80" alt="imagen cargando."/>                           
                         <span>.     Esperando por la atención de un usuario experto.</span>
                     </div>
-                    <br />
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" onclick="cancelarEsperaChat();" value="Cancelar" />
                     </div>
@@ -72,7 +70,7 @@
                     <div class="input-group">
                         <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribe tu mensaje aquí..." />
                         <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="chatEnviar()">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="enMensaje()">
                                 Enviar</button>
                         </span>
                     </div>
@@ -81,6 +79,25 @@
         </div>
         <div class="col-md-6 text-center">
             <p>Aquí va la información del experto, el tema, el tiempo y costo.</p>
+            <div class="row">
+                <label for="lbl-Experto"  class="col-sm-3 control-label" >Nombre del experto: </label>
+                <input type="text" id="lbl-Experto" readonly placeholder="Nombre Usuario Experto"/>
+            </div>
+            <div class="row">
+                <label for="lbl-Tema"  class="col-sm-3 control-label" >Nombre del Tema: </label>
+                <input type="text" id="lbl-Tema" readonly placeholder="Nombre del tema"/>
+            </div>
+            <div class="row">
+                <label for="lbl-Usuario"  class="col-sm-3 control-label" >Nombre del usuario: </label>
+                <input type="text" id="lbl-Usuario" readonly placeholder="Nombre del usuario"/>
+            </div>
+            <div class="row">
+                <label for="lbl-Tiempo"  class="col-sm-3 control-label" >Tiempo: </label>
+                <h2 id="lbl-Tiempo" readonly >00:00:00</h2>
+            </div>
+            <div clas="row">
+                <input type="button" onclick="" value="Finalizar" />
+            </div>
         </div>
     </div>
     
