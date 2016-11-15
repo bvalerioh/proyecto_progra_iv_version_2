@@ -79,6 +79,7 @@ public class LoginServlet extends HttpServlet {
                                 session.setAttribute("id", usu.getIdUsuario());
                                 // Se guarda el nombre de usaurio en sesion.
                                 session.setAttribute("username",usu.getUsuario());
+                                session.setAttribute("nombre",usu.getNombre()+" "+usu.getApellidos());
                                 // Se guarda el roll del usuario en sesion.
                                 session.setAttribute("rolusuario",usu.getTipoUsuario());
                                 //setting session to expiry in 30 min

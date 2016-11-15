@@ -39,7 +39,7 @@
                     <option value="0"></option>
                 </select>
             </div>
-            <input type="button" id="btSolicitaChat" onclick="callServer()" class="btn btn-default" value="Solicitar." />
+            <input type="button" id="btSolicitaChat" onclick="ws.onopen()" class="btn btn-default" value="Solicitar." />
         </div>
     </div>
     <br>

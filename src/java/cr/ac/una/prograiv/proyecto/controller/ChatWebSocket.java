@@ -5,10 +5,8 @@
  */
 package cr.ac.una.prograiv.proyecto.controller;
 
-import cr.ac.una.prograiv.proyecto.controller.ChatWebSocket.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.websocket.OnMessage;
@@ -26,7 +24,7 @@ public class ChatWebSocket {
     private final Logger log = Logger.getLogger(getClass().getName());
     private static final List<Session> conectados = new ArrayList<>();
     @OnOpen
-    public void iniciar(Session sesion) {
+    public void onOpen(Session sesion) {
         conectados.add(sesion);
             log.info("session openend and bound to room: ");
     }
