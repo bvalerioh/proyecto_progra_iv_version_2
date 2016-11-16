@@ -1368,10 +1368,13 @@ function eliminaGUsuarios(id){
 //******************************************************************************
 //******************************** PARTE CHAT **********************************
 //******************************************************************************
+
+
 //1. cargar los demas de a consultar.
 function obtenerTodosTemasParaChat(){
     // Ocultamos el chat
     hideChat();
+    //ws.onclose();
     mostrarMensaje("alert alert-info", "Espere por favor, se estan obteniendo los temas existentes desde la base de datos.", "¡Consultando!");
     // parte ajax
     $.ajax({
@@ -1421,66 +1424,22 @@ function llenarSelectTemasChat(data){
          .text(tema.nombreTema));
     }
 }
-
-//2. llamar al servidor.
 /*
-// Sending canvas ImageData as ArrayBuffer
-var img = canvas_context.getImageData(0, 0, 400, 320);
-var binary = new Uint8Array(img.data.length);
-for (var i = 0; i < img.data.length; i++) {
-  binary[i] = img.data[i];
-}
-connection.send(binary.buffer);
-
-// Sending file as Blob
-var file = document.querySelector('input[type="file"]').files[0];
-connection.send(file);
-*/
 var url = 'ws://'+window.location.host+'/proyecto-progra-iv-v2/chat',
-    ws = new WebSocket(url),
-    mensajes = document.getElementById("conversacion"),                
-    nombre = document.getElementById('usuario'),
-    mensaje = document.getElementById('mensaje');
-
-ws.open = OnOpen;
-ws.close = OnClose;
-ws.recibir = OnMessage;
-ws.enviar = EnMessage;
-
-
-// abrir el servicio
-function OnOpen(){
+    ws = new WebSocket(url), control;
+function conectar(){
+    ws = new WebSocket(url);
     $("#modalWaiting").modal("show");        
-    console.log('conectado...');
+    console.log('conectado...');   
     inicializaChat();
+    var msg = [{
+        nombre: "pruebaopen",//nombre.value,
+        mensaje: "resultado prueba open"//mensaje.value
+    }];
+    ws.send(JSON.stringify(msg));
 }
-// cerrar el server
-function OnClose(){
-    console.log('Desconectado...');
-    terminarChat();
-}
-// Log errors
-ws.OnError = function(jqXHR, exception) { //si existe un error en la respuesta del ajax
-    var msg = '';
-    if (jqXHR.status === 0) {
-        msg = 'Not connect.\n Verify Network.';
-    } else if (jqXHR.status === 404) {
-        msg = 'Requested page not found. [404]';
-    } else if (jqXHR.status === 500) {
-        msg = 'Internal Server Error [500].';
-    } else if (exception === 'parsererror') {
-        msg = 'Requested JSON parse failed.';
-    } else if (exception === 'timeout') {
-        msg = 'Time out error.';
-    } else if (exception === 'abort') {
-        msg = 'Ajax request aborted.';
-    } else {
-        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-    }
-    console.log('WebSocket Error ' + msg);
-};
-// funcion enviar un mensaje
-function EnMessage(){
+
+function msgEnviar(){
     var msg = {
         nombre: $("#NombreUsuarioIdentificado").val(),//nombre.value,
         mensaje: $("#btn-input").val()//mensaje.value
@@ -1501,8 +1460,33 @@ function EnMessage(){
     // enviamos el Mensaje
     ws.send(JSON.stringify(msg));
 }
+// cerrar el server
+ws.onclose = function(){
+    console.log('Desconectado...');
+    terminarChat();
+};
+// Log errors
+ws.onerror = function(jqXHR, exception) { //si existe un error en la respuesta del ajax
+    var msg = '';
+    if (jqXHR.status === 0) {
+        msg = 'Not connect.\n Verify Network.';
+    } else if (jqXHR.status === 404) {
+        msg = 'Requested page not found. [404]';
+    } else if (jqXHR.status === 500) {
+        msg = 'Internal Server Error [500].';
+    } else if (exception === 'parsererror') {
+        msg = 'Requested JSON parse failed.';
+    } else if (exception === 'timeout') {
+        msg = 'Time out error.';
+    } else if (exception === 'abort') {
+        msg = 'Ajax request aborted.';
+    } else {
+        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+    }
+    console.log('WebSocket Error ' + msg);
+};
 // funcion recibir un mensaje
-function OnMessage(evt){
+ws.onmessage = function (evt){
     var obj = JSON.parse(evt.data);
 
     // variable del TimeStamp.
@@ -1516,19 +1500,23 @@ function OnMessage(evt){
             "</p></div></li>";
 
     $("#ulChat").append(msg);
-}
-// al precionar EL ENTER
+};
+
 $(document).keypress(function (e) {
     if (e.which === 13) {
-        ws.enviar();
+        enviar();
     }
 });
+*/
+// al precionar EL ENTER
+var control;
 
-//3. Inicializar el chat.
+
 function inicializaChat(){
     // mostramos el chat
     showChat();
     // Iniciamos el conometro
+    reinicio();
     startTime();
     // Llenamos el form del chat los datos
     llenarDatosChat();    
@@ -1567,8 +1555,8 @@ var minutos = 00;
 var horas = 00;
 
 function reinicio () {
-	clearInterval(control);
-        $("#lbl-Tiempo").val("00:00:00");
+    clearInterval(control);
+    $("#lbl-Tiempo").val("00:00:00");
 }
 
 function cronometro () {

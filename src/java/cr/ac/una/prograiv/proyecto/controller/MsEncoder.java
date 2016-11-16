@@ -7,6 +7,7 @@ package cr.ac.una.prograiv.proyecto.controller;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonWriter;
@@ -18,29 +19,25 @@ import javax.websocket.EndpointConfig;
  *
  * @author bvale
  */
-public class MsEncoder  implements Encoder.Text<cMessage> {
-        
-	public void encode(cMessage chatMessage, Writer writer) throws EncodeException, IOException{
-            JsonObject json = Json.createObjectBuilder()
-                .add("message", chatMessage.getMessage())
-                .add("sender", chatMessage.getSender()).build();
-            try(JsonWriter jw = Json.createWriter(writer)){
-               jw.writeObject(json);
-            }
-	}
-        @Override
-        public void init(EndpointConfig config) {
-            System.out.println("init");
-        }
-        @Override
-        public void destroy() {
-            System.out.println("destroy");
-        }
-        
-        @Override
-        public String encode(cMessage object) throws EncodeException {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
+public class MsEncoder  implements Encoder.TextStream<cMessage> {
+    private final Logger log = Logger.getLogger(getClass().getName());
+    @Override
+    public void encode(cMessage chatMessage, Writer writer) throws EncodeException, IOException{
+        JsonObject json = Json.createObjectBuilder()
+            .add("message", chatMessage.getMessage())
+            .add("sender", chatMessage.getSender()).build();
 
-    
+        try(JsonWriter jw = Json.createWriter(writer)){
+           jw.writeObject(json);
+        }
+        log.info("Creando mensaje encoder:");
+    }
+    @Override
+    public void init(EndpointConfig config) {
+        System.out.println("init encoder");
+    }
+    @Override
+    public void destroy() {
+        System.out.println("destroy encoder");
+    }
 }

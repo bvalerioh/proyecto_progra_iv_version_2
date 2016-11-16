@@ -28,11 +28,13 @@
     <link rel="shortcut icon" href="images/favicon.png" /> 
     <input type="hidden" id="idUsuarioIdentificado" value="${sessionScope.id}" />
     <input type="hidden" id="NombreUsuarioIdentificado" value="${sessionScope.nombre}" />
-    
     <%@include file="public/contenido-head.jsp"%>
+    <script src="scripts/chatJS.js" type="text/javascript"></script>
+    
     <!-- Final del Head --> 
     <!-- Inicio del body -->
     <body onload="obtenerTodosTemasParaChat()">
+        
         <!--[if lt IE 10]>
               <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -109,7 +111,7 @@
                                 <option value="0"></option>
                             </select>
                         </div>
-                        <input type="button" id="btSolicitaChat" onclick="ws.open()" class="btn btn-default" value="Solicitar." />
+                        <input type="button" id="btSolicitaChat" onclick="inicializaChat()" class="btn btn-default" value="Solicitar." />
                     </div>
                 </div>
                 <br>
@@ -140,8 +142,7 @@
                                 <div class="input-group">
                                     <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribe tu mensaje aquí..." />
                                     <span class="input-group-btn">
-                                        <button class="btn btn-warning btn-sm" id="btn-chat" onclick="ws.enviar()">
-                                            Enviar</button>
+                                        <button class="btn btn-warning btn-sm" id="btn-chat">Enviar</button>
                                     </span>
                                 </div>
                             </div>
@@ -186,7 +187,7 @@
                         <br/>
                         <div clas="row">
                              <div class="col-sm-12">  
-                            <input type="button" class="btn btn-danger" onclick="" value="Finalizar" />
+                                 <input type="button" class="btn btn-danger" onclick="terminarChat()" value="Finalizar" />
                              </div>
                         </div>
                     </div>

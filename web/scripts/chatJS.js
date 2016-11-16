@@ -1,67 +1,75 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/*
-var wsocket;
-var serviceLocation = "ws://0.0.0.0:8080/chat/";
-var $nickName;
-var $message;
-var $chatWindow;
-var room = '';
 
-function onMessageReceived(evt) {
-        var msg = JSON.parse(evt.data); // native API
-        var $messageLine = $('<tr><td class="received">' + msg.received
-                        + '</td><td class="user label label-info">' + msg.sender
-                        + '</td><td class="message badge">' + msg.message
-                        + '</td></tr>');
-        $chatWindow.append($messageLine);
-}
-function sendMessage() {
-        var msg = '{"message":"' + $message.val() + '", "sender":"'
-                        + $nickName.val() + '", "received":""}';
-        wsocket.send(msg);
-        $message.val('').focus();
-}
+(function(window, document, JSON){
+    'use strict';
+    var url = 'ws://'+window.location.host+'/proyecto-progra-iv-v2/chat',
+        ws = new WebSocket(url),
+        boton = document.getElementById('btn-chat');/*,
+        mensajes = document.getElementById(''),
+        boton = document.getElementById(''),
+        nombre = $("#NombreUsuarioIdentificado").val(),
+        mensaje = $("#btn-input").val();*/
+        
+    ws.onopen = onOpen;
+    ws.onclose = onClose;
+    ws.onmessage = onMessage;
+    /*
+    boton.addEventListener("click", function(){
+        enviar();
+    });
+    
+    boton.addEventListener("keypress",function(){
+        enviar();
+    });*/
+    $("#btn-chat").button();
+    $("#btn-chat").click(function() {
+        enviar();
+    });
+    $(document).keypress(function (e) {
+        if (e.which === 13) {
+            enviar();
+        }
+    });
+    function onOpen(){
+        console.log('Conectado...');
+    }
+    function onClose(){
+        console.log('Desconectado...');
+    }
+    function enviar(){
+        var msg = {
+            nombre: $("#NombreUsuarioIdentificado").val(),//nombre.value,
+            mensaje: $("#btn-input").val()//mensaje.value
+        };
+        // variable del TimeStamp.
+        var d = new Date(); 
+        //var ul = document.getElementById("ulChat");
+        var Msg1 = "<li class='right clearfix'> <div class='chat-body clearfix'>" +
+                "<div class='header'><small class='text-muted'>"+
+                "<span class='glyphicon glyphicon-time'></span>"+ d.toUTCString() +
+                "</small><strong class='ull-right primary-font'>" +msg.nombre +
+                "</strong></div><p>"+ msg.mensaje +
+                "</p></div></li>";
 
-function connectToChatserver() {
-        room = $('#chatroom option:selected').val();
-        wsocket = new WebSocket(serviceLocation + room);
-        wsocket.onmessage = onMessageReceived;
-}
+        $("#ulChat").append(Msg1);
+        $("#btn-input").val("");
 
-function leaveRoom() {
-        wsocket.close();
-        $chatWindow.empty();
-        $('.chat-wrapper').hide();
-        $('.chat-signin').show();
-        $nickName.focus();
-}
-
-$(document).ready(function() {
-        $nickName = $('#nickname');
-        $message = $('#message');
-        $chatWindow = $('#response');
-        $('.chat-wrapper').hide();
-        $nickName.focus();
-
-        $('#enterRoom').click(function(evt) {
-                evt.preventDefault();
-                connectToChatserver();
-                $('.chat-wrapper h2').text('Chat # '+$nickName.val() + "@" + room);
-                $('.chat-signin').hide();
-                $('.chat-wrapper').show();
-                $message.focus();
-        });
-        $('#do-chat').submit(function(evt) {
-                evt.preventDefault();
-                sendMessage()
-        });
-
-        $('#leave-room').click(function(){
-                leaveRoom();
-        });
-});
-*/
+        // enviamos el Mensaje
+        ws.send(JSON.stringify(msg));
+    }
+    
+    function onMessage(evt){
+        // parseamos el objeto
+        var obj = JSON.parse(evt.data);
+        // variable del TimeStamp.
+        var d = new Date();
+        // para meterlo en el UL
+        var msg2 = "<li class='left clearfix'> <div class='chat-body clearfix'>" +
+                "<div class='header'><small class='text-muted'>"+
+                "<span class='glyphicon glyphicon-time'></span>"+ d.toUTCString() +
+                "</small><strong class='primary-font'>"+ obj.nombre +
+                "</strong></div><p>"+ obj.mesaje +
+                "</p></div></li>";
+        $("#ulChat").append(msg2);
+    }
+    
+})(window, document, JSON);

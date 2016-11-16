@@ -23,11 +23,13 @@ import javax.websocket.Session;
 public class ChatWebSocket {
     private final Logger log = Logger.getLogger(getClass().getName());
     private static final List<Session> conectados = new ArrayList<>();
+    
     @OnOpen
     public void onOpen(Session sesion) {
         conectados.add(sesion);
-            log.info("session openend and bound to room: ");
+            log.info("session openend: " + sesion);
     }
+    
     @OnMessage
     public void Message(cMessage cMs) throws IOException, EncodeException{
         for (Session s : conectados) {
@@ -37,9 +39,9 @@ public class ChatWebSocket {
     
     @OnClose
     public void salir(Session sesion){
+        log.info("session removida: " + sesion);
         conectados.remove(sesion);
-    }
-    
+    }    
 }
 
 
