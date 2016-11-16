@@ -16,6 +16,15 @@
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>cr.ac.una.prograiv.proyecto.controller.AdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChatServlet</servlet-name>
+        <servlet-class>cr.ac.una.prograiv.proyecto.controller.ChatServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description>El web servlet del chat</description>
+        <servlet-name>ChatWebServlet</servlet-name>
+        <servlet-class>cr.ac.una.prograiv.proyecto.controller.ChatWebSocket</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -31,6 +40,14 @@
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/UsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChatServlet</servlet-name>
+        <url-pattern>/ChatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChatWebServlet</servlet-name>
+        <url-pattern>/ChatWebServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

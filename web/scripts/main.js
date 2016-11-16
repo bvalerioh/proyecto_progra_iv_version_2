@@ -67,7 +67,7 @@ function cargarContenido(idContenido) {
             if (idContenido === '5') {
                 $("#contenido-wrapper").load("./usuario/contenido-chat.jsp" , function(responseText, statusText, xhr){
                     if(statusText === "success")
-                        obtenerTodosTemasParaChat();
+                        document.location.href = "chat.jsp";
                     if(statusText === "error")
                         alert("An error occurred: " + xhr.status + " - " + xhr.statusText);
                 }); 
@@ -1368,8 +1368,13 @@ function eliminaGUsuarios(id){
 //******************************************************************************
 //******************************** PARTE CHAT **********************************
 //******************************************************************************
+
+
 //1. cargar los demas de a consultar.
 function obtenerTodosTemasParaChat(){
+    // Ocultamos el chat
+    hideChat();
+    //ws.onclose();
     mostrarMensaje("alert alert-info", "Espere por favor, se estan obteniendo los temas existentes desde la base de datos.", "¡Consultando!");
     // parte ajax
     $.ajax({
@@ -1410,6 +1415,7 @@ function llenarSelectTemasChat(data){
     //Se limpia el select para que no se repitan temas.
     $('#select-temas-chat').children().remove();
     // Se llena el select con las options de la base de datos
+    sessionStorage.setItem("temas", JSON.stringify(data));
     for(var i = 0; i < data.length; i ++){
         var tema = data[i];
         $('#select-temas-chat')
@@ -1418,12 +1424,193 @@ function llenarSelectTemasChat(data){
          .text(tema.nombreTema));
     }
 }
-//2. llamar al servidor.
- 
-//3. Inicializar el chat.
+/*
+var url = 'ws://'+window.location.host+'/proyecto-progra-iv-v2/chat',
+    ws = new WebSocket(url), control;
+function conectar(){
+    ws = new WebSocket(url);
+    $("#modalWaiting").modal("show");        
+    console.log('conectado...');   
+    inicializaChat();
+    var msg = [{
+        nombre: "pruebaopen",//nombre.value,
+        mensaje: "resultado prueba open"//mensaje.value
+    }];
+    ws.send(JSON.stringify(msg));
+}
 
-//4. 
+function msgEnviar(){
+    var msg = {
+        nombre: $("#NombreUsuarioIdentificado").val(),//nombre.value,
+        mensaje: $("#btn-input").val()//mensaje.value
+    };
+    // variable del TimeStamp.
+    var d = new Date(); 
+    //var ul = document.getElementById("ulChat");
+    var cMsg = "<li class='right clearfix'> <div class='chat-body clearfix'>" +
+            "<div class='header'><small class='text-muted'>"+
+            "<span class='glyphicon glyphicon-time'></span>"+ d.toUTCString() +
+            "</small><strong class='ull-right primary-font'>" +msg.nombre +
+            "</strong></div><p>"+ msg.mensaje +
+            "</p></div></li>";
 
+    $("#ulChat").append(cMsg);
+    $("#btn-input").val("");
+
+    // enviamos el Mensaje
+    ws.send(JSON.stringify(msg));
+}
+// cerrar el server
+ws.onclose = function(){
+    console.log('Desconectado...');
+    terminarChat();
+};
+// Log errors
+ws.onerror = function(jqXHR, exception) { //si existe un error en la respuesta del ajax
+    var msg = '';
+    if (jqXHR.status === 0) {
+        msg = 'Not connect.\n Verify Network.';
+    } else if (jqXHR.status === 404) {
+        msg = 'Requested page not found. [404]';
+    } else if (jqXHR.status === 500) {
+        msg = 'Internal Server Error [500].';
+    } else if (exception === 'parsererror') {
+        msg = 'Requested JSON parse failed.';
+    } else if (exception === 'timeout') {
+        msg = 'Time out error.';
+    } else if (exception === 'abort') {
+        msg = 'Ajax request aborted.';
+    } else {
+        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+    }
+    console.log('WebSocket Error ' + msg);
+};
+// funcion recibir un mensaje
+ws.onmessage = function (evt){
+    var obj = JSON.parse(evt.data);
+
+    // variable del TimeStamp.
+    var d = new Date();
+
+    var msg = "<li class='left clearfix'> <div class='chat-body clearfix'>" +
+            "<div class='header'><small class='text-muted'>"+
+            "<span class='glyphicon glyphicon-time'></span>"+ d.toUTCString() +
+            "</small><strong class='primary-font'>"+ obj.nombre +
+            "</strong></div><p>"+ obj.mesaje +
+            "</p></div></li>";
+
+    $("#ulChat").append(msg);
+};
+
+$(document).keypress(function (e) {
+    if (e.which === 13) {
+        enviar();
+    }
+});
+*/
+// al precionar EL ENTER
+var control;
+
+
+function inicializaChat(){
+    // mostramos el chat
+    showChat();
+    // Iniciamos el conometro
+    reinicio();
+    startTime();
+    // Llenamos el form del chat los datos
+    llenarDatosChat();    
+}
+
+function llenarDatosChat(){
+    $("#lbl-Experto").val();
+    $("#lbl-Usuario").val($("#NombreUsuarioIdentificado").val());
+    var opt = $('#select-temas-chat').val();
+    var sData = JSON.parse(sessionStorage.getItem("temas"));
+    for(var i = 0; i < sData.length; i ++){
+        var val = sData[i];
+        if(opt === val.idTemas.toString()){
+            $("#lbl-Tema").val(val.nombreTema);    
+            $("#lbl-Costo").text("$"+val.costoXminuto+" por minuto.");
+            i = sData.length;
+        }
+    }    
+}
+
+function regresar(){
+     document.location.href = "index.jsp";
+}
+//6. Function Iniciarlizar el temporizador.
+function startTime(){
+    control = setInterval(cronometro, 10);
+}
+//7. Funcion que detiene el tiempo
+function stopTime(){
+    clearInterval(control);
+}
+
+var centesimas = 0;
+var segundos = 00;
+var minutos = 00;
+var horas = 00;
+
+function reinicio () {
+    clearInterval(control);
+    $("#lbl-Tiempo").val("00:00:00");
+}
+
+function cronometro () {
+    if (centesimas < 99) {
+            centesimas++;
+    }
+    if (centesimas == 99) {
+            centesimas = 00;
+    }
+    if (centesimas == 0) {
+            segundos ++;
+            if (segundos < 10) { segundos = "0"+segundos }
+            //$("#lbl-Tiempo").val("00:00:"+segundos);
+    }
+    if (segundos == 59) {
+            segundos = -1;
+    }
+    if ( (centesimas == 0)&&(segundos == 0) ) {
+            minutos++;
+            if (minutos < 10) { minutos = "0"+minutos }
+            //$("#lbl-Tiempo").val("00:"+minutos+":"+segundos);
+    }
+    if (minutos == 59) {
+            minutos = -1;
+    }
+    if ( (centesimas == 0)&&(segundos == 0)&&(minutos == 0) ) {
+            horas ++;
+            ///if (horas < 10) { horas = "0"+horas }
+    }
+    $("#lbl-Tiempo").text(horas+":"+minutos+":"+segundos);
+}
+
+//8. Terminar conversación del chat.
+function cancelarEsperaChat(){
+  $("#modalWaiting").modal("hide");
+}
+
+function terminarChat(){
+    // detener el chat
+    stopTime();
+    // activar el boton de pagar.
+    
+}
+//Extras
+//-OcultarChat
+function hideChat(){
+    $("#areaChat").removeClass();
+    $("#areaChat").addClass("hidden");
+}
+//-MostrarChat
+function showChat(){
+    $("#areaChat").removeClass();
+    $("#areaChat").addClass("container");
+}
 
 //********************************** FIN CHAT **********************************
 //******************************************************************************
