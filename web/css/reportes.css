@@ -1,0 +1,12 @@
+/*
+Css destinado a estilos personalizados de la pagina de reportes.
+
+
+*/
+/* Estilos del grafico para la facturacion anual*/
+#grafico-facturacion-anual{
+   width: 400px;
+   height: 400px;
+   margin-left: auto;
+   margin-right: auto;
+}

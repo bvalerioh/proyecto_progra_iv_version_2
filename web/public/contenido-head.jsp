@@ -37,4 +37,8 @@
         <!-- Custrom CSS -->
         <link href="css/pagination.css" rel="stylesheet" type="text/css"/>        
         <link href="css/main.css" rel="stylesheet" type="text/css"/>   
+        <script src="scripts/chartjs/Chart.bundle.min.js" type="text/javascript"></script>
+        <script src="scripts/chartjs/Chart.min.js" type="text/javascript"></script>
+        <script src="scripts/reportes.js" type="text/javascript"></script>
+        <link href="css/reportes.css" rel="stylesheet" type="text/css"/>
     </head>

@@ -43,6 +43,12 @@ body {
     text-align: center;
     font-weight: 100;
 }
+.heading-second{
+    font-size: 30px;
+    font-family: roboto_condensed_light;
+    text-align: center;
+    font-weight: 100;
+}
 
 /*==============================================================================
                        ESTILOS PERSONALIZADOS PARA EL SITIO.

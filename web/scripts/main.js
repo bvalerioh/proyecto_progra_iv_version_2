@@ -106,7 +106,7 @@ function cargarContenido(idContenido) {
                 $("#contenido-wrapper").load("./administrador/contenido-facturacion.jsp");
             }
             if (idContenido === '14') {
-                $("#contenido-wrapper").load("./administrador/contenido-reportes.jsp");
+               $("#contenido-wrapper").load("./administrador/contenido-reportes.jsp");
             }
             if (idContenido === '15') {
                 $("#contenido-wrapper").load("./administrador/contenido-gestionar-usuario.jsp", function(responseText, statusText, xhr){
