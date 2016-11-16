@@ -1545,9 +1545,26 @@ function startTime(){
     control = setInterval(cronometro, 10);
 }
 //7. Funcion que detiene el tiempo
+var tiempo = 0;
 function stopTime(){
     clearInterval(control);
+    var costo;
+    var opt = $('#select-temas-chat').val();
+    var sData = JSON.parse(sessionStorage.getItem("temas"));
+    for(var i = 0; i < sData.length; i ++){
+        var val = sData[i];
+        if(opt === val.idTemas.toString()){
+            costo = val.costoXminuto;
+            i = sData.length;
+        }
+    }  
+    if(tiempo === 0){
+        $("#Total").val(costo);
+    }else{
+        $("#Total").val(costo*tiempo);
+    }
 }
+
 
 var centesimas = 0;
 var segundos = 00;
@@ -1581,6 +1598,7 @@ function cronometro () {
     }
     if (minutos == 59) {
             minutos = -1;
+            tiempo++;
     }
     if ( (centesimas == 0)&&(segundos == 0)&&(minutos == 0) ) {
             horas ++;
